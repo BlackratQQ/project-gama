@@ -49,7 +49,7 @@ npm run format
 
 ## Architecture Overview
 
-Project Delta je moderní webová aplikace postavená na Astro frameworku s React komponentami pro interaktivní prvky.
+Project Gama je moderní webová aplikace postavená na Astro frameworku s React komponentami pro interaktivní prvky.
 
 ### Tech Stack
 
