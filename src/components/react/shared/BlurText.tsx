@@ -150,7 +150,7 @@ const BlurText: FC<BlurTextProps> = ({
             style={{
               display: 'inline-block',
               willChange: 'transform, filter, opacity',
-              marginRight: normalizedAnimateBy === 'words' ? '0.25em' : '0',
+              marginRight: '0',
             }}
           >
             {segment === ' ' ? '\u00A0' : segment}

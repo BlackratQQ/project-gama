@@ -489,3 +489,242 @@ body::after {
         transparent calc(var(--linear-end, 10%) * var(--linear-active, 1))
       );
 }
+
+/* TIMELINE */
+/* Timeline */
+.timeline {
+  position: relative;
+  background-image: linear-gradient(
+    to bottom,
+    #030811,
+    #0a111b,
+    #0e1724,
+    #111c2d,
+    #132237,
+    #172d4c,
+    #1c3961,
+    #284d76,
+    #4176a0,
+    #73a0b0,
+    #ecffff
+  );
+  width: 62px;
+  text-align: center;
+  transition: all 0.3s;
+}
+@media screen and (max-width: 768px) {
+  .timeline {
+    margin: 0 0 0 0px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .timeline {
+    margin: 0 auto;
+  }
+}
+
+.timeline-wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.timeline-background {
+  position: fixed; /* Pozadí je fixní pouze v rámci této komponenty */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Pozadí pokrývá celou viditelnou část */
+  background-image: url("/Textura2.jpg"); /* Vaše pozadí */
+  background-repeat: repeat; /* Opakování obrázku */
+  background-size: auto; /* Zachování velikosti obrázku */
+  background-position: top left; /* Umístění pozadí */
+  background-color: rgba(0, 0, 0, 0.8); /* Přidání tmavé vrstvy */
+  background-blend-mode: multiply; /* Směšovací režim */
+  z-index: -1; /* Zajišťuje, že je pozadí pod obsahem */
+}
+
+.timeline-content {
+  position: relative; /* Obsah je relativní k wrapperu */
+  z-index: 1; /* Obsah je nad pozadím */
+  padding-top: 100vh; /* Posun obsahu pod fixní pozadí */
+}
+
+.timeline .point .year {
+  padding-top: 10px;
+  color: #ffffff;
+  position: relative; /* Position relative to establish a new stacking context */
+  z-index: 20; /* Higher than the .bocata elements' z-index of 10 */
+}
+.timeline .point .bocata {
+  position: relative;
+  background-color: rgb(255, 252, 252);
+  color: #000;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all 0.3s;
+}
+@media screen and (max-width: 320px) {
+  .timeline .point .bocata {
+    width: 150px;
+  }
+  .timeline .point .bocata.little {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .timeline .point .bocata {
+    width: 254px;
+  }
+  .timeline .point .bocata.little {
+    width: 224px;
+  }
+}
+
+@media screen and (min-width: 425px) and (max-width: 576px) {
+  .timeline .point .bocata {
+    width: 270px;
+  }
+  .timeline .point .bocata.little {
+    width: 250px;
+  }
+}
+
+@media screen and (min-width: 577px) {
+  .timeline .point .bocata {
+    width: 300px;
+  }
+  .timeline .point .bocata.little {
+    width: 250px;
+  }
+}
+.timeline .point .bocata + .bocata {
+  margin-top: 35px;
+}
+.timeline .point:nth-child(odd) .bocata {
+  box-shadow: -6px 10px 20px -20px #4a4a4a;
+  left: 100px;
+  position: relative;
+  z-index: 10;
+}
+.timeline .point:nth-child(odd) .bocata::after {
+  content: "";
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  z-index: 10;
+  border: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin-top: -10px;
+  top: 50%;
+  border-right: 10px solid #ffffff;
+  left: -10px;
+}
+.timeline .point:nth-child(even) .bocata {
+  box-shadow: 6px 10px 20px -20px #4a4a4a;
+}
+@media screen and (max-width: 768px) {
+  .timeline .point:nth-child(even) .bocata {
+    left: 100px;
+    position: relative;
+    z-index: 10;
+  }
+  .timeline .point:nth-child(even) .bocata::after {
+    content: "";
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-top: -10px;
+    top: 50%;
+    border-right: 10px solid #ffffff;
+    left: -10px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .timeline .point:nth-child(even) .bocata {
+    right: 340px;
+    position: relative;
+    z-index: 10;
+  }
+}
+@media screen and (min-width: 769px) and (min-width: 769px) {
+  .timeline .point:nth-child(even) .bocata.little {
+    right: 275px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .timeline .point:nth-child(even) .bocata::after {
+    content: "";
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    z-index: 10;
+    border: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-top: -10px;
+    top: 50%;
+    border-left: 10px solid #ffffff;
+    left: auto;
+    right: -10px;
+  }
+}
+.timeline .point .arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 20px;
+  transform: rotate(45deg);
+}
+.timeline .point:first-child .arrow,
+.timeline .point:last-child .arrow {
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 20px;
+  transform: rotate(45deg);
+}
+.timeline .point .arrow-clean {
+  border: solid #020202;
+  border-width: 0 25px 25px 0;
+  display: inline-block;
+  padding: 25px;
+  position: absolute;
+  left: -7px;
+  bottom: -18px;
+  transform: rotate(45deg);
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1.28px;
+}
+
+.timeline .point {
+  margin-bottom: 50px; /* Add space between points */
+}
+
+@media screen and (min-width: 1280px) {
+  .timeline .point .bocata {
+    width: 450px;
+  }
+  .timeline .point .bocata.little {
+    width: 450px;
+  }
+  .timeline .point:nth-child(2n) .bocata {
+    right: 488px;
+    position: relative;
+    z-index: 10;
+  }
+}

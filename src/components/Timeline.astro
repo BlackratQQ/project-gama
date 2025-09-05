@@ -1,0 +1,237 @@
+---
+interface Bocata {
+  months: string[];
+  contents: string[];
+  little?: boolean;
+}
+
+interface Point {
+  year: string;
+  bocatas: Bocata[];
+  isLast?: boolean;
+}
+
+import BlurText from './react/shared/BlurText.tsx';
+import FadeContent from './react/shared/FadeContent.tsx';
+
+const timelineData: Point[] = [
+  {
+    year: '1. Kolo',
+    bocatas: [
+      {
+        months: ['Úvodní konzultace a analýza potřeb'],
+        contents: [
+          'Začneme nezávazným rozhovorem, kde si ujasníme vaše cíle a požadavky. Zjistím, jaké problémy řešíte a jak vám s nimi pomůže nasazení nového webu, aplikace či digitálního systému. Na základě toho připravím konkrétní návrh řešení – včetně časového harmonogramu a cenové kalkulace.',
+        ],
+        little: false,
+      },
+    ],
+  },
+  {
+    year: '2. Kolo',
+    bocatas: [
+      {
+        months: ['Uživatelský výzkum a prototypování'],
+        contents: [
+          'Zjistím, s jakými problémy a potřebami za vámi vaši zákazníci chodí a jak jim vaše služby pomáhají. Výsledky výzkumu s vámi proberu a na jejich základě navrhnu vzhled webu či aplikace, resp. architekturu systému.',
+        ],
+        little: false,
+      },
+    ],
+  },
+  {
+    year: '3. Kolo',
+    bocatas: [
+      {
+        months: ['Vývoj'],
+        contents: [
+          'Na základě schváleného návrhu zahájím samotný vývoj. Pravidelně vás informuji o postupu prací a společně budeme kontrolovat, že výsledek odpovídá vašim očekáváním.',
+        ],
+        little: false,
+      },
+    ],
+  },
+  {
+    year: '4. Kolo',
+    bocatas: [
+      {
+        months: ['Spuštění a následná podpora'],
+        contents: [
+          'Po dokončení vývoje nasadím řešení na server a provedu finální testování. Zaškolím vás a vaše zaměstnance v používání webu, aplikace či systému. Po spuštění se postarám o technickou podporu, údržbu a případné další vylepšení funkcionality.',
+        ],
+        little: false,
+      },
+    ],
+    isLast: true,
+  },
+];
+---
+
+<div class="bg-gradient">
+  <div class="timeline-container container relative mx-auto px-3">
+    <!-- Nadpis -->
+    <div class="fade-in-slide-blur-item">
+      <h2
+        class="relative mb-10 select-none text-balance text-center text-5xl font-bold text-white md:text-8xl xl:text-9xl mx-auto w-fit"
+      >
+        <!-- Statický fallback pro SEO/crawlery -->
+        <noscript>PRŮBĚH NAŠÍ SPOLUPRÁCE</noscript>
+        <!-- Animovaná verze -->
+        <div class="timeline-title-wrapper">
+          <BlurText
+            text="PRŮBĚH NAŠÍ"
+            delay={100}
+            initialDelay={0}
+            animateBy="words"
+            direction="top"
+            animateOn="view"
+            className="inline-block"
+            client:only="react"
+          />
+          <BlurText
+            text="SPOLUPRÁCE"
+            delay={100}
+            initialDelay={800}
+            animateBy="words"
+            direction="top"
+            animateOn="view"
+            className="inline-block"
+            client:only="react"
+          />
+        </div>
+      </h2>
+    </div>
+
+    <!-- Časová osa -->
+    <div class="timeline jumbotron-fluid grey_light-block container relative mx-auto">
+      {
+        timelineData.map((point, pointIndex) => (
+          <div class="point">
+            {/* Rok nebo fáze */}
+            <div class="year-container fade-in-slide-blur-item">
+              <div class="year">{point.year}</div>
+            </div>
+
+            {/* Obsah každého bodu */}
+            {point.bocatas.map((bocata) => (
+              <div class="bocata-container">
+                <FadeContent
+                  blur={true}
+                  duration={800}
+                  delay={500 + pointIndex * 200}
+                  direction="top"
+                  easing="ease-out"
+                  initialOpacity={0}
+                  client:only="react"
+                >
+                  <div class={`bocata ${bocata.little ? 'little' : ''} body row text-left`}>
+                    {bocata.months.map((month) => (
+                      <div
+                        class={`${bocata.months.length === 1 ? 'col-md-12' : 'col-md-6'} title small bold pb-2`}
+                      >
+                        {month}
+                      </div>
+                    ))}
+                    {bocata.contents.map((content) => (
+                      <div
+                        class={`${bocata.contents.length === 1 ? 'col-md-12' : 'col-md-6'} body small pr-0`}
+                      >
+                        {content}
+                      </div>
+                    ))}
+                  </div>
+                </FadeContent>
+              </div>
+            ))}
+
+            {/* Šipky */}
+            <i class="arrow" />
+            {point.isLast && <i class="arrow-clean" />}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+<style>
+  /* Jednoduché fade-in animace pro nahrazení FadeInSlideBlur */
+  .fade-in-slide-blur-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1.2s ease-out forwards;
+  }
+
+  .fade-in-slide-blur-item:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .fade-in-slide-blur-item:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .fade-in-slide-blur-item:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  .fade-in-slide-blur-item:nth-child(4) {
+    animation-delay: 0.8s;
+  }
+  .fade-in-slide-blur-item:nth-child(5) {
+    animation-delay: 1s;
+  }
+
+  @keyframes fadeInSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Staggered animace pro timeline body */
+  .point:nth-child(1) .fade-in-slide-blur-item {
+    animation-delay: 0.2s;
+  }
+  .point:nth-child(2) .fade-in-slide-blur-item {
+    animation-delay: 0.4s;
+  }
+  .point:nth-child(3) .fade-in-slide-blur-item {
+    animation-delay: 0.6s;
+  }
+  .point:nth-child(4) .fade-in-slide-blur-item {
+    animation-delay: 0.8s;
+  }
+
+  .bg-gradient {
+    /* Hodnoty pro původní gradient-under-hero */
+    position: relative;
+
+    /* Lineární gradient vypnutý defaultně */
+    --linear-active: 0;
+    --linear-dir: bottom;
+    --linear-start: #000000;
+    --linear-end: 30%;
+
+    /* Radiální gradienty */
+    --g1-x: 6%;
+    --g1-y: 40%;
+    --g1-color: #002853;
+    --g1-size: 1%;
+    --g1-fade: min(10%, 220px);
+
+    --g2-x: 90%;
+    --g2-y: 25%;
+    --g2-color: #2b0053;
+    --g2-size: 1%;
+    --g2-fade: min(15%, 220px);
+
+    --g3-x: 68%;
+    --g3-y: 80%;
+    --g3-color: #002853;
+    --g3-size: 0%;
+    --g3-fade: min(15%, 180px);
+
+    /* Čtvrtý gradient vypneme */
+    --g4-fade: 0%;
+  }
+</style>

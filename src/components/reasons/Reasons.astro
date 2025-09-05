@@ -1,0 +1,100 @@
+---
+import BentoGrid from './BentoGrid.astro';
+import ReasonBentoEffects from '../react/shared/ReasonBentoEffects.tsx';
+import BlurText from '../react/shared/BlurText.tsx';
+---
+
+<div class="bg-gradient py-12">
+  <div class="container mx-auto px-3">
+    <!-- Nadpis -->
+    <div class="my-8 relative z-0">
+      <h2
+        class="relative select-none text-balance text-center text-5xl font-bold text-white md:text-8xl xl:text-9xl mx-auto w-fit"
+      >
+        <!-- Statický fallback pro SEO/crawlery -->
+        <noscript>PROČ SI SE MNOU</noscript>
+        <!-- Animovaná verze -->
+        <BlurText
+          text="PROČ SI SE MNOU"
+          delay={100}
+          initialDelay={0}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className=""
+          client:only="react"
+        />
+      </h2>
+
+      <p
+        class="relative select-none text-center text-5xl font-bold text-white md:text-8xl xl:text-9xl mx-auto w-fit"
+      >
+        <!-- Statický fallback pro SEO/crawlery -->
+        <noscript>PODAT RUKU</noscript>
+        <!-- Animovaná verze -->
+        <BlurText
+          text="PODAT RUKU"
+          delay={100}
+          initialDelay={600}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className=""
+          client:only="react"
+        />
+      </p>
+    </div>
+
+    <!-- BentoGrid s SSR obsahem + React efekty -->
+    <div class="flex justify-center md:-mt-16 relative z-10">
+      <BentoGrid />
+      <ReasonBentoEffects
+        enableStars={true}
+        enableSpotlight={true}
+        enableBorderGlow={true}
+        enableTilt={true}
+        enableMagnetism={true}
+        clickEffect={true}
+        spotlightRadius={300}
+        particleCount={12}
+        glowColor="132, 0, 255"
+        client:idle
+      />
+    </div>
+  </div>
+</div>
+
+<style>
+  .bg-gradient {
+    /* Hodnoty pro původní gradient-under-hero */
+    position: relative;
+
+    /* Lineární gradient vypnutý defaultně */
+    --linear-active: 0;
+    --linear-dir: bottom;
+    --linear-start: #000000;
+    --linear-end: 30%;
+
+    /* Radiální gradienty */
+    --g1-x: 6%;
+    --g1-y: 40%;
+    --g1-color: #002853;
+    --g1-size: 1%;
+    --g1-fade: min(10%, 220px);
+
+    --g2-x: 90%;
+    --g2-y: 25%;
+    --g2-color: #2b0053;
+    --g2-size: 1%;
+    --g2-fade: min(15%, 220px);
+
+    --g3-x: 68%;
+    --g3-y: 80%;
+    --g3-color: #002853;
+    --g3-size: 0%;
+    --g3-fade: min(15%, 180px);
+
+    /* Čtvrtý gradient vypneme */
+    --g4-fade: 0%;
+  }
+</style>

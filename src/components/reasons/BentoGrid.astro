@@ -1,0 +1,105 @@
+---
+import BentoCard from './BentoCard.astro';
+import FadeContent from '../react/shared/FadeContent.tsx';
+
+const cardData = [
+  {
+    title: 'Na čem se domluvíme, to platí',
+    description:
+      'Férové jednání je pro mě základ jakéhokoliv vztahu – i toho obchodního. Držím slovo a co slíbím, to dodržím.',
+    icon: 'fa-solid fa-handshake',
+  },
+  {
+    title: 'Jednám na rovinu',
+    description:
+      'Nechodím kolem horké kaše. Oponenturu vidím jako příležitost k rozvoji. Pokud cítím, že váš nápad vaší firmě uškodí, řeknu vám to.',
+    icon: 'fa-solid fa-eye',
+  },
+  {
+    title: 'Téměř non-stop dostupnost',
+    description:
+      'Když netrénuju nebo nespím, jsem tu pro vás. Žádné několikadenní čekání na odpověď. Reaguju rychle, protože vím, že čas v byznysu je drahý.',
+    icon: 'fa-solid fa-clock',
+  },
+  {
+    title: '"Nejde" v mém slovníku nehledejte',
+    description:
+      'Neexistují pro mě překážky, jen výzvy. Vyřeším i sebesložitější požadavky. Tvořím systémy, nad kterými nemusíte přemýšlet – prostě fungují.',
+    icon: 'fa-solid fa-lightbulb',
+  },
+  {
+    title: 'Rád se s vámi potkám',
+    description:
+      'Technické znalosti kombinuji s osobním přístupem. Proto se o vašem podnikání, cílové skupině a konkurenci pobavíme tváří v tvář.',
+    icon: 'fa-solid fa-users',
+  },
+  {
+    title: 'Mluvím srozumitelně',
+    description:
+      'Nezahltím vás technickými detaily. Soustředím se na to, co je pro vás důležité: funkční řešení, které pohání váš byznys vpřed.',
+    icon: 'fa-solid fa-comments',
+  },
+];
+---
+
+<section class="reason-section" aria-label="Důvody pro spolupráci">
+  <div class="flex justify-center md:mt-1">
+    <div class="bento-grid" id="bento-grid" role="list">
+      {
+        cardData.map((card, index) => {
+          // První řádek (indexy 0,1,2): delay 500ms
+          // Druhý řádek (indexy 3,4,5): delay 700ms
+          const rowDelay = index < 3 ? 500 : 700;
+
+          return (
+            <div role="listitem">
+              <FadeContent
+                blur={true}
+                duration={800}
+                delay={rowDelay}
+                direction="top"
+                easing="ease-out"
+                initialOpacity={0}
+                className="relative z-20 backdrop-blur-sm bg-black/20 rounded-lg"
+                client:visible
+              >
+                <BentoCard
+                  title={card.title}
+                  description={card.description}
+                  icon={card.icon}
+                  index={index}
+                />
+              </FadeContent>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .reason-section {
+    position: relative;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

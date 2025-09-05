@@ -1,0 +1,124 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  index: number;
+  icon: string;
+}
+
+const { title, description, index, icon } = Astro.props;
+---
+
+<article
+  class="reason-card"
+  data-card-index={index}
+  itemscope
+  itemtype="https://schema.org/Article"
+>
+  <div class="card__content">
+    <div class="card__icon">
+      <i class={icon}></i>
+    </div>
+    <h3 class="card__title" itemprop="headline">{title}</h3>
+    <p class="card__description" itemprop="description">{description}</p>
+  </div>
+</article>
+
+<style>
+  .reason-card {
+    display: flex;
+    min-height: 288px;
+    width: 100%;
+    max-width: 400px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    background-color: transparent;
+    color: white;
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+  }
+
+  .reason-card:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow:
+      0 4px 20px rgba(46, 24, 78, 0.4),
+      0 0 30px rgba(132, 0, 255, 0.2);
+  }
+
+  .card__content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: white;
+    flex-grow: 1;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .card__icon {
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .card__icon i {
+    font-size: 48px;
+    font-weight: bold;
+  }
+
+  .card__title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card__description {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    opacity: 0.9;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (max-width: 768px) {
+    .reason-card {
+      min-height: 180px;
+      padding: 1rem;
+    }
+
+    .card__icon {
+      margin-bottom: 0.75rem;
+    }
+
+    .card__icon i {
+      font-size: 36px;
+    }
+
+    .card__title {
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+    }
+
+    .card__description {
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+  }
+</style>
