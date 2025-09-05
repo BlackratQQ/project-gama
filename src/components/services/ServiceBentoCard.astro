@@ -1,0 +1,135 @@
+---
+import Button from '../Button.astro';
+
+export interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  href: string;
+  index: number;
+}
+
+const { icon, title, description, href, index } = Astro.props;
+---
+
+<article
+  class="service-bento-card"
+  data-card-index={index}
+  itemscope
+  itemtype="https://schema.org/Service"
+>
+  <div class="card__content">
+    <!-- Horní část s obsahem -->
+    <div class="card__top">
+      <!-- FontAwesome ikona -->
+      <div class="card__icon">
+        <i class={icon}></i>
+      </div>
+      <h2 class="card__title" itemprop="name">{title}</h2>
+      <p class="card__description" itemprop="description">{description}</p>
+    </div>
+
+    <!-- Spodní část s buttonem -->
+    <div class="card__bottom">
+      <Button text="Zjistit více" href={href} variant="ghost" class="max-w-xs" />
+    </div>
+  </div>
+</article>
+
+<style>
+  .service-bento-card {
+    display: flex;
+    height: 400px;
+    width: 100%;
+    max-width: 400px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    background-color: transparent;
+    color: white;
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+  }
+
+  .service-bento-card:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow:
+      0 4px 20px rgba(46, 24, 78, 0.4),
+      0 0 30px rgba(132, 0, 255, 0.2);
+  }
+
+  .card__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .card__icon {
+    margin-top: 0.5rem;
+    color: white;
+  }
+
+  .card__icon i {
+    font-size: 60px;
+  }
+
+  .card__title {
+    color: white;
+    margin-top: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.25;
+  }
+
+  .card__description {
+    margin-top: 0.75rem;
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.95;
+  }
+
+  .card__bottom {
+    margin-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .service-bento-card {
+      height: 350px;
+      padding: 1rem;
+    }
+
+    .card__icon i {
+      font-size: 48px;
+    }
+
+    .card__title {
+      font-size: 1.25rem;
+    }
+
+    .card__description {
+      font-size: 0.875rem;
+    }
+  }
+</style>

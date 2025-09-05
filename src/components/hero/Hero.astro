@@ -80,10 +80,12 @@ const heroItems = [
 <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 
 <main role="main" aria-label="Hlavní hero sekce" class="relative min-h-screen">
-  <div class="gradient-hero"></div>
-  
   <!-- LightRays container - dynamic loading only for desktop/tablet -->
   <div id="lightrays-container" class="absolute inset-0 z-[1] hidden md:block"></div>
+  
+  <!-- Gradient overlay na bottom -->
+  <div class="gradient-hero"></div>
+  
   
   <!-- CSS Fallback - všechny breakpointy, ale na desktop/tablet méně viditelné -->
   <div class="absolute inset-0 z-[1] bg-gradient-radial from-white/5 via-white/2 to-transparent opacity-30 pointer-events-none md:opacity-10"></div>
@@ -156,7 +158,7 @@ const heroItems = [
   </div>
 
   <!-- Portrét - Tablet a Desktop (md+ breakpointy) s GridDistortion efektem -->
-  <div class="absolute top-0 left-0 w-full min-h-screen z-10 pointer-events-none hidden md:flex">
+  <div class="absolute top-0 left-0 w-full min-h-screen z-0 pointer-events-none hidden md:flex">
     <div class="container mx-auto px-3 flex w-full min-h-screen">
       <!-- Levá strana - 50% prázdná -->
       <div class="w-0 lg:w-1/2 min-[1024px]:max-[1279px]:w-1/3"></div>

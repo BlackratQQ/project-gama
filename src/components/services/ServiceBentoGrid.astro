@@ -1,0 +1,75 @@
+---
+import ServiceBentoCard from './ServiceBentoCard.astro';
+import FadeContent from '../react/shared/FadeContent.tsx';
+
+const serviceData = [
+  {
+    icon: 'fa-solid fa-laptop-code',
+    title: 'Návrh & vývoj webu',
+    description:
+      'Vytvořím přehledný web, který vás prezentuje a prodává vaše služby a produkt. 24 hodin denně, 7 dní v týdnu.',
+    href: '/moje-sluzby/vyvoj-funkcniho-webu',
+  },
+  {
+    icon: 'fa-solid fa-gears',
+    title: 'Automatizace firemních procesů',
+    description:
+      'Převedu vaše manuální procesy do digitální podoby. Propojím systémy a aplikace a automatizací eliminuji chyby, které vznikají nepozorností.',
+    href: '/moje-sluzby/automatizace-procesu',
+  },
+];
+---
+
+<section class="service-bento-section" aria-label="Nabízené služby">
+  <div class="flex justify-center">
+    <div class="service-bento-grid" id="service-bento-grid" role="list">
+      {
+        serviceData.map((service, index) => (
+          <div role="listitem" class="flex items-center justify-center">
+            <FadeContent
+              blur={true}
+              duration={800}
+              delay={500 + index * 200}
+              direction="top"
+              easing="ease-out"
+              initialOpacity={0}
+              className="relative z-20 backdrop-blur-sm bg-black/20 rounded-lg"
+              client:visible
+            >
+              <ServiceBentoCard
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                href={service.href}
+                index={index}
+              />
+            </FadeContent>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-bento-section {
+    position: relative;
+    width: 100%;
+  }
+
+  .service-bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .service-bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+</style>

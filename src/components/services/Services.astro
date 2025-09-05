@@ -1,0 +1,143 @@
+---
+import ServiceBentoGrid from './ServiceBentoGrid.astro';
+import ServiceMagicEffects from '../react/services/ServiceMagicEffects';
+import BlurText from '../react/shared/BlurText.tsx';
+
+interface Props {
+  showLinearGradient?: boolean;
+}
+
+const { showLinearGradient = true } = Astro.props;
+---
+
+<div class="bg-gradient h-auto w-full py-12 text-white" data-show-linear={showLinearGradient}>
+  <section class="container mx-auto flex py-24 flex-col px-3">
+    <!-- Hlavní container -->
+    <div class="flex w-full flex-col">
+      <!-- Nadpis container - 2/3 šířky -->
+      <div class="mb-12 flex w-full">
+        <div class="w-full xl:w-2/3">
+          <h3
+            class="mb-8 text-center text-5xl font-bold text-white md:text-left md:text-8xl xl:text-9xl"
+          >
+            <!-- Statický fallback pro SEO/crawlery -->
+            <noscript>
+              <strong>KÓ</strong>DOVÁNÍ BEZ{' '}
+              <span class="strikethrough-lower">KOMPROMISŮ:</span>
+            </noscript>
+            <!-- Animovaná verze -->
+            <div class="blur-text-wrapper">
+              <BlurText
+                text="KÓDOVÁNÍ BEZ"
+                delay={100}
+                initialDelay={0}
+                animateBy="words"
+                direction="top"
+                animateOn="view"
+                className="block"
+                client:only="react"
+              />
+              <BlurText
+                text="KOMPROMISŮ:"
+                delay={100}
+                initialDelay={800}
+                animateBy="words"
+                direction="top"
+                animateOn="view"
+                className="block strikethrough-lower"
+                client:only="react"
+              />
+            </div>
+          </h3>
+
+          <h2 class="text-center text-4xl font-bold text-white md:text-left">O co se postarám?</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prvky container -->
+    <div class="flex w-full justify-center lg:justify-end">
+      <!-- Pravá strana - zabírá 2/3 šířky a je zarovnaná vpravo -->
+      <div class="mt-0 w-full xl:w-3/5 2xl:-mt-24">
+        <!-- Service Bento Grid s SSR obsahem + React efekty -->
+        <ServiceBentoGrid />
+        <ServiceMagicEffects
+          enableStars={true}
+          enableSpotlight={true}
+          enableBorderGlow={true}
+          enableTilt={true}
+          enableMagnetism={true}
+          clickEffect={true}
+          spotlightRadius={300}
+          particleCount={12}
+          glowColor="132, 0, 255"
+          client:idle
+        />
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  /* Strikethrough fade-in efekt */
+  .strikethrough-lower {
+    position: relative;
+  }
+
+  .strikethrough-lower::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60%;
+    height: 4px;
+    background-color: currentColor;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: strikethrough-fadein 0.8s ease-out 1.9s forwards;
+  }
+
+  @keyframes strikethrough-fadein {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%) scaleX(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-50%) scaleX(1);
+    }
+  }
+
+  .bg-gradient {
+    /* Hodnoty pro původní gradient-under-hero */
+    position: relative;
+
+    /* Lineární gradient vypnutý defaultně */
+    --linear-active: 1;
+    --linear-dir: bottom;
+    --linear-start: #000000;
+    --linear-end: 30%;
+
+    /* Radiální gradienty */
+    --g1-x: 6%;
+    --g1-y: 40%;
+    --g1-color: #002853;
+    --g1-size: 1%;
+    --g1-fade: min(10%, 220px);
+
+    --g2-x: 70%;
+    --g2-y: 25%;
+    --g2-color: #2b0053;
+    --g2-size: 1%;
+    --g2-fade: min(15%, 220px);
+
+    --g3-x: 68%;
+    --g3-y: 80%;
+    --g3-color: #002853;
+    --g3-size: 0%;
+    --g3-fade: min(15%, 180px);
+
+    /* Čtvrtý gradient vypneme */
+    --g4-fade: 0%;
+  }
+</style>
