@@ -151,7 +151,7 @@ const heroItems = [
 
   <!-- Portrét - Mobilní (pod textem) -->
   <div class="relative w-full z-10 pointer-events-none flex md:hidden justify-center items-center">
-    <HeroPortrait variant="mobile" client:idle />
+    <HeroPortrait variant="mobile" />
   </div>
 
   <!-- Portrét - Tablet (md a lg breakpointy) -->
@@ -162,7 +162,7 @@ const heroItems = [
 
       <!-- Pravá strana - 50% s portrétem -->
       <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
-        <HeroPortrait variant="tablet" client:idle />
+        <HeroPortrait variant="tablet" />
       </div>
     </div>
   </div>
@@ -175,7 +175,7 @@ const heroItems = [
 
       <!-- Pravá strana - 50% s portrétem -->
       <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
-        <HeroPortrait variant="desktop" client:idle />
+        <HeroPortrait variant="desktop" client:media="(min-width: 1024px)" />
       </div>
     </div>
   </div>
