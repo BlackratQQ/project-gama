@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 interface PortfolioLightboxProps {
   isOpen: boolean;
@@ -15,19 +15,19 @@ export default function PortfolioLightbox({
 }: PortfolioLightboxProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'auto';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "auto";
     };
   }, [isOpen, onClose]);
 
@@ -40,12 +40,12 @@ export default function PortfolioLightbox({
       onClick={onClose}
       aria-label="Zavřít lightbox"
     >
-      <div className="relative max-h-[90vh] max-w-[90vw] animate-scale-in">
-        <div className="h-auto w-auto object-contain max-h-[90vh] max-w-[90vw]">
+      <div className="relative max-h-[80vh] max-w-[80vw] animate-scale-in">
+        <div className="h-auto w-auto object-contain max-h-[80vh] max-w-[80vw]">
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="h-auto w-auto object-contain max-h-[90vh] max-w-[90vw]"
+            className="h-auto w-auto object-contain max-h-[80vh] max-w-[80vw]"
           />
         </div>
         <button
@@ -53,7 +53,7 @@ export default function PortfolioLightbox({
             e.stopPropagation();
             onClose();
           }}
-          className="absolute -right-4 -top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 transition-colors"
+          className="absolute -right-4 -top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20 transition-colors z-10"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

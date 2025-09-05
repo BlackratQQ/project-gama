@@ -85,7 +85,7 @@ const NavbarMenu: FC = () => {
               </button>
 
               {/* Dropdown menu */}
-              <div className="dropdown-menu absolute top-full left-0 mt-2 w-64 backdrop-blur-md bg-black/80 border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+              <div className="dropdown-menu absolute top-full left-0 mt-2 w-64 backdrop-blur-md bg-black/80 border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-30">
                 <div>
                   {item.dropdown.map((dropdownItem) => (
                     <a
