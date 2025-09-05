@@ -88,6 +88,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const userInteractedRef = useRef(false);
 
@@ -378,6 +379,9 @@ void main() {
       window.addEventListener('resize', updatePlacement);
       updatePlacement();
       animationIdRef.current = requestAnimationFrame(loop);
+      
+      // Trigger fade-in after WebGL is ready
+      setTimeout(() => setFadeIn(true), 100);
 
       cleanupFunctionRef.current = () => {
         if (animationIdRef.current) {
@@ -487,7 +491,7 @@ void main() {
   return (
     <div
       ref={containerRef}
-      className={`w-full h-full pointer-events-none z-[3] overflow-hidden relative ${className}`.trim()}
+      className={`w-full h-full pointer-events-none z-[1] overflow-hidden relative transition-opacity duration-1000 ${fadeIn ? 'opacity-100' : 'opacity-0'} ${className}`.trim()}
     />
   );
 };
