@@ -2,6 +2,8 @@
 import Button from '../Button.astro';
 import ArrowDown from '../ArrowDown.astro';
 import SocialProof from '../shared/SocialProof.astro';
+import HeroPortraitMobile from './HeroPortraitMobile.astro';
+import HeroPortraitTablet from './HeroPortraitTablet.astro';
 import HeroPortrait from '../react/HeroPortrait';
 
 // JSON-LD structured data pro SEO
@@ -151,7 +153,7 @@ const heroItems = [
 
   <!-- Portrét - Mobilní (pod textem) -->
   <div class="relative w-full z-10 pointer-events-none flex md:hidden justify-center items-center">
-    <HeroPortrait variant="mobile" />
+    <HeroPortraitMobile />
   </div>
 
   <!-- Portrét - Tablet (md a lg breakpointy) -->
@@ -162,7 +164,7 @@ const heroItems = [
 
       <!-- Pravá strana - 50% s portrétem -->
       <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
-        <HeroPortrait variant="tablet" />
+        <HeroPortraitTablet />
       </div>
     </div>
   </div>
@@ -175,7 +177,7 @@ const heroItems = [
 
       <!-- Pravá strana - 50% s portrétem -->
       <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
-        <HeroPortrait variant="desktop" client:media="(min-width: 1024px)" />
+        <HeroPortrait client:media="(min-width: 1024px)" />
       </div>
     </div>
   </div>
