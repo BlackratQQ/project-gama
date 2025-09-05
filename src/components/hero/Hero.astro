@@ -104,24 +104,24 @@ const heroItems = [
           id="hero-heading"
           class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-orange-500"
         >
-          <span class="hero-word-1">VOJTĚCH</span><span class="hero-word-2">KOCHTA</span>
+          <span class="hero-word-1">VOJTĚCH</span> <span class="hero-word-2">KOCHTA</span>
         </h1>
 
         <!-- Podnadpis H2 -->
         <h2 class="mb-6 lg:mb-16 text-2xl sm:text-3xl lg:text-6xl text-white">
-          <span class="hero-word-3">IT</span><span class="hero-word-4">developer</span><span class="hero-word-5">na</span><span class="hero-word-6">volné</span><span class="hero-word-7">noze</span>
+          <span class="hero-word-3">IT</span> <span class="hero-word-4">developer</span> <span class="hero-word-5">na</span> <span class="hero-word-6">volné</span> <span class="hero-word-7">noze</span>
         </h2>
 
         <!-- Popis - 3 části animované paralelně -->
         <div class="pb-16 md:pb-0mb-0 lg:mb-8 text-lg lg:text-xl font-medium leading-relaxed text-white px-4 lg:px-0">
           <span class="hero-text-line">
-            <span class="hero-word-8">Složte</span><span class="hero-word-9">k</span><span class="hero-word-10">zemi</span><span class="hero-word-11">svou</span><span class="hero-word-12">konkurenci.</span><span class="hero-word-13">Navrhuji</span><span class="hero-word-14">a</span><span class="hero-word-15">stavím</span><span class="hero-word-16">weby</span><span class="hero-word-17">a</span><span class="hero-word-18">pomáhám</span>
+            <span class="hero-word-8">Složte</span> <span class="hero-word-9">k</span> <span class="hero-word-10">zemi</span> <span class="hero-word-11">svou</span> <span class="hero-word-12">konkurenci.</span> <span class="hero-word-13">Navrhuji</span> <span class="hero-word-14">a</span> <span class="hero-word-15">stavím</span> <span class="hero-word-16">weby</span> <span class="hero-word-17">a</span> <span class="hero-word-18">pomáhám</span>
           </span>
           <span class="hero-text-line">
-            <span class="hero-word-19">automatizovat</span><span class="hero-word-20">rutinní</span><span class="hero-word-21">úkoly.</span><span class="hero-word-22">Mým</span><span class="hero-word-23">nejčastějším</span><span class="hero-word-24">klientem</span><span class="hero-word-25">jsou</span><span class="hero-word-26">malé</span><span class="hero-word-27">a</span>
+            <span class="hero-word-19">automatizovat</span> <span class="hero-word-20">rutinní</span> <span class="hero-word-21">úkoly.</span> <span class="hero-word-22">Mým</span> <span class="hero-word-23">nejčastějším</span> <span class="hero-word-24">klientem</span> <span class="hero-word-25">jsou</span> <span class="hero-word-26">malé</span> <span class="hero-word-27">a</span>
           </span>
           <span class="hero-text-line">
-            <span class="hero-word-28">střední</span><span class="hero-word-29">firmy,</span><span class="hero-word-30">které</span><span class="hero-word-31">preferují</span><span class="hero-word-32">jasnou</span><span class="hero-word-33">komunikaci</span><span class="hero-word-34">a</span><span class="hero-word-35">chtějí</span><span class="hero-word-36">ušetřit</span><span class="hero-word-37">čas.</span>
+            <span class="hero-word-28">střední</span> <span class="hero-word-29">firmy,</span> <span class="hero-word-30">které</span> <span class="hero-word-31">preferují</span> <span class="hero-word-32">jasnou</span> <span class="hero-word-33">komunikaci</span> <span class="hero-word-34">a</span> <span class="hero-word-35">chtějí</span> <span class="hero-word-36">ušetřit</span> <span class="hero-word-37">čas.</span>
           </span>
         </div>
       </div>
@@ -190,20 +190,7 @@ const heroItems = [
   </div>
 </main>
 
-<!-- Performance-optimized LightRays loading -->
+<!-- LightRays loading -->
 <script>
   import '../../scripts/lightRaysManager.ts';
-  
-  // Start animations after page load for LCP
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[class^="hero-word-"]').forEach(el => {
-        el.classList.add('animate');
-      });
-    });
-  } else {
-    document.querySelectorAll('[class^="hero-word-"]').forEach(el => {
-      el.classList.add('animate');
-    });
-  }
 </script>
