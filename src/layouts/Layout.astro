@@ -1,4 +1,5 @@
 ---
+import criticalCSS from '../styles/critical.css?raw';
 import '../styles/global.css';
 import Navbar from '../components/navbar/Navbar.astro';
 
@@ -19,9 +20,19 @@ const { title, description = 'IT developer na volné noze' } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<link rel="preload" as="image" href="/Portrait-256w.webp" media="(max-width: 768px)">
+		<link rel="preload" as="image" href="/Portrait-512w.webp" media="(min-width: 769px)">
+		<link rel="preload" as="image" href="/NewLogo.svg">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin
+		<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+		<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+		<noscript>
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+		</noscript>
+		<style set:html={criticalCSS}></style>
 	</head>
 	<body>
 		<Navbar />

@@ -146,10 +146,9 @@ const heroItems = [
       class="w-64 h-auto object-contain opacity-60"
       width={256}
       height={276}
+      loading="eager"
       fetchpriority="high"
       decoding="async"
-      srcset="/Portrait-256w.webp 256w"
-      sizes="256px"
     />
   </div>
 
@@ -167,9 +166,11 @@ const heroItems = [
           class="absolute bottom-0 w-5/6 lg:w-full min-[1024px]:max-[1279px]:w-full h-auto object-contain mx-auto left-0 right-0"
           width={512}
           height={552}
+          loading="eager"
+          fetchpriority="high"
           decoding="async"
-          srcset="/Portrait-512w.webp 512w, /Portrait.webp 730w"
-          sizes="(min-width: 1280px) 730px, 512px"
+          srcset="/Portrait-256w.webp 256w, /Portrait-512w.webp 512w, /Portrait.webp 730w"
+          sizes="(max-width: 768px) 256px, (min-width: 1280px) 730px, 512px"
         />
       </div>
     </div>
