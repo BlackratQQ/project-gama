@@ -2,6 +2,7 @@
 import Button from '../Button.astro';
 import ArrowDown from '../ArrowDown.astro';
 import SocialProof from '../shared/SocialProof.astro';
+import HeroPortrait from '../react/HeroPortrait';
 
 // JSON-LD structured data pro SEO
 const jsonLd = {
@@ -150,36 +151,31 @@ const heroItems = [
 
   <!-- Portrét - Mobilní (pod textem) -->
   <div class="relative w-full z-10 pointer-events-none flex md:hidden justify-center items-center">
-    <img
-      src="/Portrait-256w.webp"
-      alt="Hero portrait"
-      class="w-64 h-auto object-contain opacity-60"
-      width={256}
-      height={276}
-      loading="lazy"
-      decoding="async"
-    />
+    <HeroPortrait variant="mobile" client:idle />
   </div>
 
-  <!-- Portrét - Desktop (přes text) -->
-  <div class="absolute top-0 left-0 w-full min-h-screen z-10 pointer-events-none hidden md:flex">
+  <!-- Portrét - Tablet (md a lg breakpointy) -->
+  <div class="absolute top-0 left-0 w-full min-h-screen z-10 pointer-events-none hidden md:flex lg:hidden">
     <div class="container mx-auto px-3 flex w-full min-h-screen">
       <!-- Levá strana - 50% prázdná -->
       <div class="w-0 lg:w-1/2 min-[1024px]:max-[1279px]:w-1/3"></div>
 
       <!-- Pravá strana - 50% s portrétem -->
       <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
-        <img
-          src="/Portrait-512w.webp"
-          alt="Hero portrait"
-          class="absolute bottom-0 w-5/6 lg:w-full min-[1024px]:max-[1279px]:w-full h-auto object-contain mx-auto left-0 right-0"
-          width={512}
-          height={552}
-          loading="lazy"
-          decoding="async"
-          srcset="/Portrait-256w.webp 256w, /Portrait-512w.webp 512w, /Portrait.webp 730w"
-          sizes="(max-width: 768px) 256px, (max-width: 1024px) 400px, (min-width: 1280px) 600px, 512px"
-        />
+        <HeroPortrait variant="tablet" client:idle />
+      </div>
+    </div>
+  </div>
+
+  <!-- Portrét - Desktop (lg+ breakpointy) s GridDistortion efektem -->
+  <div class="absolute top-0 left-0 w-full min-h-screen z-10 pointer-events-none hidden lg:flex">
+    <div class="container mx-auto px-3 flex w-full min-h-screen">
+      <!-- Levá strana - 50% prázdná -->
+      <div class="w-0 lg:w-1/2 min-[1024px]:max-[1279px]:w-1/3"></div>
+
+      <!-- Pravá strana - 50% s portrétem -->
+      <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
+        <HeroPortrait variant="desktop" client:idle />
       </div>
     </div>
   </div>

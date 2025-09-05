@@ -102,8 +102,9 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
       antialias: true,
       alpha: true,
       powerPreference: 'high-performance',
+      preserveDrawingBuffer: true,
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 3));
     container.appendChild(renderer.domElement);
 
     const camera = new THREE.OrthographicCamera(0, 0, 0, 0, -1000, 1000);
@@ -122,6 +123,10 @@ const GridDistortion: React.FC<GridDistortionProps> = ({
       imageSrc,
       (texture) => {
         texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.wrapS = THREE.ClampToEdgeWrapping;
+        texture.wrapT = THREE.ClampToEdgeWrapping;
+        texture.generateMipmaps = false;
         imageAspectRef.current = texture.image.width / texture.image.height;
         uniforms.uTexture.value = texture;
         handleResize();
