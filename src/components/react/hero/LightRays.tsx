@@ -91,36 +91,14 @@ const LightRays: React.FC<LightRaysProps> = ({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const userInteractedRef = useRef(false);
 
-  // Performance: Check for reduced motion preference
+  // Simplified: Only check for reduced motion preference
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       setShouldRender(false);
-      return;
+    } else {
+      setShouldRender(true);
     }
-
-    const handleUserInteraction = () => {
-      if (!userInteractedRef.current) {
-        userInteractedRef.current = true;
-        setShouldRender(true);
-      }
-    };
-
-    // Lazy load on scroll or mouse move
-    const handleScroll = () => handleUserInteraction();
-    const handleMouseMove = () => handleUserInteraction();
-
-    // Auto-trigger after 2s if no interaction
-    const autoTrigger = setTimeout(() => handleUserInteraction(), 2000);
-
-    window.addEventListener('scroll', handleScroll, { once: true, passive: true });
-    window.addEventListener('mousemove', handleMouseMove, { once: true, passive: true });
-
-    return () => {
-      clearTimeout(autoTrigger);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
   }, []);
 
   // Visibility and page visibility API for performance
@@ -166,9 +144,10 @@ const LightRays: React.FC<LightRaysProps> = ({
 
       if (!containerRef.current) return;
 
-      // Performance optimization: lower DPR for mobile
-      const isMobile = window.innerWidth < 768;
-      const targetDPR = isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5);
+      // Performance optimization: different settings for tablet vs desktop
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      const isDesktop = window.innerWidth >= 1024;
+      const targetDPR = isTablet ? 1.2 : Math.min(window.devicePixelRatio, 1.5);
       
       const renderer = new Renderer({
         dpr: targetDPR,
@@ -320,9 +299,9 @@ void main() {
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return;
 
-        // Keep consistent DPR optimization
-        const isMobile = window.innerWidth < 768;
-        renderer.dpr = isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5);
+        // Keep consistent DPR optimization for tablet/desktop
+        const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+        renderer.dpr = isTablet ? 1.2 : Math.min(window.devicePixelRatio, 1.5);
 
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
         renderer.setSize(wCSS, hCSS);
@@ -338,9 +317,9 @@ void main() {
         uniforms.rayDir.value = dir;
       };
 
-      // Performance: FPS throttling
+      // Performance: FPS throttling based on device type
       let lastFrameTime = 0;
-      const targetFPS = isMobile ? 30 : 60;
+      const targetFPS = isTablet ? 45 : 60;
       const frameInterval = 1000 / targetFPS;
 
       const loop = (t: number) => {
