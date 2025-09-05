@@ -1,0 +1,125 @@
+---
+import FadeContent from '../../react/shared/FadeContent.tsx';
+---
+
+<div class="bg-gradient">
+  <section class="container mx-auto flex min-h-[80vh] items-center">
+    <div class="grid w-full grid-cols-1 gap-12 px-3 lg:grid-cols-2">
+      <!-- Levá Strana - Nadpis -->
+      <div class="flex flex-col items-center justify-center">
+        <FadeContent blur={false} duration={800} delay={0} direction="top" client:only="react">
+          <div
+            class="relative z-10 flex flex-col items-start justify-center space-y-6 rounded-lg px-3 py-3 shadow-lg md:ml-14"
+          >
+            <div>
+              <h2 class="mb-4 text-4xl font-bold text-white">…od KÓdu do ringu</h2>
+            </div>
+
+            <FadeContent
+              blur={false}
+              duration={800}
+              delay={400}
+              direction="top"
+              className="mb-4"
+              client:only="react"
+            >
+              <p class="text-gray-100 text-lg hover:text-white">
+                Jaký je rozdíl mezi introvertním a extrovertním programátorem? Introvertní vývojář
+                kouká na svoje boty. Extrovertní na ty vaše. Já koukám klientům do očí.
+              </p>
+            </FadeContent>
+
+            <FadeContent
+              blur={false}
+              duration={800}
+              delay={800}
+              direction="top"
+              className="mb-4"
+              client:only="react"
+            >
+              <p class="text-gray-100 text-lg hover:text-white">
+                Do očí hledím i svým soupeřům – řadu let se věnuji kickboxu na poloprofesionální
+                úrovni. Pokud se nevěnuji vašemu projektu, najdete mě trénovat v jednom z pražských
+                gymů.
+              </p>
+            </FadeContent>
+
+            <FadeContent
+              blur={false}
+              duration={800}
+              delay={1200}
+              direction="top"
+              className="mb-4"
+              client:only="react"
+            >
+              <p class="text-gray-100 text-lg hover:text-white">
+                Jsem držitelem národního titulu
+                <span class="font-semibold text-orange-500"> Wako Pro </span>
+                ve váhové kategorii do 75 kg, který jsem získal vítězstvím ve čtyřčlenné pyramidě. Mám
+                také
+                <span class="font-semibold text-orange-500">
+                  několik titulů Mistra ČR v kickboxu.
+                </span>
+              </p>
+            </FadeContent>
+
+            <FadeContent
+              blur={false}
+              duration={800}
+              delay={1600}
+              direction="top"
+              className="mb-4"
+              client:only="react"
+            >
+              <p class="text-gray-100 text-lg hover:text-white">
+                Sport mě naučil disciplíně, vytrvalosti a schopnosti nevzdávat se při řešení
+                složitých výzev. Stejný přístup aplikuji i v práci – každý projekt, do kterého se
+                pustím,
+                <span class="font-semibold text-orange-500"> dotáhnu to do konce. </span>
+              </p>
+            </FadeContent>
+          </div>
+        </FadeContent>
+      </div>
+
+      <!-- Pravá Strana - Text -->
+      <div class="relative flex h-full items-center justify-center">
+        <p class="text-xl text-white opacity-80">Fotka z promocí brzy...</p>
+      </div>
+    </div>
+  </section>
+</div>
+<style>
+  .bg-gradient {
+    /* Hodnoty pro původní gradient-under-hero */
+    position: relative;
+
+    /* Lineární gradient vypnutý defaultně */
+    --linear-active: 0;
+    --linear-dir: bottom;
+    --linear-start: #000000;
+    --linear-end: 30%;
+
+    /* Radiální gradienty */
+    --g1-x: 17%;
+    --g1-y: 70%;
+    --g1-color: #2b0053;
+    --g1-size: 1%;
+    --g1-fade: min(3%, 220px);
+
+    --g2-x: 80%;
+    --g2-y: 55%;
+    --g2-color: #002853;
+    --g2-size: 1%;
+    --g2-fade: min(2%, 220px);
+
+    --g3-x: 90%;
+    --g3-y: 20%;
+    --g3-color: #2b0053;
+    --g3-size: 0%;
+    --g3-fade: min(15%, 180px);
+
+    /* Čtvrtý gradient vypneme */
+    --g4-fade: 0%;
+  }
+</style>

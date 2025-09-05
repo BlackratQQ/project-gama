@@ -1,0 +1,164 @@
+---
+import PriceListBentoEffects from '../../react/shared/PriceListBentoEffects.tsx';
+import BlurText from '../../react/shared/BlurText.tsx';
+import FadeContent from '../../react/shared/FadeContent.tsx';
+
+interface CardData {
+  title: string;
+  description: string[];
+  price: string;
+}
+
+const cardData: CardData[] = [
+  {
+    title: 'Návrh a vývoj webu',
+    description: [
+      'Profesionální web reprezentující vaši značku',
+      'Moderní, rychlý a plně responzivní design',
+      'Snadná správa obsahu bez technických znalostí',
+      'Pokročilé funkce přesně na míru vašim potřebám',
+      'Kompletní SEO optimalizace pro lepší viditelnost',
+      'Napojení na Google Analytics a další nástroje',
+      'Bezpečnost a pravidelné aktualizace',
+      'Podpora všech moderních zařízení a prohlížečů',
+    ],
+    price: '25 000 Kč',
+  },
+  {
+    title: 'Automatizace firemních procesů',
+    description: [
+      'Úspora desítek hodin týdně eliminací rutinní práce',
+      'Automatické zpracování objednávek a fakturace',
+      'Chytré workflow pro schvalování a reporty',
+      'Propojení všech vašich systémů (CRM, ERP, e-mail)',
+      'Automatické zálohovány a synchronizace dat',
+      'Okamžité notifikace o důležitých událostech',
+      'Detailní školení týmu a kompletní dokumentace',
+      'Návratnost investice obvykle do 3 měsíců',
+    ],
+    price: 'Dohodou',
+  },
+];
+---
+
+<div class="bg-gradient">
+  <section
+    id="cenik"
+    class="relative h-auto w-full py-12 text-white [--line-rotate:-75deg] [--line-top:68%] [--line-width:420%] md:[--line-rotate:-40deg] md:[--line-top:75%] lg:[--line-rotate:-30deg] lg:[--line-top:50%] xl:[--line-rotate:65deg] xl:[--line-top:60%] xl:[--line-width:300%]"
+  >
+    <!-- Animovaný nadpis -->
+    <h2
+      class="relative mb-12 select-none text-center text-6xl font-bold text-white sm:text-4xl md:text-8xl xl:text-9xl"
+    >
+      <!-- Statický fallback pro SEO/crawlery -->
+      <noscript> CENA VAŠÍ INVESTICE? </noscript>
+      <!-- Animovaná verze -->
+      <BlurText
+        text="CENA VAŠÍ INVESTICE?"
+        delay={100}
+        initialDelay={0}
+        animateBy="words"
+        direction="top"
+        animateOn="view"
+        client:only="react"
+      />
+    </h2>
+
+    <!-- Ceníky -->
+    <div
+      class="container mx-auto -mt-10 flex flex-col justify-center gap-6 p-6 md:-mt-24 lg:-mt-28 md:flex-row md:flex-nowrap lg:flex-nowrap xl:flex-nowrap"
+    >
+      {
+        cardData.map((card, index) => (
+          <FadeContent
+            blur={true}
+            duration={800}
+            delay={600 + index * 200}
+            direction="top"
+            className="backdrop-blur-sm"
+            client:only="react"
+          >
+            <div
+              class="price-card relative flex min-h-[504px] w-full flex-col justify-between rounded-lg p-6 text-white hover:cursor-pointer md:min-w-[400px] lg:min-w-[450px] xl:min-w-[504px]"
+              data-card-index={index}
+            >
+              <h3 class="mb-4 text-center text-2xl font-bold">{card.title}</h3>
+              <ul class="mb-6 text-white">
+                {card.description.map((item) => (
+                  <li class="mb-2 flex items-start">
+                    <img
+                      src="/icons/Triangle-Icon.svg"
+                      alt="Triangle Icon"
+                      width="12"
+                      height="12"
+                      class="mr-2 mt-2"
+                    />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div class="relative mx-auto flex items-center justify-center text-center text-4xl font-bold text-white">
+                {index === 0 && (
+                  <span class="text-gray-100 absolute -left-6 top-3 text-xl font-normal">Od</span>
+                )}
+                <span class={index === 0 ? 'ml-2' : ''}>{card.price}</span>
+              </div>
+            </div>
+          </FadeContent>
+        ))
+      }
+    </div>
+
+    <!-- Bento efekty -->
+    <PriceListBentoEffects client:visible />
+  </section>
+</div>
+
+<style>
+  .bg-gradient {
+    /* Hodnoty pro původní gradient-under-hero */
+    position: relative;
+
+    /* Lineární gradient vypnutý defaultně */
+    --linear-active: 0;
+    --linear-dir: bottom;
+    --linear-start: #000000;
+    --linear-end: 30%;
+
+    /* Radiální gradienty */
+    --g1-x: 17%;
+    --g1-y: 70%;
+    --g1-color: #2b0053;
+    --g1-size: 1%;
+    --g1-fade: min(13%, 220px);
+
+    --g2-x: 80%;
+    --g2-y: 55%;
+    --g2-color: #002853;
+    --g2-size: 1%;
+    --g2-fade: min(11%, 220px);
+
+    --g3-x: 90%;
+    --g3-y: 20%;
+    --g3-color: #2b0053;
+    --g3-size: 0%;
+    --g3-fade: min(15%, 180px);
+
+    /* Čtvrtý gradient vypneme */
+    --g4-fade: 0%;
+  }
+
+  .price-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .price-card:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow:
+      0 4px 20px rgba(46, 24, 78, 0.4),
+      0 0 30px rgba(132, 0, 255, 0.2);
+  }
+</style>

@@ -1,0 +1,211 @@
+---
+import HowItWorksBentoEffects from '../../react/shared/HowItWorksBentoEffects.tsx';
+import BlurText from '../../react/shared/BlurText.tsx';
+import FadeContent from '../../react/shared/FadeContent.tsx';
+
+const steps = [
+  {
+    title: '1. Analýza procesů',
+    description:
+      'Zmapuji vaše současné procesy a identifikuji místa, která je možné automatizovat. Zjistím, kde ztrácíte nejvíc času a peněz.',
+  },
+  {
+    title: '2. Návrh řešení',
+    description:
+      'Navrhnu efektivní automatizaci, která bude přesně odpovídat vašim potřebám. Vytvořím harmonogram implementace a transparentní nacenění.',
+  },
+  {
+    title: '3. Vývoj a testování',
+    description:
+      'Vytvořím automatizační systém a důkladně jej otestuji. Průběžně s vámi konzultuji postup, abyste měli kontrolu nad celým procesem.',
+  },
+  {
+    title: '4. Nasazení a optimalizace',
+    description:
+      'Implementuji řešení do vašeho provozu a zajistím plynulý přechod. Systém následně monitoruji a optimalizuji pro maximální efektivitu.',
+  },
+];
+---
+
+<div class="bg-gradient">
+  <section
+    id="jak-to-probiha"
+    class="howitworks-section container mx-auto flex min-h-[80vh] items-center overflow-x-hidden pt-28 lg:pt-0"
+    aria-label="Jak to probíhá"
+  >
+    <div class="grid w-full grid-cols-1 gap-12 px-3 lg:grid-cols-2">
+      <!-- Levá Strana - Nadpis -->
+      <div class="flex flex-col justify-center">
+        <h3
+          class="mb-8 text-center text-5xl font-bold text-white md:text-left md:text-8xl xl:text-9xl"
+        >
+          <!-- Statický fallback pro SEO/crawlery -->
+          <noscript>
+            JAK TO <span class="strikethrough">PROBÍHÁ?</span>
+          </noscript>
+          <!-- Animovaná verze -->
+          <div class="howitworks-title-wrapper">
+            <BlurText
+              text="JAK TO"
+              delay={100}
+              initialDelay={0}
+              animateBy="words"
+              direction="top"
+              animateOn="view"
+              className="inline-block"
+              client:only="react"
+            />
+            <BlurText
+              text="PROBÍHÁ?"
+              delay={100}
+              initialDelay={600}
+              animateBy="words"
+              direction="top"
+              animateOn="view"
+              className="inline-block strikethrough"
+              client:only="react"
+            />
+          </div>
+        </h3>
+
+        <FadeContent blur={true} duration={800} delay={800} direction="top" client:only="react">
+          <h2 class="text-center text-3xl font-bold text-white md:text-left md:text-4xl">
+            Proces automatizace
+          </h2>
+        </FadeContent>
+      </div>
+
+      <!-- Pravá Strana - Seznam -->
+      <div class="flex flex-col items-center justify-center">
+        <div class="relative z-10 ml-0 flex flex-col items-start justify-center space-y-6 lg:ml-14">
+          <ol class="space-y-6">
+            {
+              steps.map((step, index) => (
+                <li>
+                  <FadeContent
+                    blur={true}
+                    duration={800}
+                    delay={1200 + index * 400}
+                    direction="top"
+                    client:only="react"
+                  >
+                    <article
+                      class="howitworks-card relative rounded-lg bg-black/30 p-6 text-center shadow-lg backdrop-blur-sm hover:bg-black/60 md:text-left border border-white/10 transition-all duration-300"
+                      data-card-index={index}
+                      itemscope
+                      itemtype="https://schema.org/HowToStep"
+                    >
+                      <strong class="mb-2 block text-lg text-white" itemprop="name">
+                        {step.title}
+                      </strong>
+                      <p class="text-gray-300" itemprop="text">
+                        {step.description}
+                      </p>
+                    </article>
+                  </FadeContent>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- React efekty s SSR obsahem -->
+    <HowItWorksBentoEffects
+      enableStars={true}
+      enableSpotlight={true}
+      enableBorderGlow={true}
+      enableTilt={true}
+      enableMagnetism={true}
+      clickEffect={true}
+      spotlightRadius={350}
+      particleCount={10}
+      glowColor="132, 0, 255"
+      client:idle
+    />
+  </section>
+</div>
+<style>
+  .bg-gradient {
+    /* Hodnoty pro původní gradient-under-hero */
+    position: relative;
+
+    /* Lineární gradient vypnutý defaultně */
+    --linear-active: 0;
+    --linear-dir: bottom;
+    --linear-start: #000000;
+    --linear-end: 30%;
+
+    /* Radiální gradienty */
+    --g1-x: 17%;
+    --g1-y: 30%;
+    --g1-color: #002853;
+    --g1-size: 1%;
+    --g1-fade: min(13%, 220px);
+
+    --g2-x: 90%;
+    --g2-y: 75%;
+    --g2-color: #002853;
+    --g2-size: 1%;
+    --g2-fade: min(15%, 220px);
+
+    --g3-x: 45%;
+    --g3-y: 65%;
+    --g3-color: #2b0053;
+    --g3-size: 0%;
+    --g3-fade: min(15%, 180px);
+
+    /* Čtvrtý gradient vypneme */
+    --g4-fade: 0%;
+  }
+
+  .howitworks-section {
+    position: relative;
+  }
+
+  .howitworks-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+  }
+
+  .howitworks-card:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow:
+      0 4px 20px rgba(46, 24, 78, 0.4),
+      0 0 30px rgba(132, 0, 255, 0.2);
+    cursor: pointer;
+  }
+
+  .howitworks-card--border-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 6px;
+    background: radial-gradient(
+      var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+      rgba(132, 0, 255, calc(var(--glow-intensity) * 0.8)) 0%,
+      rgba(132, 0, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+      transparent 60%
+    );
+    border-radius: inherit;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: subtract;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .howitworks-card--border-glow:hover::after {
+    opacity: 1;
+  }
+</style>

@@ -1,0 +1,127 @@
+---
+import BlurText from '../../react/shared/BlurText.tsx';
+import FadeContent from '../../react/shared/FadeContent.tsx';
+---
+
+<div class="bg-gradient">
+  <section class="container mx-auto flex py-72 items-center">
+    <div class="grid w-full grid-cols-1 gap-12 px-3 lg:grid-cols-2">
+      <!-- Levá Strana - Nadpis -->
+      <div class="flex flex-col justify-center">
+        <h3
+          class="mb-8 text-center text-5xl font-bold text-white md:text-left md:text-8xl xl:text-9xl"
+        >
+          <!-- Statický fallback pro SEO/crawlery -->
+          <noscript>
+            JAK <span class="strikethrough">FUNGUJI?</span>
+          </noscript>
+          <!-- Animovaná verze -->
+          <div class="how-works-title-wrapper">
+            <BlurText
+              text="JAK"
+              delay={100}
+              initialDelay={0}
+              animateBy="words"
+              direction="top"
+              animateOn="view"
+              className="inline-block"
+              client:only="react"
+            />
+            <BlurText
+              text="FUNGUJI?"
+              delay={100}
+              initialDelay={600}
+              animateBy="words"
+              direction="top"
+              animateOn="view"
+              className="inline-block strikethrough"
+              client:only="react"
+            />
+          </div>
+        </h3>
+
+        <FadeContent blur={true} duration={800} delay={800} direction="top" client:only="react">
+          <h2 class="text-center text-4xl font-bold text-white md:text-left">Pracuji projektově</h2>
+        </FadeContent>
+      </div>
+
+      <!-- Pravá Strana - Technologie -->
+      <div class="flex flex-col items-center justify-center">
+        <FadeContent blur={true} duration={800} delay={1200} direction="top" client:only="react">
+          <div
+            class="relative z-10 flex flex-col items-start justify-center space-y-6 text-center md:ml-14 md:text-left"
+          >
+            <h2 class="mb-4 text-4xl font-bold text-white">Jak probíhá spolupráce</h2>
+
+            <p class="text-gray-100 mb-4 text-lg transition-all duration-300 hover:text-white">
+              Pracuji projektově – cenu stanovím na základě bezplatné a nezávazné konzultace. Na té
+              probereme vaše představy a požadavky, rozsah projektu, náročnost jeho realizace a
+              termín dokončení.
+              <a
+                href="#kontaktni-formular"
+                class="cursor-pointer font-semibold text-orange-500 hover:text-orange-400"
+              >
+                Stačí se mi ozvat.
+              </a>
+            </p>
+
+            <p class="text-gray-100 mb-4 text-lg transition-all duration-300 hover:text-white">
+              Chcete alespoň orientační představu o cenách ještě před odesláním poptávky?
+              <a
+                href="#cenik"
+                class="cursor-pointer font-semibold text-orange-500 hover:text-orange-400"
+              >
+                Tady jsou:
+              </a>
+            </p>
+
+            <p class="text-gray-100 mb-4 text-lg transition-all duration-300 hover:text-white">
+              Pronájem cloudu a dalších nástrojů fakturuji zvlášť. S novými klienty začínám
+              spolupráci po složení
+              <a
+                href="#cenik"
+                class="cursor-pointer font-semibold text-orange-500 hover:text-orange-400"
+              >
+                50% zálohy
+              </a>.
+            </p>
+          </div>
+        </FadeContent>
+      </div>
+    </div>
+  </section>
+</div>
+<style>
+  .bg-gradient {
+    /* Hodnoty pro původní gradient-under-hero */
+    position: relative;
+
+    /* Lineární gradient vypnutý defaultně */
+    --linear-active: 1;
+    --linear-dir: bottom;
+    --linear-start: #000000;
+    --linear-end: 30%;
+
+    /* Radiální gradienty */
+    --g1-x: 17%;
+    --g1-y: 60%;
+    --g1-color: #002853;
+    --g1-size: 1%;
+    --g1-fade: min(13%, 220px);
+
+    --g2-x: 90%;
+    --g2-y: 55%;
+    --g2-color: #002853;
+    --g2-size: 1%;
+    --g2-fade: min(11%, 220px);
+
+    --g3-x: 45%;
+    --g3-y: 25%;
+    --g3-color: #2b0053;
+    --g3-size: 0%;
+    --g3-fade: min(15%, 180px);
+
+    /* Čtvrtý gradient vypneme */
+    --g4-fade: 0%;
+  }
+</style>

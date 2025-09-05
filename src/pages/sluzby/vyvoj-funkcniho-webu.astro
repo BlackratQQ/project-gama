@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/sluzby/vyvoj-funkcniho-webu/Hero.astro';
+import Services from '../../components/sluzby/vyvoj-funkcniho-webu/Services.astro';
+import HowItWorks from '../../components/sluzby/vyvoj-funkcniho-webu/HowItWorks.astro';
+import Portfolio from '../../components/Portfolio.astro';
+import References from '../../components/references/References.astro';
+import Contact from '../../components/Contact.astro';
+---
+
+<Layout>
+  <main class="overflow-hidden">
+    <Hero />
+    <div class="text-white">
+      <Services />
+      <HowItWorks />
+      <Portfolio />
+      <References />
+      <Contact />
+    </div>
+  </main>
+</Layout>

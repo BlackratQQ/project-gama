@@ -1,0 +1,66 @@
+---
+import Button from '../../Button.astro';
+import BlurText from '../../react/shared/BlurText.tsx';
+import FadeContent from '../../react/shared/FadeContent.tsx';
+---
+
+<div class="relative min-h-screen w-full">
+  <!-- Gradient pozadí -->
+  <div class="bg-radial-gradient absolute left-0 top-0 z-0 h-[85vh] w-full"></div>
+
+  <!-- Obsah -->
+  <div class="relative z-10 flex min-h-[70vh] flex-col items-center justify-evenly">
+    <!-- Horní část -->
+    <div class="max-w-9xl justify-center space-y-6 px-3 pt-24 text-center text-white">
+      <h1
+        class="text-4xl font-extrabold leading-tight text-orange-500 md:text-5xl md:leading-normal lg:text-7xl"
+      >
+        <!-- Statický fallback pro SEO/crawlery -->
+        <noscript> Ceník & O mně </noscript>
+        <!-- Animovaná verze -->
+        <BlurText
+          text="Ceník & O mně"
+          delay={100}
+          initialDelay={0}
+          animateBy="words"
+          direction="top"
+          animateOn="load"
+          client:only="react"
+        />
+      </h1>
+
+      <FadeContent
+        blur={true}
+        duration={800}
+        delay={800}
+        direction="top"
+        className="mx-auto max-w-4xl pt-7"
+        client:only="react"
+      >
+        <p class="text-lg font-semibold text-gray-200 lg:text-2xl">
+          ...když chcete schopného vývojáře, který mluví vaším jazykem, drží slovo a má férové ceny.
+        </p>
+      </FadeContent>
+    </div>
+
+    <!-- Tlačítka -->
+    <FadeContent
+      blur={true}
+      duration={800}
+      delay={1200}
+      direction="bottom"
+      className="mx-auto mt-20 md:mt-0"
+      client:only="react"
+    >
+      <div class="flex flex-col items-center justify-center gap-8 md:flex-row">
+        <Button text="Poptat nezávaznou konzultaci" href="#kontaktni-formular" variant="solid" />
+        <Button text="Prohlédnout ceník" href="#cenik" variant="ghost" />
+      </div>
+    </FadeContent>
+  </div>
+
+  <!-- Gradient layers na spodní části -->
+  <div class="bottom-black-layer absolute bottom-0 left-0 z-10 h-[30vh] w-full"></div>
+  <div class="gray-layer absolute bottom-0 left-0 z-10 h-[30vh] w-full"></div>
+  <div class="black-layer absolute bottom-0 left-0 z-10 h-[30vh] w-full"></div>
+</div>

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 
 // Dynamické načtení GridDistortion pouze pro desktop
-const GridDistortion = lazy(() => import("./shared/GridDistortion"));
+const GridDistortion = lazy(() => import("../shared/GridDistortion"));
 
 interface HeroPortraitProps {
   className?: string;
