@@ -10,19 +10,20 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow-x: hidden;
   line-height: 1.6;
 }
 
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/Textura-bg.webp');
+  background-image: url("/Textura-bg.webp");
   background-repeat: repeat;
   background-size: auto;
   background-position: top left;
@@ -61,8 +62,8 @@ body::after {
   border: 1px solid transparent;
   box-sizing: border-box;
   background: #f97316;
-  -webkit-mask: url('/urban-sprite-reverse.webp');
-  mask: url('/urban-sprite-reverse.webp');
+  -webkit-mask: url("/urban-sprite-reverse.webp");
+  mask: url("/urban-sprite-reverse.webp");
   -webkit-mask-size: 3000% 100%;
   mask-size: 3000% 100%;
   color: #fff;
@@ -94,110 +95,12 @@ body::after {
   pointer-events: none;
 }
 
-/* Solid button styly */
-.solid-button-container {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.solid-button-container button,
-.solid-button-container a {
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 700;
-  width: 100%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  background: #f97316;
-  -webkit-mask: url('/urban-sprite.webp');
-  mask: url('/urban-sprite.webp');
-  -webkit-mask-size: 3000% 100%;
-  mask-size: 3000% 100%;
-  color: #fff;
-  -webkit-animation: ani2 0.7s steps(29) forwards;
-  animation: ani2 0.7s steps(29) forwards;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.solid-button-container button:hover,
-.solid-button-container a:hover,
-.solid-button-container.active button,
-.solid-button-container.active a {
-  -webkit-animation: ani 0.7s steps(29) forwards;
-  animation: ani 0.7s steps(29) forwards;
-}
-
-.solid-mas {
-  position: absolute;
-  color: #fff;
-  width: 100%;
-  overflow: hidden;
-  font-weight: bold;
-  border: 1px solid #f97316;
-  padding: 12px 24px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  pointer-events: none;
-}
-
-/* Keyframes pro mask animace */
-@-webkit-keyframes ani {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-}
-
-@keyframes ani {
-  from {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-  to {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-}
-
-@-webkit-keyframes ani2 {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-}
-
-@keyframes ani2 {
-  from {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-  to {
-    -webkit-mask-position: 0 0;
-    mask-position: 0 0;
-  }
-}
-
 /* Logo animace */
 .logo-animate {
   opacity: 0;
   filter: blur(10px);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .logo-animate.logo-visible {
@@ -260,7 +163,7 @@ body::after {
 .arrow-down:before,
 .arrow-down:after {
   transition: all 0.4s ease;
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   transform-origin: bottom right;
