@@ -2,7 +2,6 @@
 import Button from '../Button.astro';
 import ArrowDown from '../ArrowDown.astro';
 import SocialProof from '../shared/SocialProof.astro';
-import LightRays from '../react/hero/LightRays.tsx';
 
 // JSON-LD structured data pro SEO
 const jsonLd = {
@@ -81,22 +80,8 @@ const heroItems = [
 <main role="main" aria-label="Hlavní hero sekce" class="relative min-h-screen">
   <div class="gradient-hero"></div>
   
-  <!-- LightRays pozadí - pouze desktop a tablet -->
-  <div class="absolute inset-0 z-[1] hidden md:block">
-    <LightRays
-      client:load
-      raysOrigin="top-center"
-      raysColor="#ffffff"
-      raysSpeed={1.5}
-      lightSpread={1.4}
-      rayLength={3}
-      followMouse={true}
-      mouseInfluence={0.1}
-      noiseAmount={0.1}
-      distortion={0.05}
-      className="w-full h-full"
-    />
-  </div>
+  <!-- LightRays container - dynamic loading only for desktop/tablet -->
+  <div id="lightrays-container" class="absolute inset-0 z-[1] hidden md:block"></div>
   
   <!-- CSS Fallback - všechny breakpointy, ale na desktop/tablet méně viditelné -->
   <div class="absolute inset-0 z-[1] bg-gradient-radial from-white/5 via-white/2 to-transparent opacity-30 pointer-events-none md:opacity-10"></div>
@@ -189,7 +174,7 @@ const heroItems = [
           loading="lazy"
           decoding="async"
           srcset="/Portrait-256w.webp 256w, /Portrait-512w.webp 512w, /Portrait.webp 730w"
-          sizes="(max-width: 768px) 256px, (min-width: 1280px) 730px, 512px"
+          sizes="(max-width: 768px) 256px, (max-width: 1024px) 400px, (min-width: 1280px) 600px, 512px"
         />
       </div>
     </div>
@@ -200,3 +185,8 @@ const heroItems = [
     <ArrowDown targetId="moje-sluzby" />
   </div>
 </main>
+
+<!-- Performance-optimized LightRays loading -->
+<script>
+  import '../../scripts/lightRaysManager.ts';
+</script>

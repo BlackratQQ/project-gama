@@ -335,26 +335,44 @@ void main() {
         }
         lastFrameTime = t;
 
-        uniforms.iTime.value = t * 0.001;
-
-        if (followMouse && mouseInfluence > 0.0) {
-          const smoothing = 0.92;
-
-          smoothMouseRef.current.x =
-            smoothMouseRef.current.x * smoothing + mouseRef.current.x * (1 - smoothing);
-          smoothMouseRef.current.y =
-            smoothMouseRef.current.y * smoothing + mouseRef.current.y * (1 - smoothing);
-
-          uniforms.mousePos.value = [smoothMouseRef.current.x, smoothMouseRef.current.y];
-        }
-
-        try {
-          renderer.render({ scene: mesh });
+        // Yield to main thread every 10 frames to prevent TBT issues
+        const frameCount = Math.floor(t / frameInterval);
+        if (frameCount % 10 === 0) {
+          setTimeout(() => {
+            if (rendererRef.current && uniformsRef.current && meshRef.current) {
+              uniforms.iTime.value = t * 0.001;
+              performRender();
+            }
+          }, 0);
           animationIdRef.current = requestAnimationFrame(loop);
-        } catch (error) {
-          console.warn('WebGL rendering error:', error);
           return;
         }
+
+        uniforms.iTime.value = t * 0.001;
+        performRender();
+
+        function performRender() {
+          if (!rendererRef.current || !meshRef.current || !uniformsRef.current) return;
+          
+          if (followMouse && mouseInfluence > 0.0) {
+            const smoothing = 0.92;
+
+            smoothMouseRef.current.x =
+              smoothMouseRef.current.x * smoothing + mouseRef.current.x * (1 - smoothing);
+            smoothMouseRef.current.y =
+              smoothMouseRef.current.y * smoothing + mouseRef.current.y * (1 - smoothing);
+
+            uniforms.mousePos.value = [smoothMouseRef.current.x, smoothMouseRef.current.y];
+          }
+
+          try {
+            renderer.render({ scene: mesh });
+          } catch (error) {
+            console.warn('WebGL rendering error:', error);
+          }
+        }
+        
+        animationIdRef.current = requestAnimationFrame(loop);
       };
 
       window.addEventListener('resize', updatePlacement);
