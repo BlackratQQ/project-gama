@@ -81,10 +81,10 @@ const heroItems = [
 <main role="main" aria-label="Hlavní hero sekce" class="relative min-h-screen">
   <div class="gradient-hero"></div>
   
-  <!-- LightRays pozadí -->
+  <!-- LightRays pozadí s performance optimalizací -->
   <div class="absolute inset-0 z-[1]">
     <LightRays
-      client:load
+      client:idle
       raysOrigin="top-center"
       raysColor="#ffffff"
       raysSpeed={1.5}
@@ -97,6 +97,9 @@ const heroItems = [
       className="w-full h-full"
     />
   </div>
+  
+  <!-- CSS Fallback pro performance -->
+  <div class="absolute inset-0 z-[1] bg-gradient-radial from-white/5 via-white/2 to-transparent opacity-30 pointer-events-none lg:opacity-20"></div>
 
   <!-- Obsah Hero sekce -->
   <div

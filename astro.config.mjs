@@ -48,6 +48,10 @@ export default defineConfig({
                 return 'icons-vendor';
               }
             }
+            // Separate WebGL components for lazy loading
+            if (id.includes('LightRays') || id.includes('WebGL') || id.includes('3d')) {
+              return 'webgl-effects';
+            }
           }
         }
       }

@@ -86,8 +86,44 @@ const LightRays: React.FC<LightRaysProps> = ({
   const meshRef = useRef<Mesh | null>(null);
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const userInteractedRef = useRef(false);
 
+  // Performance: Check for reduced motion preference
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setShouldRender(false);
+      return;
+    }
+
+    const handleUserInteraction = () => {
+      if (!userInteractedRef.current) {
+        userInteractedRef.current = true;
+        setShouldRender(true);
+      }
+    };
+
+    // Lazy load on scroll or mouse move
+    const handleScroll = () => handleUserInteraction();
+    const handleMouseMove = () => handleUserInteraction();
+
+    // Auto-trigger after 2s if no interaction
+    const autoTrigger = setTimeout(() => handleUserInteraction(), 2000);
+
+    window.addEventListener('scroll', handleScroll, { once: true, passive: true });
+    window.addEventListener('mousemove', handleMouseMove, { once: true, passive: true });
+
+    return () => {
+      clearTimeout(autoTrigger);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  // Visibility and page visibility API for performance
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -99,9 +135,15 @@ const LightRays: React.FC<LightRaysProps> = ({
       { threshold: 0.1 }
     );
 
+    const handleVisibilityChange = () => {
+      setIsPaused(document.hidden);
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     observerRef.current.observe(containerRef.current);
 
     return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       if (observerRef.current) {
         observerRef.current.disconnect();
         observerRef.current = null;
@@ -110,7 +152,7 @@ const LightRays: React.FC<LightRaysProps> = ({
   }, []);
 
   useEffect(() => {
-    if (!isVisible || !containerRef.current) return;
+    if (!isVisible || !shouldRender || !containerRef.current) return;
 
     if (cleanupFunctionRef.current) {
       cleanupFunctionRef.current();
@@ -124,8 +166,12 @@ const LightRays: React.FC<LightRaysProps> = ({
 
       if (!containerRef.current) return;
 
+      // Performance optimization: lower DPR for mobile
+      const isMobile = window.innerWidth < 768;
+      const targetDPR = isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5);
+      
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 2),
+        dpr: targetDPR,
         alpha: true,
       });
       rendererRef.current = renderer;
@@ -274,7 +320,9 @@ void main() {
       const updatePlacement = () => {
         if (!containerRef.current || !renderer) return;
 
-        renderer.dpr = Math.min(window.devicePixelRatio, 2);
+        // Keep consistent DPR optimization
+        const isMobile = window.innerWidth < 768;
+        renderer.dpr = isMobile ? 1 : Math.min(window.devicePixelRatio, 1.5);
 
         const { clientWidth: wCSS, clientHeight: hCSS } = containerRef.current;
         renderer.setSize(wCSS, hCSS);
@@ -290,10 +338,23 @@ void main() {
         uniforms.rayDir.value = dir;
       };
 
+      // Performance: FPS throttling
+      let lastFrameTime = 0;
+      const targetFPS = isMobile ? 30 : 60;
+      const frameInterval = 1000 / targetFPS;
+
       const loop = (t: number) => {
-        if (!rendererRef.current || !uniformsRef.current || !meshRef.current) {
+        if (!rendererRef.current || !uniformsRef.current || !meshRef.current || isPaused) {
+          animationIdRef.current = requestAnimationFrame(loop);
           return;
         }
+
+        // Throttle FPS
+        if (t - lastFrameTime < frameInterval) {
+          animationIdRef.current = requestAnimationFrame(loop);
+          return;
+        }
+        lastFrameTime = t;
 
         uniforms.iTime.value = t * 0.001;
 
