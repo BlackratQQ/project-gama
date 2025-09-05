@@ -7,7 +7,7 @@ import SocialProof from '../shared/SocialProof.astro';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Váš Název',
+  name: 'VOJTĚCH KOCHTA',
   jobTitle: 'IT Developer',
   description:
     'Freelance IT developer specializující se na UX, front-end a back-end design, řešení technických problémů a rychlé doručení výsledků.',
@@ -37,7 +37,7 @@ const jsonLd = {
       description: 'Kompletní návrh a implementace webových aplikací',
       provider: {
         '@type': 'Person',
-        name: 'Váš Název',
+        name: 'VOJTĚCH KOCHTA',
       },
     },
     {
@@ -46,7 +46,7 @@ const jsonLd = {
       description: 'Rychlé řešení technických výzev a problémů',
       provider: {
         '@type': 'Person',
-        name: 'Váš Název',
+        name: 'VOJTĚCH KOCHTA',
       },
     },
     {
@@ -55,7 +55,7 @@ const jsonLd = {
       description: 'Efektivní dodávka projektů v krátkém čase',
       provider: {
         '@type': 'Person',
-        name: 'Váš Název',
+        name: 'VOJTĚCH KOCHTA',
       },
     },
   ],
@@ -98,30 +98,52 @@ const heroItems = [
         <!-- Hlavní nadpis -->
         <h1
           id="hero-heading"
-          class="mb-4 lg:mb-6 text-4xl sm:text-5xl lg:text-7xl font-extrabold text-orange-500"
+          class="mb-4 lg:mb-6 text-4xl sm:text-5xl lg:text-7xl font-extrabold text-orange-500 hero-text-animated"
+          data-base-delay="300"
+          data-word-delay="200"
         >
-          VÁŠ NÁZEV
+          VOJTĚCH KOCHTA
         </h1>
 
         <!-- Podnadpis H2 -->
-        <h2 class="mb-6 lg:mb-16 text-2xl sm:text-3xl lg:text-6xl text-white">
+        <h2 
+          class="mb-6 lg:mb-16 text-2xl sm:text-3xl lg:text-6xl text-white hero-text-animated"
+          data-base-delay="800"
+          data-word-delay="150"
+        >
           IT developer na volné noze
         </h2>
 
-        <!-- Popis -->
-        <p
-          class="pb-16 md:pb-0mb-0 lg:mb-8 text-lg lg:text-xl font-medium leading-relaxed text-white px-4 lg:px-0"
-        >
-          Složte k zemi svou konkurenci. Navrhuji a stavím weby a pomáhám automatizovat rutinní
-          úkoly. Mým nejčastějším klientem jsou malé a střední firmy, které preferují jasnou
-          komunikaci a chtějí ušetřit čas.
-        </p>
+        <!-- Popis - 3 části animované paralelně -->
+        <div class="pb-16 md:pb-0mb-0 lg:mb-8 text-lg lg:text-xl font-medium leading-relaxed text-white px-4 lg:px-0">
+          <span
+            class="hero-text-animated"
+            data-base-delay="1500"
+            data-word-delay="100"
+          >
+            Složte k zemi svou konkurenci. Navrhuji a stavím weby a pomáhám
+          </span>
+          <span
+            class="hero-text-animated"
+            data-base-delay="1500"
+            data-word-delay="100"
+          >
+            automatizovat rutinní úkoly. Mým nejčastějším klientem jsou malé a
+          </span>
+          <span
+            class="hero-text-animated"
+            data-base-delay="1500"
+            data-word-delay="100"
+          >
+            střední firmy, které preferují jasnou komunikaci a chtějí ušetřit čas.
+          </span>
+        </div>
       </div>
 
       <!-- Div 2: SocialProof karty a tlačítko -->
       <div class="flex-shrink-0 lg:pb-0 md:-mt-8">
         <!-- SocialProof karty -->
-        <div class="mb-6 lg:mb-8 flex justify-center lg:justify-start px-2 lg:px-0">
+        <div class="mb-6 lg:mb-8 flex justify-center lg:justify-start px-2 lg:px-0 hero-animate hero-animate-4">
           <SocialProof
             items={heroItems}
             containerClass="flex gap-2 lg:gap-3"
@@ -132,7 +154,7 @@ const heroItems = [
         </div>
 
         <!-- Call to Action Button -->
-        <div class="flex justify-center lg:justify-start">
+        <div class="flex justify-center lg:justify-start hero-animate hero-animate-5">
           <Button
             text="Poptat nezávaznou konzultaci"
             href="#kontaktni-formular"
@@ -189,4 +211,9 @@ const heroItems = [
 <!-- Performance-optimized LightRays loading -->
 <script>
   import '../../scripts/lightRaysManager.ts';
+</script>
+
+<!-- Hero animations with Intersection Observer -->
+<script>
+  import '../../scripts/heroAnimations.ts';
 </script>

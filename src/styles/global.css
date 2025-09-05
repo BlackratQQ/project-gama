@@ -190,3 +190,57 @@ body::after {
 .arrow-down:nth-child(3) {
   top: 45%;
 }
+
+/* Hero Word-by-Word Blur Animations */
+.hero-word {
+  display: inline-block;
+  margin-right: 0.25em;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(-20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-word.animate {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
+/* Container pro word animace */
+.hero-text-animated {
+  /* Ensures proper spacing and line breaks */
+  word-spacing: normal;
+  line-height: inherit;
+}
+
+/* Fallback pro elementy bez word-by-word */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(-20px);
+  filter: blur(5px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out, filter 0.8s ease-out;
+}
+
+.hero-animate.hero-animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+.hero-animate-1.hero-animate-visible { transition-delay: 0.2s; }
+.hero-animate-2.hero-animate-visible { transition-delay: 0.4s; }
+.hero-animate-3.hero-animate-visible { transition-delay: 0.6s; }
+.hero-animate-4.hero-animate-visible { transition-delay: 0.8s; }
+.hero-animate-5.hero-animate-visible { transition-delay: 1.0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-word,
+  .hero-animate {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
