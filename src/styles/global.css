@@ -205,14 +205,14 @@ body::after {
   }
 }
 
-/* Base styles pro všechna slova - Critical Performance */
+/* Base styles pro všechna slova - Start hidden, animate in */
 [class^="hero-word-"] {
   display: inline-block;
   margin-right: 0.25em;
-  /* Start visible for LCP detection, then animate */
-  opacity: 1;
-  filter: blur(0px);
-  transform: translateY(0);
+  /* Start hidden, animate to visible */
+  opacity: 0;
+  filter: blur(5px);
+  transform: translateY(-10px);
   /* GPU acceleration hints */
   will-change: opacity, filter, transform;
   /* Performance optimization */
@@ -220,13 +220,10 @@ body::after {
   animation: heroWordAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Critical H1 - immediate visibility for LCP */
-.hero-word-1,
-.hero-word-2 {
-  opacity: 1 !important;
-  filter: blur(0px) !important;
-  transform: translateY(0) !important;
-  animation: none;
+/* Critical H1 - still start hidden but animate quickly for LCP */
+.hero-word-1 {
+  /* First word appears quickly but still animated */
+  animation-delay: 0.1s !important;
 }
 
 /* Mobile optimizations */
@@ -257,9 +254,9 @@ body::after {
 /* Progressive Enhancement - Only animate when page is loaded */
 @media (prefers-reduced-motion: no-preference) {
   /* Individual animation delays pro každé slovo */
-  /* H1 nadpis: immediate for LCP, then others */
-  .hero-word-1 { animation-delay: 0s; animation: none; } /* Critical LCP */
-  .hero-word-2 { animation-delay: 0.1s; }
+  /* H1 nadpis: quick animation for both words */
+  .hero-word-1 { animation-delay: 0.1s; } /* First word animates */
+  .hero-word-2 { animation-delay: 0.2s; }
 
   /* H2 podnadpis: faster delays for performance */
   .hero-word-3 { animation-delay: 0.3s; }
@@ -339,11 +336,14 @@ body::after {
   }
 }
 
-/* Critical loading hint for main heading */
-.hero-word-1 {
-  /* Ensure immediate visibility for LCP */
-  opacity: 1 !important;
-  filter: none !important;
-  transform: none !important;
-  will-change: auto;
+/* Critical loading hint for main heading - only for performance critical cases */
+@media (max-width: 480px), (prefers-reduced-motion: reduce) {
+  .hero-word-1 {
+    /* Ensure immediate visibility for LCP on low-end devices */
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    animation: none !important;
+    will-change: auto;
+  }
 }
