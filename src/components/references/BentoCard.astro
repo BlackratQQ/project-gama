@@ -18,7 +18,7 @@ const { title, description, index, logo, logoSize = '120px' } = Astro.props;
 >
   <div class="card__content">
     <div class="card__logo">
-      <img src={logo} alt={title} loading="lazy" style={`max-width: ${logoSize};`} />
+      <img src={logo} alt={title} loading="lazy" decoding="async" style={`max-width: ${logoSize};`} />
     </div>
     <h3 class="card__title" itemprop="headline">{title}</h3>
     <p class="card__description" itemprop="description">{description}</p>

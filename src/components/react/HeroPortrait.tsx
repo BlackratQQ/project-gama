@@ -23,8 +23,9 @@ const HeroPortrait: React.FC<HeroPortraitProps> = ({ className = "" }) => {
             className="w-full h-full object-contain"
             width={730}
             height={786}
-            loading="lazy"
+            loading="eager"
             decoding="async"
+            fetchPriority="high"
           />
         }
       >

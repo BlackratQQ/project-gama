@@ -12,6 +12,7 @@ const { class: className = "" } = Astro.props;
   class={`w-64 h-auto object-contain opacity-60 ${className}`}
   width={256}
   height={276}
-  loading="lazy"
+  loading="eager"
+  fetchpriority="high"
   decoding="async"
 />
