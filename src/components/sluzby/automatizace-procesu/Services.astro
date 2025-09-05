@@ -37,7 +37,7 @@ const services = [
     class="services-section container mx-auto flex min-h-[80vh] items-center justify-center px-3"
     aria-label="Služby"
   >
-    <div class="relative">
+    <div class="relative w-full">
       <!-- Nadpis -->
       <h2
         class="relative mb-12 select-none text-center text-6xl font-bold text-white sm:text-6xl md:text-8xl xl:text-9xl"
@@ -52,6 +52,7 @@ const services = [
           animateBy="words"
           direction="top"
           animateOn="view"
+          className="justify-center"
           client:only="react"
         />
       </h2>
@@ -84,8 +85,8 @@ const services = [
                     {service.title}
                   </h3>
                 </div>
-                <div class="relative z-10 mb-4 flex-1 flex items-center">
-                  <p class="text-lg leading-relaxed text-white/90" lang="cs" itemprop="description">
+                <div class="relative z-10 mb-4 mt-4 flex-1 flex items-center">
+                  <p class="text-gray-300" lang="cs" itemprop="description">
                     {service.description}
                   </p>
                 </div>

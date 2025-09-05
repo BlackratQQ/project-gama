@@ -1,4 +1,6 @@
 ---
+import BlurText from '../react/shared/BlurText.tsx';
+
 export interface Props {
   title: string;
   description: string;
@@ -20,8 +22,32 @@ const { title, description, index, logo, logoSize = '120px' } = Astro.props;
     <div class="card__logo">
       <img src={logo} alt={title} loading="lazy" decoding="async" style={`max-width: ${logoSize};`} />
     </div>
-    <h3 class="card__title" itemprop="headline">{title}</h3>
-    <p class="card__description" itemprop="description">{description}</p>
+    <h3 class="card__title" itemprop="headline">
+      <BlurText
+        text={title}
+        delay={50}
+        initialDelay={800}
+        animateBy="words"
+        direction="top"
+        animateOn="view"
+        threshold={0.1}
+        className="text-center justify-center"
+        client:visible
+      />
+    </h3>
+    <div class="card__description" itemprop="description">
+      <BlurText
+        text={description}
+        delay={20}
+        initialDelay={1000}
+        animateBy="words"
+        direction="top"
+        animateOn="view"
+        threshold={0.1}
+        className="text-center justify-center"
+        client:visible
+      />
+    </div>
   </div>
 </article>
 

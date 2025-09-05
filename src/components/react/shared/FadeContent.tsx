@@ -42,12 +42,12 @@ const FadeContent: FC<FadeContentProps> = ({
     <motion.div
       initial={{
         opacity: initialOpacity,
-        filter: blur ? 'blur(10px)' : 'blur(0px)',
+        filter: blur ? 'blur(20px)' : 'blur(0px)',
         ...offset,
       }}
       whileInView={{
         opacity: 1,
-        filter: 'blur(0px)',
+        filter: blur ? 'blur(0px)' : 'blur(0px)',
         x: 0,
         y: 0,
       }}
@@ -56,6 +56,10 @@ const FadeContent: FC<FadeContentProps> = ({
         duration: duration / 1000,
         delay: delay / 1000,
         ease: easing === 'ease-out' ? [0.16, 1, 0.3, 1] : 'easeInOut',
+        filter: {
+          duration: (duration / 1000) * 1.2,
+          ease: [0.4, 0, 0.2, 1],
+        },
       }}
       className={className}
     >
