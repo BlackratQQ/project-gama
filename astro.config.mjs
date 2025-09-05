@@ -21,15 +21,33 @@ export default defineConfig({
       terserOptions: {
         compress: {
           drop_console: true,
-          drop_debugger: true
+          drop_debugger: true,
+          passes: 2,
+          pure_funcs: ['console.log', 'console.debug']
+        },
+        mangle: {
+          safari10: true
         }
       },
+      reportCompressedSize: false,
+      chunkSizeWarningLimit: 1000,
       rollupOptions: {
         output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'animation-vendor': ['motion', 'gsap'],
-            '3d-vendor': ['three', 'ogl']
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('react-dom')) {
+                return 'react-vendor';
+              }
+              if (id.includes('gsap')) {
+                return 'animation-vendor';
+              }
+              if (id.includes('three') || id.includes('ogl')) {
+                return '3d-vendor';
+              }
+              if (id.includes('react-icons')) {
+                return 'icons-vendor';
+              }
+            }
           }
         }
       }
