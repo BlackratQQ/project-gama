@@ -1,41 +1,220 @@
 ---
-import criticalCSS from '../styles/critical.css?raw';
 import '../styles/global.css';
 import Navbar from '../components/navbar/Navbar.astro';
 
 export interface Props {
-	title: string;
-	description?: string;
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
 }
 
-const { title, description = 'IT developer na volné noze' } = Astro.props;
+const {
+  title = 'Vojtěch Kochta - Vývoj webů a automatizace procesů',
+  description = 'Bleskové KO technických problémů a rychlé doručení výsledků. UX, front-end i back-end design pro malé a střední firmy. Profesionální vývoj webů a automatizace procesů.',
+  keywords = 'vývoj webu, webové aplikace, automatizace procesů, React, Astro, TypeScript, programování na míru',
+  ogImage = '/og-image.jpg',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechkochta.cz');
 ---
 
 <!doctype html>
 <html lang="cs">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<meta name="description" content={description} />
-		<link rel="preload" as="image" href="/NewLogo.svg" fetchpriority="high">
-		<link rel="modulepreload" href="/_astro/client.CeYxlCdl.js">
-		<link rel="modulepreload" href="/_astro/jsx-runtime.CnDyYxjH.js">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="dns-prefetch" href="https://fonts.googleapis.com">
-		<link rel="dns-prefetch" href="https://fonts.gstatic.com">
-		<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
-		<noscript>
-			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-		</noscript>
-		<style set:html={criticalCSS}></style>
-	</head>
-	<body>
-		<Navbar />
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Vojtěch Kochta" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="cs_CZ" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Fonts & Styles -->
+    <!-- Preload kritických fontů pro lepší výkon -->
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+    
+    <!-- Preload LCP obrázku pro různá zařízení -->
+    <link rel="preload" href="/Portrait-256w.webp" as="image" media="(max-width: 767px)" />
+    <link rel="preload" href="/Portrait-512w.webp" as="image" media="(min-width: 768px)" />
+    
+    <!-- Critical CSS inline pro faster rendering -->
+    <style>
+      /* Critical above-the-fold styles */
+      :root {
+        --background: #030811;
+        --foreground: #ededed;
+        --d: 700ms;
+        --e: cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      
+      body {
+        color: var(--foreground);
+        background: var(--background);
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        background-image: url('/Textura-bg.webp');
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: top left;
+        background-attachment: scroll;
+        line-height: 1.6;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .gradient-hero {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, #000000 0%, transparent 30%);
+        z-index: -2;
+      }
+      
+      /* Critical Tailwind utilities */
+      .container { max-width: 100%; margin-left: auto; margin-right: auto; }
+      .relative { position: relative; }
+      .absolute { position: absolute; }
+      .flex { display: flex; }
+      .hidden { display: none; }
+      .min-h-screen { min-height: 100vh; }
+      .text-white { color: #fff; }
+      .text-orange-500 { color: #f97316; }
+      .font-extrabold { font-weight: 800; }
+      .font-medium { font-weight: 500; }
+      .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+      .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+      .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+      .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+      .px-4 { padding-left: 1rem; padding-right: 1rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .mb-6 { margin-bottom: 1.5rem; }
+      .z-10 { z-index: 10; }
+      .z-20 { z-index: 20; }
+      .w-full { width: 100%; }
+      .h-auto { height: auto; }
+      .items-center { align-items: center; }
+      .justify-center { justify-content: center; }
+      .text-center { text-align: center; }
+      .flex-col { flex-direction: column; }
+      .object-contain { object-fit: contain; }
+      .pointer-events-none { pointer-events: none; }
+      .opacity-60 { opacity: 0.6; }
+      .w-64 { width: 16rem; }
+      .leading-relaxed { line-height: 1.625; }
+      
+      @media (min-width: 640px) {
+        .sm\:text-5xl { font-size: 3rem; line-height: 1; }
+        .sm\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .sm\:block { display: block; }
+      }
+      
+      @media (min-width: 768px) {
+        .md\:hidden { display: none; }
+        .md\:flex { display: flex; }
+        .md\:-mt-8 { margin-top: -2rem; }
+      }
+      
+      @media (min-width: 1024px) {
+        .lg\:text-7xl { font-size: 4.5rem; line-height: 1; }
+        .lg\:text-6xl { font-size: 3.75rem; line-height: 1; }
+        .lg\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .lg\:w-4\/5 { width: 80%; }
+        .lg\:max-w-4xl { max-width: 56rem; }
+        .lg\:pr-8 { padding-right: 2rem; }
+        .lg\:text-left { text-align: left; }
+        .lg\:justify-start { justify-content: flex-start; }
+        .lg\:mb-16 { margin-bottom: 4rem; }
+        .lg\:mb-8 { margin-bottom: 2rem; }
+        .lg\:px-0 { padding-left: 0; padding-right: 0; }
+        .lg\:w-1\/2 { width: 50%; }
+        .lg\:w-full { width: 100%; }
+        .lg\:min-h-0 { min-height: 0; }
+        .lg\:-mt-16 { margin-top: -4rem; }
+        .lg\:justify-start { justify-content: flex-start; }
+        .lg\:block { display: block; }
+      }
+    </style>
+
+    <!-- Non-critical CSS - deferred loading -->
+    <link rel="preload" href="/fonts/inter.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/fonts/inter.css" /></noscript>
+    
+    <!-- FontAwesome subset - pouze používané ikony (8 ikon vs 2000+) -->
+    <link rel="preload" href="/fonts/fontawesome-subset.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/fonts/fontawesome-subset.css" /></noscript>
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Skip links pro accessibility -->
+    <a href="#main-content" class="skip-link">Přeskočit na hlavní obsah</a>
+    <a href="#navigation" class="skip-link">Přeskočit na navigaci</a>
+
+    <div id="navigation">
+      <Navbar />
+    </div>
+    <div id="main-content">
+      <slot />
+    </div>
+  </body>
 </html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Skip links pro accessibility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all 0.3s ease;
+  }
+
+  .skip-link:focus {
+    top: 6px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
