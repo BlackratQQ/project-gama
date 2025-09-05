@@ -191,12 +191,12 @@ body::after {
   top: 45%;
 }
 
-/* Hero CSS-Only Word-by-Word Blur Animations */
+/* Hero CSS-Only Word-by-Word Blur Animations - Performance Optimized */
 @keyframes heroWordAppear {
   0% {
     opacity: 0;
-    filter: blur(10px);
-    transform: translateY(-20px);
+    filter: blur(5px);
+    transform: translateY(-10px);
   }
   100% {
     opacity: 1;
@@ -205,14 +205,48 @@ body::after {
   }
 }
 
-/* Base styles pro všechna slova */
+/* Base styles pro všechna slova - Critical Performance */
 [class^="hero-word-"] {
   display: inline-block;
   margin-right: 0.25em;
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(-20px);
-  animation: heroWordAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* Start visible for LCP detection, then animate */
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+  /* GPU acceleration hints */
+  will-change: opacity, filter, transform;
+  /* Performance optimization */
+  content-visibility: auto;
+  animation: heroWordAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Critical H1 - immediate visibility for LCP */
+.hero-word-1,
+.hero-word-2 {
+  opacity: 1 !important;
+  filter: blur(0px) !important;
+  transform: translateY(0) !important;
+  animation: none;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  [class^="hero-word-"] {
+    /* Reduce blur for better mobile performance */
+    filter: none !important;
+    animation: heroWordAppearMobile 0.4s ease-out forwards;
+  }
+}
+
+@keyframes heroWordAppearMobile {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Container pro text lines */
@@ -220,54 +254,57 @@ body::after {
   display: block;
 }
 
-/* Individual animation delays pro každé slovo */
-/* H1 nadpis: base delay 300ms, word delay 200ms */
-.hero-word-1 { animation-delay: 0.3s; }
-.hero-word-2 { animation-delay: 0.5s; }
+/* Progressive Enhancement - Only animate when page is loaded */
+@media (prefers-reduced-motion: no-preference) {
+  /* Individual animation delays pro každé slovo */
+  /* H1 nadpis: immediate for LCP, then others */
+  .hero-word-1 { animation-delay: 0s; animation: none; } /* Critical LCP */
+  .hero-word-2 { animation-delay: 0.1s; }
 
-/* H2 podnadpis: base delay 800ms, word delay 150ms */
-.hero-word-3 { animation-delay: 0.8s; }
-.hero-word-4 { animation-delay: 0.95s; }
-.hero-word-5 { animation-delay: 1.1s; }
-.hero-word-6 { animation-delay: 1.25s; }
-.hero-word-7 { animation-delay: 1.4s; }
+  /* H2 podnadpis: faster delays for performance */
+  .hero-word-3 { animation-delay: 0.3s; }
+  .hero-word-4 { animation-delay: 0.4s; }
+  .hero-word-5 { animation-delay: 0.5s; }
+  .hero-word-6 { animation-delay: 0.6s; }
+  .hero-word-7 { animation-delay: 0.7s; }
 
-/* Popis - 3 paralelní části: base delay 1500ms, word delay 100ms */
-/* První řádek */
-.hero-word-8 { animation-delay: 1.5s; }
-.hero-word-9 { animation-delay: 1.6s; }
-.hero-word-10 { animation-delay: 1.7s; }
-.hero-word-11 { animation-delay: 1.8s; }
-.hero-word-12 { animation-delay: 1.9s; }
-.hero-word-13 { animation-delay: 2.0s; }
-.hero-word-14 { animation-delay: 2.1s; }
-.hero-word-15 { animation-delay: 2.2s; }
-.hero-word-16 { animation-delay: 2.3s; }
-.hero-word-17 { animation-delay: 2.4s; }
-.hero-word-18 { animation-delay: 2.5s; }
+  /* Popis - 3 paralelní části: reduced delays */
+  /* První řádek */
+  .hero-word-8 { animation-delay: 0.9s; }
+  .hero-word-9 { animation-delay: 1.0s; }
+  .hero-word-10 { animation-delay: 1.1s; }
+  .hero-word-11 { animation-delay: 1.2s; }
+  .hero-word-12 { animation-delay: 1.3s; }
+  .hero-word-13 { animation-delay: 1.4s; }
+  .hero-word-14 { animation-delay: 1.5s; }
+  .hero-word-15 { animation-delay: 1.6s; }
+  .hero-word-16 { animation-delay: 1.7s; }
+  .hero-word-17 { animation-delay: 1.8s; }
+  .hero-word-18 { animation-delay: 1.9s; }
 
-/* Druhý řádek - paralelně s prvním */
-.hero-word-19 { animation-delay: 1.5s; }
-.hero-word-20 { animation-delay: 1.6s; }
-.hero-word-21 { animation-delay: 1.7s; }
-.hero-word-22 { animation-delay: 1.8s; }
-.hero-word-23 { animation-delay: 1.9s; }
-.hero-word-24 { animation-delay: 2.0s; }
-.hero-word-25 { animation-delay: 2.1s; }
-.hero-word-26 { animation-delay: 2.2s; }
-.hero-word-27 { animation-delay: 2.3s; }
+  /* Druhý řádek - paralelně s prvním */
+  .hero-word-19 { animation-delay: 0.9s; }
+  .hero-word-20 { animation-delay: 1.0s; }
+  .hero-word-21 { animation-delay: 1.1s; }
+  .hero-word-22 { animation-delay: 1.2s; }
+  .hero-word-23 { animation-delay: 1.3s; }
+  .hero-word-24 { animation-delay: 1.4s; }
+  .hero-word-25 { animation-delay: 1.5s; }
+  .hero-word-26 { animation-delay: 1.6s; }
+  .hero-word-27 { animation-delay: 1.7s; }
 
-/* Třetí řádek - paralelně s prvním */
-.hero-word-28 { animation-delay: 1.5s; }
-.hero-word-29 { animation-delay: 1.6s; }
-.hero-word-30 { animation-delay: 1.7s; }
-.hero-word-31 { animation-delay: 1.8s; }
-.hero-word-32 { animation-delay: 1.9s; }
-.hero-word-33 { animation-delay: 2.0s; }
-.hero-word-34 { animation-delay: 2.1s; }
-.hero-word-35 { animation-delay: 2.2s; }
-.hero-word-36 { animation-delay: 2.3s; }
-.hero-word-37 { animation-delay: 2.4s; }
+  /* Třetí řádek - paralelně s prvním */
+  .hero-word-28 { animation-delay: 0.9s; }
+  .hero-word-29 { animation-delay: 1.0s; }
+  .hero-word-30 { animation-delay: 1.1s; }
+  .hero-word-31 { animation-delay: 1.2s; }
+  .hero-word-32 { animation-delay: 1.3s; }
+  .hero-word-33 { animation-delay: 1.4s; }
+  .hero-word-34 { animation-delay: 1.5s; }
+  .hero-word-35 { animation-delay: 1.6s; }
+  .hero-word-36 { animation-delay: 1.7s; }
+  .hero-word-37 { animation-delay: 1.8s; }
+}
 
 /* Fallback pro ostatní elementy */
 .hero-animate {
@@ -280,12 +317,33 @@ body::after {
 .hero-animate-4 { animation-delay: 2.8s; }
 .hero-animate-5 { animation-delay: 3.2s; }
 
-@media (prefers-reduced-motion: reduce) {
+/* Critical Performance - Immediate visibility fallbacks */
+@media (prefers-reduced-motion: reduce), (max-width: 480px) {
   [class^="hero-word-"],
   .hero-animate {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+    will-change: auto;
   }
+}
+
+/* Connection speed optimizations */
+@media (prefers-reduced-data: reduce) {
+  [class^="hero-word-"] {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* Critical loading hint for main heading */
+.hero-word-1 {
+  /* Ensure immediate visibility for LCP */
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  will-change: auto;
 }
