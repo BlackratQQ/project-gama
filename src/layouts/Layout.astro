@@ -1,6 +1,6 @@
 ---
+import '../styles/global.css';
 import Navbar from '../components/navbar/Navbar.astro';
-import globalStyles from '../styles/global.css?raw';
 
 export interface Props {
   title?: string;
@@ -176,12 +176,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
       <slot />
     </div>
     
-    <!-- Load non-critical styles after content -->
-    <link rel="preload" href="/_astro/index.DTMmnm29.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/_astro/index.DTMmnm29.css"></noscript>
-    
-    <!-- Load global styles -->
-    <style set:html={globalStyles}></style>
   </body>
 </html>
 
