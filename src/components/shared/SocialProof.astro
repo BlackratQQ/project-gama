@@ -1,0 +1,83 @@
+---
+import StaticIcon from './StaticIcon.astro';
+
+interface SocialProofItem {
+  text: string;
+  iconName?: string;
+  href?: string;
+}
+
+interface Props {
+  items: SocialProofItem[];
+  containerClass?: string;
+  itemClass?: string;
+  minHeight?: string;
+  maxWidth?: string;
+}
+
+const { 
+  items, 
+  containerClass = "mb-4 flex w-full gap-3",
+  itemClass = "w-full",
+  minHeight = "min-h-[92px]",
+  maxWidth = "max-w-3xl"
+} = Astro.props;
+
+// Mapování pro aria-label texty
+const iconLabels = {
+  FaLayerGroup: 'Ikona vrstev - UX, front-end a back-end design',
+  FaBolt: 'Ikona blesku - rychlé řešení technických problémů',
+  FaRocket: 'Ikona rakety - rychlé doručení výsledků',
+};
+---
+
+<div class={`${containerClass} ${maxWidth}`}>
+  {
+    items.map((item) => (
+      <div class={itemClass}>
+        <div
+          class={`flex ${minHeight} items-center justify-center rounded-lg border border-white/10 bg-black/30 px-2 py-1 text-center shadow-lg backdrop-blur-sm hover:bg-black/30 sm:px-4 sm:py-2 md:min-h-[72px]`}
+          style="background-image: linear-gradient(225deg, #ffffff, #fff0 15%)"
+        >
+          {/* Flex pro ikonu a text vedle sebe */}
+          <div class="flex flex-col items-center justify-center gap-2 pt-2 sm:flex-row">
+            {/* Statická ikona */}
+            {item.iconName && (
+              <StaticIcon
+                iconName={item.iconName as 'FaLayerGroup' | 'FaBolt' | 'FaRocket'}
+                size={24}
+                className="text-white"
+                ariaLabel={iconLabels[item.iconName as keyof typeof iconLabels] || item.text}
+              />
+            )}
+
+            {/* Odkaz nebo pouhý span */}
+            {item.href ? (
+              item.href.startsWith('#') ? (
+                <a
+                  href={item.href}
+                  class="block text-balance text-sm font-semibold text-white sm:text-base"
+                >
+                  {item.text}
+                </a>
+              ) : (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block text-balance text-sm font-semibold text-white sm:text-base"
+                >
+                  {item.text}
+                </a>
+              )
+            ) : (
+              <span class="text-balance text-sm font-semibold text-white sm:text-base">
+                {item.text}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>

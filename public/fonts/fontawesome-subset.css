@@ -1,0 +1,60 @@
+/* FontAwesome subset - pouze používané ikony */
+/* Font face definice s font-display: swap */
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("./fa-solid-900.woff2") format("woff2");
+}
+
+.fa,
+.fa-solid {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Základní třída pro ikony */
+.fa-solid::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* Pouze používané ikony */
+.fa-handshake::before {
+  content: "\f2b5";
+}
+
+.fa-eye::before {
+  content: "\f06e";
+}
+
+.fa-clock::before {
+  content: "\f017";
+}
+
+.fa-lightbulb::before {
+  content: "\f0eb";
+}
+
+.fa-users::before {
+  content: "\f0c0";
+}
+
+.fa-comments::before {
+  content: "\f086";
+}
+
+.fa-laptop-code::before {
+  content: "\f5fc";
+}
+
+.fa-gears::before {
+  content: "\f085";
+}

@@ -1,0 +1,21 @@
+---
+// Jednoduchá komponenta pro test stránku
+---
+
+<div class="absolute top-0 right-0 w-1/2 min-h-screen z-10 pointer-events-none">
+  <div class="container mx-auto px-3 h-full flex justify-end">
+    <div class="w-full relative">
+      <img
+        src="/Portrait.webp"
+        alt="Hero portrait"
+        class="absolute bottom-0 w-full h-auto object-contain"
+        width={730}
+        height={800}
+        fetchpriority="high"
+        decoding="async"
+        srcset="/Portrait-256w.webp 256w, /Portrait-512w.webp 512w, /Portrait.webp 730w"
+        sizes="(max-width: 768px) 256px, (max-width: 1024px) 512px, 730px"
+      />
+    </div>
+  </div>
+</div>

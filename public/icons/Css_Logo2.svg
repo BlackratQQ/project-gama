@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="XMLID_1_">
+        <path id="XMLID_11_" d="M145.7,401.1L122.5,140.7L377.5,140.7L354.3,401L249.8,430L145.7,401.1Z" style="fill:rgb(31,114,181);fill-rule:nonzero;"/>
+        <path id="XMLID_10_" d="M250,407.9L334.4,384.5L354.3,162L250,162L250,407.9Z" style="fill:rgb(81,163,220);fill-rule:nonzero;"/>
+        <path id="XMLID_35_" d="M167.1,222.1L164,192L336,192L334,226.9L261.3,259L331,259L323.5,358L253.2,376.9L180.3,359.2L175.8,309L208,309L209.8,335.5L252,343.4L291,331.4L292.8,289L173,289L170.8,257.5L250,222.8L167.1,222.1Z" style="fill:rgb(235,235,235);fill-rule:nonzero;"/>
+        <g id="XMLID_2_">
+            <path id="XMLID_39_" d="M170.8,257.5L173,289L250,289L250,222.8L170.8,257.5Z" style="fill:rgb(206,206,206);fill-rule:nonzero;"/>
+            <path id="XMLID_40_" d="M209.8,335.5L208,309L175.8,309L180.3,359.2L250,376.1L250,343L209.8,335.5Z" style="fill:rgb(206,206,206);fill-rule:nonzero;"/>
+            <path id="XMLID_41_" d="M164,192L167.1,222.1L250,222.8L250,192L164,192Z" style="fill:rgb(206,206,206);fill-rule:nonzero;"/>
+        </g>
+        <g id="XMLID_36_" transform="matrix(1.11692,0,0,1.11692,-27.9122,3.26116)">
+            <path id="XMLID_34_" d="M274,82L274,70L226,70L226,98L259,98L259,107L225,107L225,118L273,118L273,89L239,89L239,82L274,82Z" style="fill:white;fill-rule:nonzero;stroke:black;stroke-width:2.69px;"/>
+            <path id="XMLID_38_" d="M187,82L187,107L221,107L221,118L173,118L173,70L220,70L220,82L187,82Z" style="fill:white;fill-rule:nonzero;stroke:black;stroke-width:2.69px;"/>
+            <path id="XMLID_37_" d="M327,82L327,70L279,70L279,98L312,98L312,107L278,107L278,118L326,118L326,89L292,89L292,82L327,82Z" style="fill:white;fill-rule:nonzero;stroke:black;stroke-width:2.69px;"/>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,36 @@
+---
+export interface Props {
+  targetId?: string;
+}
+
+const { targetId = 'moje-sluzby' } = Astro.props;
+---
+
+<div class="arrow-container z-20 pointer-events-auto hidden sm:block" id="arrow-down" data-target={targetId}>
+  <div class="arrow-down" style="animation-delay: -0.4s;"></div>
+  <div class="arrow-down" style="animation-delay: -0.2s;"></div>
+  <div class="arrow-down" style="animation-delay: 0s;"></div>
+</div>
+
+<script>
+  // Smooth scroll funkcionalita
+  document.addEventListener('DOMContentLoaded', function () {
+    const arrowContainer = document.getElementById('arrow-down');
+
+    if (arrowContainer) {
+      arrowContainer.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-target');
+        if (targetId) {
+          const targetElement = document.getElementById(targetId);
+
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            });
+          }
+        }
+      });
+    }
+  });
+</script>

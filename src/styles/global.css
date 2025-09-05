@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #030811;
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  background-image: url('/Textura-bg.webp');
+  background-repeat: repeat;
+  background-size: auto;
+  background-position: top left;
+  background-attachment: scroll;
+  line-height: 1.6;
+}
+
+/* Gradient pro Hero sekci */
+.gradient-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #000000 0%, transparent 30%);
+  z-index: -2;
+}
+
+/* Ghost button styly */
+.ghost-button-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ghost-button-container button,
+.ghost-button-container a {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  background: #f97316;
+  -webkit-mask: url('/urban-sprite-reverse.webp');
+  mask: url('/urban-sprite-reverse.webp');
+  -webkit-mask-size: 3000% 100%;
+  mask-size: 3000% 100%;
+  color: #fff;
+  -webkit-animation: ani2 0.7s steps(29) forwards;
+  animation: ani2 0.7s steps(29) forwards;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.ghost-button-container button:hover,
+.ghost-button-container a:hover,
+.ghost-button-container.active button,
+.ghost-button-container.active a {
+  -webkit-animation: ani 0.7s steps(29) forwards;
+  animation: ani 0.7s steps(29) forwards;
+}
+
+.ghost-mas {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  overflow: hidden;
+  font-weight: bold;
+  border: 1px solid #f97316;
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Solid button styly */
+.solid-button-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.solid-button-container button,
+.solid-button-container a {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  background: #f97316;
+  -webkit-mask: url('/urban-sprite.webp');
+  mask: url('/urban-sprite.webp');
+  -webkit-mask-size: 3000% 100%;
+  mask-size: 3000% 100%;
+  color: #fff;
+  -webkit-animation: ani2 0.7s steps(29) forwards;
+  animation: ani2 0.7s steps(29) forwards;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.solid-button-container button:hover,
+.solid-button-container a:hover,
+.solid-button-container.active button,
+.solid-button-container.active a {
+  -webkit-animation: ani 0.7s steps(29) forwards;
+  animation: ani 0.7s steps(29) forwards;
+}
+
+.solid-mas {
+  position: absolute;
+  color: #fff;
+  width: 100%;
+  overflow: hidden;
+  font-weight: bold;
+  border: 1px solid #f97316;
+  padding: 12px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Keyframes pro mask animace */
+@-webkit-keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@-webkit-keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}
+
+/* ArrowDown animace */
+@keyframes arrow-animate {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.arrow-container {
+  display: block;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 0) rotateZ(0deg);
+  transition: transform 0.4s ease;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.arrow-container:hover {
+  transform: translate(-50%, -10px) rotateZ(0deg);
+}
+
+.arrow-container:hover .arrow-down {
+  top: 50%;
+  animation-play-state: paused;
+  opacity: 1 !important;
+}
+
+.arrow-container:hover .arrow-down:before {
+  transform: translate(-50%, -50%) rotateZ(-30deg);
+}
+
+.arrow-container:hover .arrow-down:after {
+  transform: translate(-50%, -50%) rotateZ(30deg);
+}
+
+.arrow-down {
+  position: absolute;
+  left: 50%;
+  transition: all 0.4s ease;
+  animation: arrow-animate 2s infinite;
+  opacity: 0;
+}
+
+.arrow-down:before,
+.arrow-down:after {
+  transition: all 0.4s ease;
+  content: '';
+  display: block;
+  position: absolute;
+  transform-origin: bottom right;
+  background: #fff;
+  width: 4px;
+  height: 50px;
+  border-radius: 10px;
+  transform: translate(-50%, -50%) rotateZ(-45deg);
+}
+
+.arrow-down:after {
+  transform-origin: bottom left;
+  transform: translate(-50%, -50%) rotateZ(45deg);
+}
+
+.arrow-down:nth-child(1) {
+  top: 15%;
+}
+
+.arrow-down:nth-child(2) {
+  top: 30%;
+}
+
+.arrow-down:nth-child(3) {
+  top: 45%;
+}

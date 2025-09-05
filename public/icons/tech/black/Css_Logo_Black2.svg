@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 554 290" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-96.3701,-265.141)">
+        <g transform="matrix(1,0,0,1,102.17,301.578)">
+            <path d="M285.17,114.224L285.17,84.118L329.094,84.118L329.094,51.176L252.227,51.176L252.227,144.285L329.094,144.285L329.094,114.224L285.17,114.224ZM408.109,84.118L438.817,84.118L438.817,51.176L361.943,51.176L361.943,84.118C372.228,94.403 377.592,99.326 392.466,114.2C383.771,114.2 361.943,114.231 361.943,114.23L361.943,144.285L438.817,144.285L438.817,114.224L408.109,84.118ZM517.064,84.118L547.771,84.118L547.771,51.176L470.894,51.176L470.894,84.118C481.179,94.403 486.545,99.326 501.42,114.2C492.728,114.2 470.894,114.231 470.894,114.23L470.894,144.285L547.773,144.285L547.773,114.224L517.064,84.118Z" style="fill-rule:nonzero;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-26.1299,124.441)">
+            <clipPath id="_clip1">
+                <rect x="122.5" y="140.7" width="254.187" height="289.3"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g id="XMLID_1_">
+                    <path id="XMLID_11_" d="M145.7,401.1L122.5,140.7L377.5,140.7L354.3,401L249.8,430L145.7,401.1Z" style="fill:rgb(31,114,181);fill-rule:nonzero;"/>
+                    <path id="XMLID_10_" d="M250,407.9L334.4,384.5L354.3,162L250,162L250,407.9Z" style="fill:rgb(81,163,220);fill-rule:nonzero;"/>
+                    <path id="XMLID_35_" d="M167.1,222.1L164,192L336,192L334,226.9L261.3,259L331,259L323.5,358L253.2,376.9L180.3,359.2L175.8,309L208,309L209.8,335.5L252,343.4L291,331.4L292.8,289L173,289L170.8,257.5L250,222.8L167.1,222.1Z" style="fill-rule:nonzero;"/>
+                    <g id="XMLID_2_">
+                        <path id="XMLID_39_" d="M170.8,257.5L173,289L250,289L250,222.8L170.8,257.5Z" style="fill-rule:nonzero;"/>
+                        <path id="XMLID_40_" d="M209.8,335.5L208,309L175.8,309L180.3,359.2L250,376.1L250,343L209.8,335.5Z" style="fill-rule:nonzero;"/>
+                        <path id="XMLID_41_" d="M164,192L167.1,222.1L250,222.8L250,192L164,192Z" style="fill-rule:nonzero;"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

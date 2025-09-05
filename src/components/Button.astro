@@ -1,0 +1,42 @@
+---
+export interface Props {
+  text: string;
+  href?: string;
+  variant?: 'ghost' | 'solid';
+  class?: string;
+  onClick?: string;
+}
+
+const { text, href, variant = 'ghost', class: className = '', onClick } = Astro.props;
+
+const isGhost = variant === 'ghost';
+const containerClass = isGhost ? 'ghost-button-container' : 'solid-button-container';
+const maskClass = isGhost ? 'ghost-mas' : 'solid-mas';
+---
+
+{
+  href ? (
+    <div class={`${containerClass} justify-center text-center ${className}`}>
+      <span class={`${maskClass} justify-center text-center text-lg`}>{text}</span>
+      <a
+        href={href}
+        class={`block w-full rounded-lg px-4 py-2 font-bold justify-center text-center text-lg min-h-[50px] ${className}`}
+        onclick={onClick}
+      >
+        {text}
+      </a>
+    </div>
+  ) : (
+    <div class={`${containerClass} justify-center text-center ${className}`}>
+      <span class={`${maskClass} justify-center text-center text-lg`}>{text}</span>
+      <button
+        type="button"
+        name="Hover"
+        class={`w-full rounded-lg px-4 py-2 font-bold justify-center text-center text-lg min-h-[50px] ${className}`}
+        onclick={onClick}
+      >
+        {text}
+      </button>
+    </div>
+  )
+}
