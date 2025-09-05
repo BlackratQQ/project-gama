@@ -1,0 +1,44 @@
+---
+import About from './About.astro';
+import LogoLoop from '../react/techStack/LogoLoop';
+---
+
+<div class="bg-gradient flex min-h-[90vh] flex-col items-center justify-evenly pt-24">
+  <div class="container mx-auto flex w-full flex-col items-center px-3 pb-20 md:pb-8">
+    <!-- Celá šířka: About -->
+    <div class="w-full">
+      <About />
+    </div>
+  </div>
+
+  <LogoLoop client:visible />
+</div>
+
+<style>
+  .bg-gradient {
+    /* 2 radiální gradienty + lineární */
+    --g1-active: 1;
+    --g2-active: 1;
+    --g3-active: 0;
+    --g4-active: 0;
+    --linear-active: 1;
+
+    /* Pozice gradientů */
+    --g1-x: 15%;
+    --g1-y: 60%;
+    --g1-color: #2b0053;
+    --g1-size: 0%;
+    --g1-fade: min(20%, 240px);
+
+    --g2-x: 85%;
+    --g2-y: 30%;
+    --g2-color: #002853;
+    --g2-size: 1%;
+    --g2-fade: min(16%, 190px);
+
+    /* Lineární gradient */
+    --linear-dir: 135deg;
+    --linear-start: #030811;
+    --linear-end: 8%;
+  }
+</style>

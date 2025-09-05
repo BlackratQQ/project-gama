@@ -1,0 +1,124 @@
+---
+// About komponenta pro TechStack sekci
+import BlurText from '../react/shared/BlurText.tsx';
+import FadeContent from '../react/shared/FadeContent.tsx';
+---
+
+<div
+  class="flex flex-col items-center gap-5 rounded-lg shadow-md lg:flex-row lg:items-center lg:justify-between"
+>
+  <!-- Levá strana - Nadpis -->
+  <div class="w-full lg:w-1/2">
+    <h2
+      class="relative select-none whitespace-nowrap text-center text-5xl font-bold text-white md:whitespace-normal md:text-left md:text-8xl xl:text-9xl"
+    >
+      <!-- Statický fallback pro SEO/crawlery -->
+      <noscript>
+        TECH
+        <span class="strikethrough">STACK</span>
+      </noscript>
+      <!-- Animovaná verze -->
+      <div class="tech-stack-wrapper">
+        <BlurText
+          text="TECH"
+          delay={100}
+          initialDelay={0}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className="inline-block"
+          client:only="react"
+        />
+        <BlurText
+          text="STACK"
+          delay={100}
+          initialDelay={600}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className="inline-block strikethrough"
+          client:only="react"
+        />
+      </div>
+    </h2>
+  </div>
+
+  <!-- Pravá strana - Text -->
+  <div class="w-full text-center md:text-left lg:w-1/2">
+    <FadeContent
+      blur={true}
+      duration={800}
+      delay={800}
+      direction="top"
+      className="mb-6"
+      client:only="react"
+    >
+      <h3 class="text-4xl font-bold text-white">Jaké používám technologie?</h3>
+    </FadeContent>
+
+    <FadeContent
+      blur={true}
+      duration={800}
+      delay={1200}
+      direction="top"
+      className="mb-4"
+      client:only="react"
+    >
+      <p class="text-white">
+        Pro <strong>design a prototypování</strong> uživatelského rozhraní používám aplikaci <strong
+          >Figma</strong
+        >.
+      </p>
+    </FadeContent>
+
+    <FadeContent
+      blur={true}
+      duration={800}
+      delay={1600}
+      direction="top"
+      className="mb-4"
+      client:only="react"
+    >
+      <p class="text-white">
+        V oblasti <strong>front-end vývoje</strong> pracuji s{' '}
+        <strong>HTML</strong> pro strukturu webových stránek,{' '}
+        <strong>JavaScriptem</strong> a jeho moderními frameworky jako{' '}
+        <strong>React.js</strong> a <strong>Next.js</strong> pro interaktivní prvky. Pro stylování a
+        responzivní design využívám především <strong>CSS</strong> a{' '}
+        <strong>Tailwind CSS</strong>.
+      </p>
+    </FadeContent>
+
+    <FadeContent
+      blur={true}
+      duration={800}
+      delay={2000}
+      direction="top"
+      className="mb-4"
+      client:only="react"
+    >
+      <p class="text-white">
+        Pro správu obsahu v rámci <strong>back-endu</strong> pracuji s{' '}
+        <strong>WordPressem</strong> a platformou{' '}
+        <strong>Elementor Builder</strong>. Pro serverovou část WordPress projektů používám <strong
+          >PHP</strong
+        >.
+      </p>
+    </FadeContent>
+
+    <FadeContent
+      blur={true}
+      duration={800}
+      delay={2400}
+      direction="top"
+      className="mb-4"
+      client:only="react"
+    >
+      <p class="text-white">
+        Moje práce zahrnuje také <strong>integraci API</strong> pro propojení s externími službami. Mám
+        bohaté zkušenosti i s nástroji umělé inteligence (<strong>ChatGPT</strong>,{' '}
+        <strong>Claude</strong>).
+      </p>
+    </FadeContent>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  index: number;
+  logo: string;
+  logoSize?: string;
+}
+
+const { title, description, index, logo, logoSize = '120px' } = Astro.props;
+---
+
+<article
+  class="reference-card"
+  data-card-index={index}
+  itemscope
+  itemtype="https://schema.org/Article"
+>
+  <div class="card__content">
+    <div class="card__logo">
+      <img src={logo} alt={title} loading="lazy" style={`max-width: ${logoSize};`} />
+    </div>
+    <h3 class="card__title" itemprop="headline">{title}</h3>
+    <p class="card__description" itemprop="description">{description}</p>
+  </div>
+</article>
+
+<style>
+  .reference-card {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    background-color: transparent;
+    color: white;
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+  }
+
+  .reference-card:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow:
+      0 4px 20px rgba(46, 24, 78, 0.4),
+      0 0 30px rgba(132, 0, 255, 0.2);
+  }
+
+  .card__content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: white;
+    flex-grow: 1;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .card__logo {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+  }
+
+  .card__logo img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .card__title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+  }
+
+  .card__description {
+    font-size: 0.875rem;
+    line-height: 1.625;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .reference-card {
+      padding: 1rem;
+    }
+
+    .card__logo {
+      margin-bottom: 0.75rem;
+      height: 50px;
+    }
+  }
+</style>

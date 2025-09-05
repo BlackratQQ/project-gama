@@ -1,0 +1,104 @@
+---
+import BentoCard from './BentoCard.astro';
+import FadeContent from '../react/shared/FadeContent.tsx';
+
+const cardData = [
+  {
+    title: 'ČESKÁ ASOCIACE KICKBOXU',
+    description:
+      'Vojtěch nám již v minulosti skvěle pomohl s komplexním problémem zavirovaného webu. Díky novému webu je naše komunikace s oddíly mnohem jednodušší a zautomatizoval dříve manuální procesy, čímž nám ušetřil mnoho času. Spolupráce byla vždy naprosto bezproblémová. Rozhodně doporučujeme!',
+    logo: '/logos/Cak-logo.svg',
+    logoSize: '100px',
+  },
+  {
+    title: 'Nubis',
+    description:
+      'Implementace nové aplikace znamenala revoluci v našich procesech. Dosáhli jsme neuvěřitelného 7000% zefektivnění oproti původnímu stavu. Investice, která se okamžitě vrátila.',
+    logo: '/logos/Nubis-logo-140w.webp',
+    logoSize: '140px',
+  },
+  {
+    title: 'Navoz.to',
+    description:
+      'Na této spolupráci oceňujeme především spolehlivost, rychlé reakce a všestrannost. Ať už potřebujeme řešit webové stránky nebo IT podporu, vždy se můžeme spolehnout na profesionální přístup a efektivní řešení.',
+    logo: '/logos/Navozto-logo-130w.webp',
+    logoSize: '130px',
+  },
+  {
+    title: 'Lumissio',
+    description:
+      'Komunikace s Vojtou je naprosto skvělá - vždycky se domluvíme rychle a jednoduše. Výsledky úplně předčily moje očekávání a originalita řešení mě vždy překvapí. Je to prostě paráda spolupráce, když máš partnera, kterému můžeš věřit a který dokáže přemýšlet mimo zajeté koleje!',
+    logo: '/logos/Lumissio-Logo-120w.webp',
+    logoSize: '120px',
+  },
+];
+---
+
+<section class="reference-section" aria-label="Reference a zkušenosti">
+  <div class="flex justify-center md:mt-1">
+    <div class="bento-grid" id="bento-grid" role="list">
+      {
+        cardData.map((card, index) => {
+          // První řádek (indexy 0,1,2): delay 500ms
+          // Druhý řádek (indexy 3,4,5): delay 700ms
+          const rowDelay = index < 3 ? 500 : 700;
+
+          return (
+            <div role="listitem" class="reference-card-wrapper">
+              <FadeContent
+                blur={true}
+                duration={800}
+                delay={rowDelay}
+                direction="top"
+                easing="ease-out"
+                initialOpacity={0}
+                className="relative z-20 backdrop-blur-sm bg-black/20 rounded-lg h-full"
+                client:visible
+              >
+                <BentoCard
+                  title={card.title}
+                  description={card.description}
+                  logo={card.logo}
+                  logoSize={card.logoSize}
+                  index={index}
+                />
+              </FadeContent>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .reference-section {
+    position: relative;
+  }
+
+  .reference-card-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    justify-items: center;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
