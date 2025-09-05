@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Navbar from '../components/navbar/Navbar.astro';
 
 export interface Props {
 	title: string;
@@ -23,6 +24,7 @@ const { title, description = 'IT developer na volné noze' } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 	</head>
 	<body>
+		<Navbar />
 		<slot />
 	</body>
 </html>

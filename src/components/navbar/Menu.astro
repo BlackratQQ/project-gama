@@ -1,0 +1,15 @@
+---
+import NavbarMenu from '../react/navbar/NavbarMenu';
+---
+
+<NavbarMenu client:idle />
+
+<style>
+  .dropdown-menu {
+    /* Gradient pozadí podle designu webu */
+    background:
+      radial-gradient(circle at 20% 30%, #002853 0%, transparent 70%),
+      radial-gradient(circle at 80% 70%, #2b0053 0%, transparent 60%), rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+  }
+</style>
