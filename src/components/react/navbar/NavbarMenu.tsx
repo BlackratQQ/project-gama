@@ -1,6 +1,6 @@
 import { FaChevronDown } from 'react-icons/fa6';
 import { motion } from 'motion/react';
-import BlurText from '../shared/BlurText';
+import BlurText from '../services/BlurText';
 import type { FC } from 'react';
 
 // Extend Window interface for openSplitModal
