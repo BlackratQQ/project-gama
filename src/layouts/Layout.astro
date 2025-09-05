@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
 import Navbar from '../components/navbar/Navbar.astro';
+import globalStyles from '../styles/global.css?raw';
 
 export interface Props {
   title?: string;
@@ -53,13 +53,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
 
     <!-- Fonts & Styles -->
     <!-- Preload kritických fontů pro lepší výkon -->
-    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Preconnect pro rychlejší spojení -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     
-    <!-- Preload LCP obrázku pro různá zařízení -->
-    <link rel="preload" href="/Portrait-256w.webp" as="image" media="(max-width: 767px)" />
-    <link rel="preload" href="/Portrait-512w.webp" as="image" media="(min-width: 768px)" />
+    <!-- Portrait obrázky jsou lazy loaded, nepotřebujeme preload -->
     
     <!-- Critical CSS inline pro faster rendering -->
     <style>
@@ -162,13 +160,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
       }
     </style>
 
-    <!-- Non-critical CSS - deferred loading -->
-    <link rel="preload" href="/fonts/inter.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/fonts/inter.css" /></noscript>
-    
-    <!-- FontAwesome subset - pouze používané ikony (8 ikon vs 2000+) -->
-    <link rel="preload" href="/fonts/fontawesome-subset.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/fonts/fontawesome-subset.css" /></noscript>
 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -184,6 +175,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
     <div id="main-content">
       <slot />
     </div>
+    
+    <!-- Load non-critical styles after content -->
+    <link rel="preload" href="/_astro/index.DTMmnm29.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/_astro/index.DTMmnm29.css"></noscript>
+    
+    <!-- Load global styles -->
+    <style set:html={globalStyles}></style>
   </body>
 </html>
 
