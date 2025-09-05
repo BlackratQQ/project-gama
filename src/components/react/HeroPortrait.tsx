@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 
 // Dynamické načtení GridDistortion pouze pro desktop
 const GridDistortion = lazy(() => import("./shared/GridDistortion"));
@@ -9,6 +9,14 @@ interface HeroPortraitProps {
 
 // Pouze desktop verze s GridDistortion efektem
 const HeroPortrait: React.FC<HeroPortraitProps> = ({ className = "" }) => {
+  // Skrýt statický fallback po načtení React komponenty
+  useEffect(() => {
+    const staticPortrait = document.getElementById('hero-portrait-static');
+    if (staticPortrait) {
+      staticPortrait.style.display = 'none';
+    }
+  }, []);
+
   // Aspect ratio obrázku: 730/786 ≈ 0.929
   return (
     <div

@@ -205,19 +205,23 @@ body::after {
   }
 }
 
-/* Base styles pro všechna slova - Start hidden, animate in */
+/* Base styles pro všechna slova - Start visible for LCP */
 [class^="hero-word-"] {
   display: inline-block;
   margin-right: 0.25em;
-  /* Start hidden, animate to visible */
-  opacity: 0;
-  filter: blur(5px);
-  transform: translateY(-10px);
+  /* Start visible for LCP */
+  opacity: 1;
+  filter: none;
+  transform: none;
   /* GPU acceleration hints */
   will-change: opacity, filter, transform;
   /* Performance optimization */
   content-visibility: auto;
-  animation: heroWordAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animation only when class is added */
+[class^="hero-word-"].animate {
+  animation: heroWordAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Critical H1 - still start hidden but animate quickly for LCP */
