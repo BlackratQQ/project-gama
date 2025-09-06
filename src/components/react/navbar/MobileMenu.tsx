@@ -17,7 +17,7 @@ const menuItems: MenuItem[] = [
     ],
   },
   { label: 'Reference', href: '/#reference' },
-  { label: 'Ceník & o mně', href: '/cenik-o-mne' },
+  { label: 'Ceník & o mně', href: '/cenik' },
   { label: 'Kontakt', href: '/#kontaktni-formular' },
 ];
 
