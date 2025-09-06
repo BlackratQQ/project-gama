@@ -16,20 +16,6 @@ body {
   line-height: 1.6;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("/Textura-bg.webp");
-  background-repeat: repeat;
-  background-size: auto;
-  background-position: top left;
-  pointer-events: none;
-  z-index: -1;
-}
 
 /* Gradient pro Hero sekci */
 .gradient-hero {
@@ -62,8 +48,8 @@ body::after {
   border: 1px solid transparent;
   box-sizing: border-box;
   background: #f97316;
-  -webkit-mask: url("/urban-sprite-reverse.webp");
-  mask: url("/urban-sprite-reverse.webp");
+  -webkit-mask: url("/urban-sprite-reverse.avif"), url("/urban-sprite-reverse.webp");
+  mask: url("/urban-sprite-reverse.avif"), url("/urban-sprite-reverse.webp");
   -webkit-mask-size: 3000% 100%;
   mask-size: 3000% 100%;
   color: #fff;

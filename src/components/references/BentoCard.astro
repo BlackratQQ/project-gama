@@ -6,10 +6,11 @@ export interface Props {
   description: string;
   index: number;
   logo: string;
+  logoAvif?: string;
   logoSize?: string;
 }
 
-const { title, description, index, logo, logoSize = '120px' } = Astro.props;
+const { title, description, index, logo, logoAvif, logoSize = '120px' } = Astro.props;
 ---
 
 <article
@@ -20,7 +21,15 @@ const { title, description, index, logo, logoSize = '120px' } = Astro.props;
 >
   <div class="card__content">
     <div class="card__logo">
-      <img src={logo} alt={title} loading="lazy" decoding="async" style={`max-width: ${logoSize};`} />
+      {logoAvif ? (
+        <picture>
+          <source srcset={logoAvif} type="image/avif" />
+          <source srcset={logo} type="image/webp" />
+          <img src={logo} alt={title} loading="lazy" decoding="async" style={`max-width: ${logoSize};`} />
+        </picture>
+      ) : (
+        <img src={logo} alt={title} loading="lazy" decoding="async" style={`max-width: ${logoSize};`} />
+      )}
     </div>
     <h3 class="card__title" itemprop="headline">
       <BlurText

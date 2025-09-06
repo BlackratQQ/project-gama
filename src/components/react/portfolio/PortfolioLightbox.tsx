@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 interface PortfolioLightboxProps {
   isOpen: boolean;
   imageSrc: string;
+  imageAvif: string;
   imageAlt: string;
   onClose: () => void;
 }
@@ -10,6 +11,7 @@ interface PortfolioLightboxProps {
 export default function PortfolioLightbox({
   isOpen,
   imageSrc,
+  imageAvif,
   imageAlt,
   onClose,
 }: PortfolioLightboxProps) {
@@ -42,11 +44,15 @@ export default function PortfolioLightbox({
     >
       <div className="relative max-h-[80vh] max-w-[80vw] animate-scale-in">
         <div className="h-auto w-auto object-contain max-h-[80vh] max-w-[80vw]">
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className="h-auto w-auto object-contain max-h-[80vh] max-w-[80vw]"
-          />
+          <picture>
+            <source srcSet={imageAvif} type="image/avif" />
+            <source srcSet={imageSrc} type="image/webp" />
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="h-auto w-auto object-contain max-h-[80vh] max-w-[80vw]"
+            />
+          </picture>
         </div>
         <button
           onClick={(e) => {

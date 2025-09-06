@@ -1,5 +1,6 @@
 ---
 import FadeContent from '../../react/shared/FadeContent.tsx';
+import OptimizedImage from '../../OptimizedImage.astro';
 ---
 
 <div class="bg-gradient">
@@ -8,7 +9,7 @@ import FadeContent from '../../react/shared/FadeContent.tsx';
       <!-- Levá Strana - Portrét -->
       <FadeContent blur={false} duration={800} delay={0} direction="left" client:only="react">
         <div class="relative">
-          <img
+          <OptimizedImage
             src="/images/sluzby/FightPhoto2.webp"
             alt="Personal Photo"
             class="w-full h-auto rounded-lg shadow-lg"

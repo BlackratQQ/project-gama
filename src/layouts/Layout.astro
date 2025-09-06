@@ -59,10 +59,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     
-    <!-- Preload critical resources for LCP -->
-    <link rel="preload" as="image" href="/images/hero/Portrait.webp" fetchpriority="high" media="(min-width: 768px)">
-    <link rel="preload" as="image" href="/images/hero/Portrait-256w.webp" fetchpriority="high" media="(max-width: 767px)">
-    <link rel="preload" as="image" href="/Textura-bg.webp">
+    <!-- Preload critical resources for LCP - AVIF priority -->
+    <link rel="preload" as="image" href="/images/hero/Portrait.avif" fetchpriority="high" media="(min-width: 768px)">
+    <link rel="preload" as="image" href="/images/hero/Portrait-256w.avif" fetchpriority="high" media="(max-width: 767px)">
+    <link rel="preload" as="image" href="/Textura2.avif">
     
     <!-- Preload critical chunks for faster page loads -->
     <link rel="modulepreload" href="/_astro/react-vendor.js">
@@ -82,7 +82,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
         background: var(--background);
         font-family: 'Inter', sans-serif;
         overflow-x: hidden;
-        background-image: url('/Textura-bg.webp');
+        background-image: 
+          linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+          url('/Textura2.avif'), 
+          url('/Textura2.webp');
         background-repeat: repeat;
         background-size: auto;
         background-position: top left;

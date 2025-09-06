@@ -1,11 +1,11 @@
 ---
-// Jednoduchá komponenta pro test stránku
+import OptimizedImage from '../OptimizedImage.astro';
 ---
 
 <div class="absolute top-0 right-0 w-1/2 min-h-screen z-10 pointer-events-none">
   <div class="container mx-auto px-3 h-full flex justify-end">
     <div class="w-full relative">
-      <img
+      <OptimizedImage
         src="/images/hero/Portrait.webp"
         alt="Hero portrait"
         class="absolute bottom-0 w-full h-auto object-contain"
@@ -15,6 +15,7 @@
         decoding="async"
         srcset="/images/hero/Portrait-256w.webp 256w, /images/hero/Portrait-512w.webp 512w, /images/hero/Portrait.webp 730w"
         sizes="(max-width: 768px) 256px, (max-width: 1024px) 512px, 730px"
+        loading="eager"
       />
     </div>
   </div>

@@ -25,16 +25,20 @@ const HeroPortrait: React.FC<HeroPortraitProps> = ({ className = "" }) => {
     >
       <Suspense
         fallback={
-          <img
-            src="/images/hero/Portrait.webp"
-            alt="Hero portrait"
-            className="w-full h-full object-contain"
-            width={730}
-            height={786}
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
-          />
+          <picture>
+            <source srcSet="/images/hero/Portrait.avif" type="image/avif" />
+            <source srcSet="/images/hero/Portrait.webp" type="image/webp" />
+            <img
+              src="/images/hero/Portrait.webp"
+              alt="Hero portrait"
+              className="w-full h-full object-contain"
+              width={730}
+              height={786}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </picture>
         }
       >
         <GridDistortion

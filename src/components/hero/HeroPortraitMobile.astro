@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from '../OptimizedImage.astro';
+
 interface Props {
   class?: string;
 }
@@ -6,7 +8,7 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<img
+<OptimizedImage
   src="/images/hero/Portrait-256w.webp"
   alt="Hero portrait"
   class={`w-64 h-auto object-contain opacity-60 ${className}`}

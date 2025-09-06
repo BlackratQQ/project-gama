@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface PortfolioItem {
   image: string;
+  imageAvif: string;
   glowImage: string;
+  glowImageAvif: string;
   alt: string;
 }
 
@@ -84,22 +86,30 @@ export default function PortfolioGrid({ items, onItemClick }: PortfolioGridProps
                 <div
                   className={`portfolio-image absolute inset-0 transition-all duration-300 ${hoveredIndex === index ? 'scale-105 opacity-0' : ''}`}
                 >
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    className="h-full w-full object-contain transition-opacity duration-300"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source srcSet={item.imageAvif} type="image/avif" />
+                    <source srcSet={item.image} type="image/webp" />
+                    <img
+                      src={item.image}
+                      alt={item.alt}
+                      className="h-full w-full object-contain transition-opacity duration-300"
+                      loading="lazy"
+                    />
+                  </picture>
                 </div>
                 <div
                   className={`portfolio-glow absolute inset-0 transition-all duration-300 ${hoveredIndex === index ? 'scale-105 opacity-100' : 'opacity-0'}`}
                 >
-                  <img
-                    src={item.glowImage}
-                    alt={`${item.alt} glow`}
-                    className="h-full w-full object-contain"
-                    loading="lazy"
-                  />
+                  <picture>
+                    <source srcSet={item.glowImageAvif} type="image/avif" />
+                    <source srcSet={item.glowImage} type="image/webp" />
+                    <img
+                      src={item.glowImage}
+                      alt={`${item.alt} glow`}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </picture>
                 </div>
               </div>
             </div>

@@ -166,18 +166,22 @@ const heroItems = [
       <!-- Pravá strana - 50% s portrétem -->
       <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
         <!-- Statický fallback pro LCP -->
-        <img
-          src="/images/hero/Portrait.webp"
-          alt="Hero portrait"
-          class="absolute bottom-0 w-5/6 lg:w-full min-[1024px]:max-[1279px]:w-full h-auto object-contain mx-auto left-0 right-0"
-          style="aspect-ratio: 730/786;"
-          width={730}
-          height={786}
-          loading="eager"
-          fetchpriority="high"
-          decoding="sync"
-          id="hero-portrait-static"
-        />
+        <picture>
+          <source srcset="/images/hero/Portrait.avif" type="image/avif" />
+          <source srcset="/images/hero/Portrait.webp" type="image/webp" />
+          <img
+            src="/images/hero/Portrait.webp"
+            alt="Hero portrait"
+            class="absolute bottom-0 w-5/6 lg:w-full min-[1024px]:max-[1279px]:w-full h-auto object-contain mx-auto left-0 right-0"
+            style="aspect-ratio: 730/786;"
+            width={730}
+            height={786}
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
+            id="hero-portrait-static"
+          />
+        </picture>
         <!-- React komponenta převezme kontrolu po hydrataci -->
         <HeroPortrait client:idle />
       </div>

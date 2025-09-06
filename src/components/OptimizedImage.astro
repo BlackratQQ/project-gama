@@ -1,0 +1,83 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  class?: string;
+  decoding?: 'async' | 'sync' | 'auto';
+  srcset?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  sizes,
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  class: className,
+  decoding = 'async',
+  srcset
+} = Astro.props;
+
+// Získání cesty bez přípony pro AVIF/WebP varianty
+const basePath = src.replace(/\.[^/.]+$/, "");
+
+// Vytvoření AVIF a WebP srcset pokud existuje originální srcset
+const createAvifSrcset = (originalSrcset: string) => {
+  return originalSrcset.replace(/\.webp/g, '.avif');
+};
+
+const createWebpSrcset = (originalSrcset: string) => {
+  return originalSrcset; // WebP už je v originále
+};
+---
+
+<picture>
+  <!-- AVIF verze s nejlepší kompresí -->
+  {srcset ? (
+    <source
+      srcset={createAvifSrcset(srcset)}
+      sizes={sizes}
+      type="image/avif"
+    />
+  ) : (
+    <source
+      srcset={`${basePath}.avif`}
+      type="image/avif"
+    />
+  )}
+  
+  <!-- WebP fallback -->
+  {srcset ? (
+    <source
+      srcset={createWebpSrcset(srcset)}
+      sizes={sizes}
+      type="image/webp"
+    />
+  ) : (
+    <source
+      srcset={`${basePath}.webp`}
+      type="image/webp"
+    />
+  )}
+  
+  <!-- Finální fallback na originální formát -->
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={decoding}
+    class={className}
+    {srcset && { srcset }}
+    {sizes && { sizes }}
+  />
+</picture>
