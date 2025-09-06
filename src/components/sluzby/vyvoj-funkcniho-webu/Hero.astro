@@ -55,8 +55,22 @@ const items = [
         client:only="react"
       >
         <p class="text-lg font-semibold text-gray-200 lg:text-2xl">
-          Stavím weby, které za vás pracují 24/7: prodávají vaše služby a zboží, informují o vašem
-          podnikání a šetří vám nervy a čas.
+          <!-- Statický fallback pro SEO/crawlery -->
+          <noscript>
+            Stavím weby, které za vás pracují 24/7: prodávají vaše služby a zboží, informují o vašem
+            podnikání a šetří vám nervy a čas.
+          </noscript>
+          <!-- Animovaná verze -->
+          <BlurText
+            text="Stavím weby, které za vás pracují 24/7: prodávají vaše služby a zboží, informují o vašem podnikání a šetří vám nervy a čas."
+            delay={50}
+            initialDelay={800}
+            animateBy="words"
+            direction="top"
+            animateOn="load"
+            className="justify-center"
+            client:only="react"
+          />
         </p>
       </FadeContent>
     </div>
@@ -79,7 +93,19 @@ const items = [
               <div class="flex flex-col items-center justify-center gap-2 pt-2 sm:flex-row">
                 <Icon name={item.icon} size="32" class="h-8 w-8 text-white" />
                 <span class="block text-balance text-sm font-semibold text-white sm:text-base">
-                  {item.text}
+                  <!-- Statický fallback pro SEO/crawlery -->
+                  <noscript>{item.text}</noscript>
+                  <!-- Animovaná verze -->
+                  <BlurText
+                    text={item.text}
+                    delay={30}
+                    initialDelay={0}
+                    animateBy="words"
+                    direction="bottom"
+                    animateOn="view"
+                    className="justify-center"
+                    client:only="react"
+                  />
                 </span>
               </div>
             </div>

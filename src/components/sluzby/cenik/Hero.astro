@@ -39,7 +39,21 @@ import FadeContent from '../../react/shared/FadeContent.tsx';
         client:only="react"
       >
         <p class="text-lg font-semibold text-gray-200 lg:text-2xl">
-          ...když chcete schopného vývojáře, který mluví vaším jazykem, drží slovo a má férové ceny.
+          <!-- Statický fallback pro SEO/crawlery -->
+          <noscript>
+            ...když chcete schopného vývojáře, který mluví vaším jazykem, drží slovo a má férové ceny.
+          </noscript>
+          <!-- Animovaná verze -->
+          <BlurText
+            text="...když chcete schopného vývojáře, který mluví vaším jazykem, drží slovo a má férové ceny."
+            delay={50}
+            initialDelay={800}
+            animateBy="words"
+            direction="top"
+            animateOn="load"
+            className="justify-center"
+            client:only="react"
+          />
         </p>
       </FadeContent>
     </div>
