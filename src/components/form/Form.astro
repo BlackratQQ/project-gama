@@ -290,7 +290,6 @@ const csrfToken = crypto.randomBytes(32).toString('hex');
       const currentBudgetContainers = document.querySelectorAll('.budget-btn-container');
       
       if (!currentBudgetInput) {
-        console.error('Budget input element not found!');
         return;
       }
 
@@ -470,17 +469,6 @@ const csrfToken = crypto.randomBytes(32).toString('hex');
 
       setLoading(true);
 
-      // Debug: show what we're sending
-      const requestData = {
-        name: formData.get('name'),
-        phone: formData.get('phone'),
-        email: formData.get('email'),
-        industry: formData.get('industry'),
-        budget: formData.get('budget'),
-        helpNeeded: formData.get('helpNeeded'),
-        csrfToken: formData.get('csrf_token'),
-      };
-      console.log('Sending data:', requestData);
 
       try {
         const response = await fetch('/api/send', {
@@ -500,8 +488,6 @@ const csrfToken = crypto.randomBytes(32).toString('hex');
         });
 
         const result = await response.json();
-        console.log('Response status:', response.status);
-        console.log('Response data:', result);
 
         if (!response.ok) {
           if (errorMessage) {
@@ -528,7 +514,6 @@ const csrfToken = crypto.randomBytes(32).toString('hex');
           });
         }
       } catch (error) {
-        console.error('Fetch Error:', error);
         if (errorMessage) {
           errorMessage.textContent = 'Chyba připojení k serveru.';
           errorMessage.classList.remove('hidden');

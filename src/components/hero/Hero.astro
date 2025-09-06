@@ -13,8 +13,8 @@ const jsonLd = {
   jobTitle: 'IT Developer',
   description:
     'Freelance IT developer specializující se na UX, front-end a back-end design, řešení technických problémů a rychlé doručení výsledků.',
-  url: typeof window !== 'undefined' ? window.location.origin : 'https://example.com',
-  image: '/Portrait.webp',
+  url: Astro.site?.origin || 'https://vojtechkochta.cz',
+  image: '/images/hero/Portrait.webp',
   sameAs: ['https://github.com/yourusername', 'https://linkedin.com/in/yourusername'],
   address: {
     '@type': 'PostalAddress',
@@ -167,7 +167,7 @@ const heroItems = [
       <div class="w-full lg:w-1/2 min-[1024px]:max-[1279px]:w-2/3 relative">
         <!-- Statický fallback pro LCP -->
         <img
-          src="/Portrait.webp"
+          src="/images/hero/Portrait.webp"
           alt="Hero portrait"
           class="absolute bottom-0 w-5/6 lg:w-full min-[1024px]:max-[1279px]:w-full h-auto object-contain mx-auto left-0 right-0"
           style="aspect-ratio: 730/786;"

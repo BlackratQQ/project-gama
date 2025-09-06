@@ -26,7 +26,7 @@ const HeroPortrait: React.FC<HeroPortraitProps> = ({ className = "" }) => {
       <Suspense
         fallback={
           <img
-            src="/Portrait.webp"
+            src="/images/hero/Portrait.webp"
             alt="Hero portrait"
             className="w-full h-full object-contain"
             width={730}
@@ -38,7 +38,7 @@ const HeroPortrait: React.FC<HeroPortraitProps> = ({ className = "" }) => {
         }
       >
         <GridDistortion
-          imageSrc="/Portrait.webp"
+          imageSrc="/images/hero/Portrait.webp"
           alt="Hero portrait"
           width={730}
           height={786}

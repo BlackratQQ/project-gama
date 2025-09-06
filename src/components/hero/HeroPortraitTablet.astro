@@ -7,13 +7,13 @@ const { class: className = "" } = Astro.props;
 ---
 
 <img
-  src="/Portrait-512w.webp"
+  src="/images/hero/Portrait-512w.webp"
   alt="Hero portrait"
   class={`absolute bottom-0 w-5/6 lg:w-full min-[1024px]:max-[1279px]:w-full h-auto object-contain mx-auto left-0 right-0 ${className}`}
   width={512}
   height={552}
   loading="lazy"
   decoding="async"
-  srcset="/Portrait-256w.webp 256w, /Portrait-512w.webp 512w, /Portrait.webp 730w"
+  srcset="/images/hero/Portrait-256w.webp 256w, /images/hero/Portrait-512w.webp 512w, /images/hero/Portrait.webp 730w"
   sizes="(max-width: 768px) 256px, (max-width: 1024px) 400px, (min-width: 1280px) 600px, 512px"
 />
