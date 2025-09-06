@@ -1,0 +1,552 @@
+---
+import Button from '../Button.astro';
+import BlurText from '../react/shared/BlurText.tsx';
+import FadeContent from '../react/shared/FadeContent.tsx';
+
+// Define interfaces for type safety - removed unused interfaces
+
+const budgetOptions = ['40 000', '80 000', '150 000', '150 000+'];
+
+// Generate cryptographically secure CSRF token
+import crypto from 'crypto';
+
+const csrfToken = crypto.randomBytes(32).toString('hex');
+
+// Token will be validated on the server side
+---
+
+<div class="relative mx-auto p-6">
+  <h2 class="mb-6 text-center text-2xl font-bold text-white">
+    <!-- Statický fallback pro SEO/crawlery -->
+    <noscript>Osobní informace</noscript>
+    <!-- Animovaná verze -->
+    <BlurText
+      text="Osobní informace"
+      delay={150}
+      initialDelay={1800}
+      animateBy="words"
+      direction="top"
+      animateOn="view"
+      className=""
+      client:only="react"
+    />
+  </h2>
+
+  <form id="contact-form" class="">
+    <!-- CSRF Token -->
+    <input type="hidden" name="csrf_token" value={csrfToken} />
+
+    <!-- Honeypot field for bot protection -->
+    <div style="position: absolute; left: -9999px;">
+      <label for="website">Website</label>
+      <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <!-- Name Input -->
+    <FadeContent
+      blur={false}
+      duration={800}
+      delay={2200}
+      direction="top"
+      className="mb-8"
+      client:only="react"
+    >
+      <div>
+        <label for="name" class="mb-1 block text-sm font-medium text-white"> Celé jméno </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Jan Novák"
+          aria-label="Celé jméno"
+          aria-required="true"
+          autocomplete="name"
+          class="block w-full rounded-md border-transparent bg-white p-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          required
+        />
+        <p id="name-error" class="mt-1 text-sm text-red-400 hidden"></p>
+      </div>
+    </FadeContent>
+
+    <!-- Phone Input -->
+    <FadeContent
+      blur={false}
+      duration={800}
+      delay={2400}
+      direction="top"
+      className="mb-8"
+      client:only="react"
+    >
+      <div>
+        <label for="phone" class="mb-1 block text-sm font-medium text-white"> Telefon </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="+420 123 456 789"
+          aria-label="Telefonní číslo"
+          aria-required="true"
+          autocomplete="tel"
+          pattern="^(\+?\d{1,4}\s?)?[0-9]{3}\s?[0-9]{3}\s?[0-9]{3,4}$"
+          title="Zadejte platné telefonní číslo (např. +420 123 456 789)"
+          class="block w-full rounded-md border-transparent bg-white p-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          required
+        />
+        <p id="phone-error" class="mt-1 text-sm text-red-400 hidden"></p>
+      </div>
+    </FadeContent>
+
+    <!-- Email Input -->
+    <FadeContent
+      blur={false}
+      duration={800}
+      delay={2600}
+      direction="top"
+      className="mb-8"
+      client:only="react"
+    >
+      <div>
+        <label for="email" class="mb-1 block text-sm font-medium text-white"> Email </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="jan.novak@example.com"
+          aria-label="E-mailová adresa"
+          aria-required="true"
+          autocomplete="email"
+          class="block w-full rounded-md border-transparent bg-white p-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          required
+        />
+        <p id="email-error" class="mt-1 text-sm text-red-400 hidden"></p>
+      </div>
+    </FadeContent>
+
+    <!-- Industry Input -->
+    <FadeContent
+      blur={false}
+      duration={800}
+      delay={2800}
+      direction="top"
+      className="mb-8"
+      client:only="react"
+    >
+      <div>
+        <label for="industry" class="mb-1 block text-sm font-medium text-white">
+          V jakém odvětví podnikáte?
+        </label>
+        <input
+          type="text"
+          id="industry"
+          name="industry"
+          placeholder="Např. E-commerce, Služby, Výroba..."
+          aria-label="Odvětví podnikání"
+          aria-required="true"
+          autocomplete="organization"
+          class="block w-full rounded-md border-transparent bg-white p-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          required
+        />
+        <p id="industry-error" class="mt-1 text-sm text-red-400 hidden"></p>
+      </div>
+    </FadeContent>
+
+    <!-- Budget Selection -->
+    <FadeContent
+      blur={false}
+      duration={800}
+      delay={3000}
+      direction="top"
+      className="mb-8"
+      client:only="react"
+    >
+      <div>
+        <label id="budget-label" class="mb-2 block text-sm font-medium text-white">
+          Rozpočet (v Kč)
+        </label>
+        <div
+          class="grid grid-cols-2 gap-3 md:grid-cols-4"
+          role="radiogroup"
+          aria-labelledby="budget-label"
+        >
+          {
+            budgetOptions.map((option) => (
+              <div data-budget={option} class="budget-btn-container">
+                <Button
+                  text={option}
+                  variant="ghost"
+                  class="budget-btn w-full"
+                  onClick={`selectBudget('${option}')`}
+                />
+              </div>
+            ))
+          }
+        </div>
+        <p id="budget-error" class="mt-1 text-sm text-red-400 hidden"></p>
+        <input type="hidden" id="budget" name="budget" required />
+      </div>
+    </FadeContent>
+
+    <!-- Help Needed Textarea -->
+    <FadeContent
+      blur={false}
+      duration={800}
+      delay={3200}
+      direction="top"
+      className="mb-8"
+      client:only="react"
+    >
+      <div>
+        <label for="helpNeeded" class="mb-1 block text-sm font-medium text-white">
+          S čím Vám mohu pomoci?
+        </label>
+        <textarea
+          id="helpNeeded"
+          name="helpNeeded"
+          rows="4"
+          placeholder="Popište stručně, s čím potřebujete pomoci..."
+          aria-label="Popis potřeby"
+          aria-required="true"
+          class="block w-full rounded-md border-transparent bg-white p-2 text-gray-900 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          required></textarea>
+        <p id="helpNeeded-error" class="mt-1 text-sm text-red-400 hidden"></p>
+      </div>
+    </FadeContent>
+
+    <!-- Submit Button -->
+    <FadeContent
+      blur={false}
+      duration={800}
+      delay={3400}
+      direction="top"
+      className="mb-0"
+      client:only="react"
+    >
+      <div class="pt-4 text-center">
+        <!-- Status Messages - moved above button -->
+        <p id="success-message" class="mb-4 text-green-400 hidden font-medium">
+          ✅ Poptávka byla úspěšně odeslána! Ozveme se vám co nejdříve.
+        </p>
+        <p id="error-message" class="mb-4 text-red-400 hidden"></p>
+
+        <div id="submit-btn-container">
+          <Button
+            text="Odeslat poptávku"
+            variant="solid"
+            class="submit-btn py-2"
+            onClick="submitForm()"
+          />
+        </div>
+
+        <!-- Loading state will be handled by JavaScript -->
+        <div id="loading-state" class="hidden mt-4">
+          <div class="inline-flex items-center text-white">
+            <svg
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            Odesílání...
+          </div>
+        </div>
+      </div>
+    </FadeContent>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    const submitBtnContainer = document.getElementById('submit-btn-container');
+    const loadingState = document.getElementById('loading-state');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
+    // Budget state is managed through the hidden input field
+
+    // Budget button handling - přístup přes kontejnery
+    const budgetContainers = document.querySelectorAll('.budget-btn-container');
+    const budgetInput = document.getElementById('budget') as HTMLInputElement;
+
+    // Vytvoři globální funkci pro budget selection
+    (window as Window & { selectBudget?: (budget: string) => void }).selectBudget = function (
+      budget: string
+    ) {
+      // Get fresh references to elements
+      const currentBudgetInput = document.getElementById('budget') as HTMLInputElement;
+      const currentBudgetContainers = document.querySelectorAll('.budget-btn-container');
+      
+      if (!currentBudgetInput) {
+        console.error('Budget input element not found!');
+        return;
+      }
+
+      // Remove active class from all button containers
+      currentBudgetContainers.forEach((container) => {
+        const ghostContainer = container.querySelector('.ghost-button-container');
+        if (ghostContainer) {
+          ghostContainer.classList.remove('active');
+        }
+      });
+
+      // Add active class to clicked button container
+      const clickedContainer = Array.from(currentBudgetContainers).find(
+        (container) => container.getAttribute('data-budget') === budget
+      );
+      if (clickedContainer) {
+        const ghostContainer = clickedContainer.querySelector('.ghost-button-container');
+        if (ghostContainer) {
+          ghostContainer.classList.add('active');
+        }
+      }
+
+      currentBudgetInput.value = budget;
+      clearError('budget');
+    };
+
+    // Clear error function
+    function clearError(fieldName: string) {
+      const errorElement = document.getElementById(`${fieldName}-error`);
+      const inputElement = document.getElementById(fieldName) as HTMLInputElement;
+
+      if (errorElement) {
+        errorElement.classList.add('hidden');
+        errorElement.textContent = '';
+      }
+
+      if (inputElement) {
+        inputElement.classList.remove('border-red-500', 'ring-1', 'ring-red-500');
+      }
+    }
+
+    // Show error function
+    function showError(fieldName: string, message: string) {
+      const errorElement = document.getElementById(`${fieldName}-error`);
+      const inputElement = document.getElementById(fieldName) as HTMLInputElement;
+
+      if (errorElement) {
+        errorElement.classList.remove('hidden');
+        errorElement.textContent = message;
+      }
+
+      if (inputElement) {
+        inputElement.classList.add('border-red-500', 'ring-1', 'ring-red-500');
+      }
+    }
+
+    // Clear errors on input
+    if (form) {
+      form.addEventListener('input', function (e) {
+        const target = e.target as HTMLInputElement;
+        if (target.name) {
+          clearError(target.name);
+        }
+        hideMessages();
+      });
+    }
+
+    // Hide status messages
+    function hideMessages() {
+      if (successMessage) {
+        successMessage.classList.add('hidden');
+      }
+      if (errorMessage) {
+        errorMessage.classList.add('hidden');
+      }
+    }
+
+    // Form validation
+    function validateForm(formData: FormData): {
+      isValid: boolean;
+      errors: Record<string, string>;
+    } {
+      const errors: Record<string, string> = {};
+
+      const name = formData.get('name') as string;
+      const phone = formData.get('phone') as string;
+      const email = formData.get('email') as string;
+      const industry = formData.get('industry') as string;
+      const budget = formData.get('budget') as string;
+      const helpNeeded = formData.get('helpNeeded') as string;
+
+      // Validation rules
+      if (!name?.trim()) {
+        errors.name = 'Jméno je povinné.';
+      }
+
+      if (!phone?.trim()) {
+        errors.phone = 'Telefonní číslo je povinné.';
+      } else {
+        const phoneRegex = /^(\+?\d{1,4}\s?)?[0-9]{3}\s?[0-9]{3}\s?[0-9]{3,4}$/;
+        if (!phoneRegex.test(phone)) {
+          errors.phone = 'Neplatný formát telefonního čísla.';
+        }
+      }
+
+      if (!email?.trim()) {
+        errors.email = 'Email je povinný.';
+      } else {
+        const emailRegex = /^\S+@\S+\.\S+$/;
+        if (!emailRegex.test(email)) {
+          errors.email = 'Neplatný formát emailu.';
+        }
+      }
+
+      if (!industry?.trim()) {
+        errors.industry = 'Odvětví je povinné.';
+      }
+
+      if (!budget) {
+        errors.budget = 'Prosím, vyberte rozpočet.';
+      }
+
+      if (!helpNeeded?.trim()) {
+        errors.helpNeeded = 'Popis je povinný.';
+      } else if (helpNeeded.trim().length > 1000) {
+        errors.helpNeeded = 'Popis nesmí přesáhnout 1000 znaků.';
+      }
+
+      return {
+        isValid: Object.keys(errors).length === 0,
+        errors,
+      };
+    }
+
+    // Set loading state
+    function setLoading(loading: boolean) {
+      if (loading) {
+        if (submitBtnContainer) {
+          submitBtnContainer.style.display = 'none';
+        }
+        if (loadingState) {
+          loadingState.classList.remove('hidden');
+        }
+      } else {
+        if (submitBtnContainer) {
+          submitBtnContainer.style.display = 'block';
+        }
+        if (loadingState) {
+          loadingState.classList.add('hidden');
+        }
+      }
+    }
+
+    // Vytvoří globální funkci pro submit
+    (window as Window & { submitForm?: () => Promise<void> }).submitForm = async function () {
+      await handleSubmit();
+    };
+
+    // Form submit handler
+    async function handleSubmit() {
+      hideMessages();
+
+      if (!form) return;
+      const formData = new FormData(form as HTMLFormElement);
+      const validation = validateForm(formData);
+
+      // Clear all previous errors
+      ['name', 'phone', 'email', 'industry', 'budget', 'helpNeeded'].forEach(clearError);
+
+      if (!validation.isValid) {
+        // Show validation errors
+        Object.entries(validation.errors).forEach(([field, message]) => {
+          showError(field, message);
+        });
+        return;
+      }
+
+      setLoading(true);
+
+      // Debug: show what we're sending
+      const requestData = {
+        name: formData.get('name'),
+        phone: formData.get('phone'),
+        email: formData.get('email'),
+        industry: formData.get('industry'),
+        budget: formData.get('budget'),
+        helpNeeded: formData.get('helpNeeded'),
+        csrfToken: formData.get('csrf_token'),
+      };
+      console.log('Sending data:', requestData);
+
+      try {
+        const response = await fetch('/api/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.get('name'),
+            phone: formData.get('phone'),
+            email: formData.get('email'),
+            industry: formData.get('industry'),
+            budget: formData.get('budget'),
+            helpNeeded: formData.get('helpNeeded'),
+            csrfToken: formData.get('csrf_token'),
+          }),
+        });
+
+        const result = await response.json();
+        console.log('Response status:', response.status);
+        console.log('Response data:', result);
+
+        if (!response.ok) {
+          if (errorMessage) {
+            errorMessage.textContent = result.error || 'Neznámá chyba serveru.';
+            errorMessage.classList.remove('hidden');
+          }
+        } else {
+          if (successMessage) {
+            successMessage.textContent = '✅ Poptávka byla úspěšně odeslána! Ozveme se vám co nejdříve.';
+            successMessage.classList.remove('hidden');
+          }
+          if (form) {
+            (form as HTMLFormElement).reset();
+          }
+          // Reset budget state
+          budgetInput.value = '';
+
+          // Reset budget buttons - remove active class from all containers
+          budgetContainers.forEach((container) => {
+            const ghostContainer = container.querySelector('.ghost-button-container');
+            if (ghostContainer) {
+              ghostContainer.classList.remove('active');
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Fetch Error:', error);
+        if (errorMessage) {
+          errorMessage.textContent = 'Chyba připojení k serveru.';
+          errorMessage.classList.remove('hidden');
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Lokální styly pro budget tlačítka - menší font */
+  .budget-btn-container :global(.ghost-button-container span) {
+    font-size: 14px !important;
+  }
+
+  .budget-btn-container :global(.ghost-button-container button) {
+    font-size: 14px !important;
+  }
+</style>

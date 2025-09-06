@@ -75,11 +75,22 @@ body::after {
 }
 
 .ghost-button-container button:hover,
-.ghost-button-container a:hover,
-.ghost-button-container.active button,
-.ghost-button-container.active a {
+.ghost-button-container a:hover {
   -webkit-animation: ani 0.7s steps(29) forwards;
   animation: ani 0.7s steps(29) forwards;
+}
+
+.ghost-button-container.active button,
+.ghost-button-container.active a {
+  background: #f97316 !important;
+  border: 2px solid #f97316 !important;
+  -webkit-animation: ani 0.7s steps(29) forwards;
+  animation: ani 0.7s steps(29) forwards;
+}
+
+.ghost-button-container.active .ghost-mas {
+  border: 2px solid #f97316 !important;
+  background: rgba(249, 115, 22, 0.1) !important;
 }
 
 .ghost-mas {

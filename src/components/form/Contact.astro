@@ -1,0 +1,153 @@
+---
+import Form from './Form.astro';
+import BlurText from '../react/shared/BlurText.tsx';
+---
+
+<div id="kontaktni-formular" class="bg-gradient">
+  <div class="container mx-auto flex min-h-screen flex-col items-center justify-center px-3">
+    <!-- Nadpis -->
+    <div class="mb-6">
+      <h3 class="mb-8 text-center text-5xl font-bold text-white md:text-8xl xl:text-9xl">
+        <!-- Statický fallback pro SEO/crawlery -->
+        <noscript>OZVĚTE SE MI</noscript>
+        <!-- Animovaná verze -->
+        <BlurText
+          text="OZVĚTE SE MI"
+          delay={300}
+          initialDelay={0}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className=""
+          client:only="react"
+        />
+      </h3>
+      <h2 class="-mt-5 text-center text-3xl font-bold text-white md:text-4xl">
+        <!-- Statický fallback pro SEO/crawlery -->
+        <noscript>První kolo je oťukávací</noscript>
+        <!-- Animovaná verze -->
+        <BlurText
+          text="První kolo je oťukávací"
+          delay={150}
+          initialDelay={400}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className=""
+          client:only="react"
+        />
+      </h2>
+    </div>
+
+    <!-- Kontaktní informace -->
+    <div class="mb-6 max-w-2xl text-white">
+      <div class="text-center">
+        <!-- Statický fallback pro SEO/crawlery -->
+        <noscript>
+          <p>
+            Pošlete mi zprávu přes formulář, napište na
+            <a
+              href="mailto:info@vojtechkochta.cz"
+              class="font-bold text-orange-500 hover:underline"
+            >
+              info@vojtechkochta.cz
+            </a> nebo zavolejte na
+            <a href="tel:+420774960708" class="font-bold text-orange-500 hover:underline">
+              +420 774 960 708
+            </a>. Obratem vás kontaktuji a domluvíme se na úvodní bezplatné schůzce.
+          </p>
+        </noscript>
+        <!-- Animovaná verze -->
+        <BlurText
+          text="Pošlete mi zprávu přes formulář, napište na "
+          delay={100}
+          initialDelay={800}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className="inline"
+          client:only="react"
+        />
+        <a href="mailto:info@vojtechkochta.cz" class="font-bold text-orange-500 hover:underline">
+          <BlurText
+            text="info@vojtechkochta.cz"
+            delay={100}
+            initialDelay={1000}
+            animateBy="words"
+            direction="top"
+            animateOn="view"
+            className="inline"
+            client:only="react"
+          />
+        </a>
+        <BlurText
+          text=" nebo zavolejte na "
+          delay={100}
+          initialDelay={1200}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className="inline"
+          client:only="react"
+        />
+        <a href="tel:+420774960708" class="font-bold text-orange-500 hover:underline">
+          <BlurText
+            text="+420 774 960 708"
+            delay={100}
+            initialDelay={1400}
+            animateBy="words"
+            direction="top"
+            animateOn="view"
+            className="inline"
+            client:only="react"
+          />
+        </a>
+        <BlurText
+          text=". Obratem vás kontaktuji a domluvíme se na úvodní bezplatné schůzce."
+          delay={100}
+          initialDelay={1600}
+          animateBy="words"
+          direction="top"
+          animateOn="view"
+          className="inline"
+          client:only="react"
+        />
+      </div>
+    </div>
+
+    <!-- Formulář -->
+    <div class="container max-w-xl rounded-md shadow-lg">
+      <Form />
+    </div>
+  </div>
+</div>
+
+<style>
+  #kontaktni-formular {
+    /* Aktivovat pouze 3 radiální gradienty */
+    --g1-active: 1;
+    --g2-active: 1;
+    --g3-active: 1;
+    --g4-active: 0;
+    --linear-active: 0;
+
+    /* Hodnoty pro původní gradient-form */
+    --g1-x: 14%;
+    --g1-y: 42%;
+    --g1-color: #002853;
+    --g1-size: 1%;
+    --g1-fade: min(7%, 185px);
+
+    --g2-x: 70%;
+    --g2-y: 30%;
+    --g2-color: #2b0053;
+    --g2-size: 0%;
+    --g2-fade: min(10%, 220px);
+
+    --g3-x: 88%;
+    --g3-y: 77%;
+    --g3-color: #002853;
+    --g3-size: 0%;
+    --g3-fade: min(9%, 110px);
+  }
+</style>
