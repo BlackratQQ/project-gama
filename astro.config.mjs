@@ -3,9 +3,13 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import icon from 'astro-icon';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
+  adapter: node({
+    mode: 'standalone'
+  }),
   integrations: [
     tailwind({
       applyBaseStyles: false
@@ -70,7 +74,7 @@ export default defineConfig({
     port: 4321,
     host: 'localhost'
   },
-  output: 'static',
+  output: 'server',
   build: {
     inlineStylesheets: 'auto',
     format: 'file'
