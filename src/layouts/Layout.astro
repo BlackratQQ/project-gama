@@ -13,7 +13,7 @@ const {
   title = 'Vojtěch Kochta - Vývoj webů a automatizace procesů',
   description = 'Bleskové KO technických problémů a rychlé doručení výsledků. UX, front-end i back-end design pro malé a střední firmy. Profesionální vývoj webů a automatizace procesů.',
   keywords = 'vývoj webu, webové aplikace, automatizace procesů, React, Astro, TypeScript, programování na míru',
-  ogImage = '/og-image.jpg',
+  ogImage = '/images/og-wallpaper.jpg',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechkochta.cz');
@@ -35,6 +35,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vojtěch Kochta - Automatizace firemních procesů a webdesign" />
+    <meta property="og:site_name" content="Vojtěch Kochta" />
     <meta property="og:locale" content="cs_CZ" />
 
     <!-- Twitter -->
@@ -48,8 +52,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/NewLogo.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Apple-specific meta tags for iMessage -->
+    <meta name="apple-mobile-web-app-title" content="Vojtěch Kochta" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <!-- Fonts -->
     <link rel="stylesheet" href="/fonts/inter.css" />

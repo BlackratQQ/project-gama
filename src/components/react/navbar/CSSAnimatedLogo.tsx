@@ -31,8 +31,8 @@ const CSSAnimatedLogo: FC = () => {
   }, []);
 
   // Výpočet velikosti a pozice na základě scroll progress
-  const logoHeight = 80 - (scrollProgress * 24); // 80px -> 56px
-  const logoMarginTop = 24 - (scrollProgress * 8); // 24px -> 16px
+  const logoHeight = 80 - (scrollProgress * 40); // 80px -> 40px
+  const logoMarginTop = 24 - (scrollProgress * 24); // 24px -> 0px
 
   return (
     <div className="logo-container">
@@ -47,8 +47,8 @@ const CSSAnimatedLogo: FC = () => {
           style={{
             height: `${logoHeight}px`,
             marginTop: `${logoMarginTop}px`,
-            transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
-            willChange: 'height, margin-top, filter, opacity',
+            transition: 'all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            willChange: 'height, margin-top',
           }}
         />
       </a>

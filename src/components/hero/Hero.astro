@@ -2,6 +2,7 @@
 import Button from '../Button.astro';
 import ArrowDown from '../ArrowDown.astro';
 import SocialProof from '../shared/SocialProof.astro';
+import LaserBeam from '../shared/LaserBeam.astro';
 import HeroPortraitMobile from './HeroPortraitMobile.astro';
 import HeroPortrait from '../react/hero/HeroPortrait.tsx';
 
@@ -79,9 +80,30 @@ const heroItems = [
 <!-- JSON-LD Structured Data pro SEO -->
 <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 
-<main role="main" aria-label="Hlavní hero sekce" class="relative min-h-screen">
+<main role="main" aria-label="Hlavní hero sekce" class="relative min-h-screen overflow-hidden">
   <!-- LightRays container - dynamic loading only for desktop/tablet -->
-  <div id="lightrays-container" class="absolute inset-0 z-[1] hidden md:block"></div>
+  <div id="lightrays-container" class="absolute inset-0 z-[10] hidden md:block"></div>
+  
+  <!-- LaserBeam efekty -->
+  <LaserBeam 
+    position="bottom-left" 
+    angle={15} 
+    color="orange" 
+    startDelay={1000}
+    opacity={0.7}
+    speed={3}
+    width="80%"
+  />
+  <LaserBeam 
+    position="bottom-left" 
+    angle={25} 
+    color="orange" 
+    startDelay={2500}
+    opacity={0.4}
+    speed={4}
+    width="60%"
+    className="translate-y-16 translate-x-8"
+  />
   
   <!-- Gradient overlay na bottom -->
   <div class="gradient-hero"></div>

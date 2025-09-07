@@ -1,0 +1,301 @@
+---
+export interface Props {
+  position?: 'top-left' | 'bottom-left' | 'top-right' | 'bottom-right' | 'center';
+  angle?: number;
+  color?: string;
+  startDelay?: number;
+  opacity?: number;
+  speed?: number;
+  width?: string;
+  className?: string;
+}
+
+const {
+  position = 'bottom-left',
+  angle = -15,
+  color = 'orange',
+  startDelay = 0,
+  opacity = 0.8,
+  speed = 3,
+  width = '120%',
+  className = ''
+} = Astro.props;
+
+// Určení pozice na základě props
+const getPositionStyles = (pos: string) => {
+  switch (pos) {
+    case 'top-left':
+      return 'top-[10%] left-[-10%]';
+    case 'bottom-left':
+      return 'bottom-[10%] left-[-10%]';
+    case 'top-right':
+      return 'top-[10%] right-[-10%]';
+    case 'bottom-right':
+      return 'bottom-[10%] right-[-10%]';
+    case 'center':
+      return 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2';
+    default:
+      return 'bottom-[10%] left-[-10%]';
+  }
+};
+
+const positionClass = getPositionStyles(position);
+const colorClass = `laser-${color}`;
+const delayClass = startDelay > 0 ? `delay-${startDelay}` : '';
+---
+
+<div 
+  class={`laser-beam ${colorClass} ${positionClass} ${delayClass} ${className}`}
+  style={`
+    --laser-angle: ${angle}deg;
+    --laser-opacity: ${opacity};
+    --laser-speed: ${speed}s;
+    --laser-width: ${width};
+  `}
+>
+  <div class="laser-beam__line"></div>
+  <div class="laser-beam__glow"></div>
+  <div class="laser-beam__particles">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+  </div>
+</div>
+
+<style>
+  .laser-beam {
+    position: absolute;
+    width: var(--laser-width, 120%);
+    height: 2px;
+    transform: rotate(var(--laser-angle, -15deg));
+    z-index: 20;
+    pointer-events: none;
+    opacity: 0;
+    animation: laser-appear calc(var(--laser-speed, 3s) * 0.33) ease-out forwards;
+  }
+
+  /* Delay classes */
+  .delay-1000 { animation-delay: 1s; }
+  .delay-2000 { animation-delay: 2s; }
+  .delay-3000 { animation-delay: 3s; }
+  .delay-4000 { animation-delay: 4s; }
+  .delay-5000 { animation-delay: 5s; }
+
+  /* Hlavní paprsek */
+  .laser-beam__line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      currentColor 20%,
+      currentColor 50%,
+      currentColor 80%,
+      transparent 100%
+    );
+    box-shadow: 
+      0 0 8px currentColor,
+      0 0 16px currentColor,
+      0 0 24px currentColor;
+    animation: laser-pulse var(--laser-speed, 3s) ease-in-out infinite;
+  }
+
+  /* Glow efekt */
+  .laser-beam__glow {
+    position: absolute;
+    top: -6px;
+    left: 0;
+    width: 100%;
+    height: 14px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      currentColor 20%,
+      currentColor 50%,
+      currentColor 80%,
+      transparent 100%
+    );
+    opacity: 0.4;
+    filter: blur(12px);
+    animation: glow-pulse var(--laser-speed, 3s) ease-in-out infinite;
+  }
+
+  /* Částice container */
+  .laser-beam__particles {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+  }
+
+  /* Jednotlivé částice */
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 6px currentColor;
+    animation: particle-move calc(var(--laser-speed, 3s) * 1.33) linear infinite;
+  }
+
+  .particle-1 {
+    top: -1px;
+    animation-delay: 0s;
+  }
+
+  .particle-2 {
+    top: 1px;
+    animation-delay: calc(var(--laser-speed, 3s) * -0.25);
+  }
+
+  .particle-3 {
+    top: -2px;
+    animation-delay: calc(var(--laser-speed, 3s) * -0.5);
+  }
+
+  .particle-4 {
+    top: 0px;
+    animation-delay: calc(var(--laser-speed, 3s) * -0.75);
+  }
+
+  /* Color variants */
+  .laser-orange {
+    color: theme('colors.orange.500');
+  }
+
+  .laser-red {
+    color: theme('colors.red.500');
+  }
+
+  .laser-blue {
+    color: theme('colors.blue.500');
+  }
+
+  .laser-green {
+    color: theme('colors.green.500');
+  }
+
+  .laser-purple {
+    color: theme('colors.purple.500');
+  }
+
+  .laser-white {
+    color: theme('colors.white');
+  }
+
+  /* Animace */
+  @keyframes laser-appear {
+    0% {
+      opacity: 0;
+      transform: rotate(var(--laser-angle, -15deg)) scaleX(0);
+      transform-origin: left center;
+    }
+    100% {
+      opacity: var(--laser-opacity, 0.8);
+      transform: rotate(var(--laser-angle, -15deg)) scaleX(1);
+    }
+  }
+
+  @keyframes laser-pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scaleY(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scaleY(1.8);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scaleY(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scaleY(2.2);
+    }
+  }
+
+  @keyframes particle-move {
+    0% {
+      left: -8px;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: calc(100% + 8px);
+      opacity: 0;
+    }
+  }
+
+  /* Responsive úpravy */
+  @media (max-width: 1024px) {
+    .laser-beam {
+      opacity: calc(var(--laser-opacity, 0.8) * 0.7);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .laser-beam {
+      height: 1px;
+      opacity: calc(var(--laser-opacity, 0.8) * 0.5);
+    }
+    
+    .laser-beam__line {
+      box-shadow: 
+        0 0 4px currentColor,
+        0 0 8px currentColor,
+        0 0 12px currentColor;
+    }
+    
+    .laser-beam__glow {
+      top: -4px;
+      height: 9px;
+      filter: blur(6px);
+    }
+    
+    .particle {
+      width: 2px;
+      height: 2px;
+      box-shadow: 0 0 4px currentColor;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .laser-beam {
+      opacity: calc(var(--laser-opacity, 0.8) * 0.4);
+    }
+  }
+
+  /* Prefers reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .laser-beam {
+      animation: none;
+      opacity: calc(var(--laser-opacity, 0.8) * 0.6);
+      transform: rotate(var(--laser-angle, -15deg)) scaleX(1);
+    }
+    
+    .laser-beam__line,
+    .laser-beam__glow {
+      animation: none;
+    }
+    
+    .particle {
+      animation: none;
+      display: none;
+    }
+  }
+</style>

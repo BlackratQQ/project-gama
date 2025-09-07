@@ -6,26 +6,14 @@ export default function NavbarScrollEffects() {
 
     const applyNavbarStyles = (isScrolled: boolean) => {
       const navbar = document.getElementById('navbar');
-      const logo = document.getElementById('navbar-logo');
       const shouldBeScrolled = isScrolled || isMobile();
 
-      // Navbar background effect
+      // Navbar background effect only
       if (navbar) {
         if (shouldBeScrolled) {
           navbar.classList.add('navbar-scrolled');
         } else {
           navbar.classList.remove('navbar-scrolled');
-        }
-      }
-
-      // Logo resize effect
-      if (logo) {
-        if (shouldBeScrolled) {
-          logo.style.height = '40px';
-          logo.style.marginTop = '0px';
-        } else {
-          logo.style.height = '80px';
-          logo.style.marginTop = '24px'; // mt-6 = 24px
         }
       }
     };
