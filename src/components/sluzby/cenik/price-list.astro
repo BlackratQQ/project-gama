@@ -44,7 +44,7 @@ const cardData: CardData[] = [
 <div class="bg-gradient">
   <section
     id="cenik"
-    class="relative h-auto w-full py-12 text-white [--line-rotate:-75deg] [--line-top:68%] [--line-width:420%] md:[--line-rotate:-40deg] md:[--line-top:75%] lg:[--line-rotate:-30deg] lg:[--line-top:50%] xl:[--line-rotate:65deg] xl:[--line-top:60%] xl:[--line-width:300%]"
+    class="price-section relative h-auto w-full py-12 text-white [--line-rotate:-75deg] [--line-top:68%] [--line-width:420%] md:[--line-rotate:-40deg] md:[--line-top:75%] lg:[--line-rotate:-30deg] lg:[--line-top:50%] xl:[--line-rotate:65deg] xl:[--line-top:60%] xl:[--line-width:300%]"
   >
     <!-- Animovaný nadpis -->
     <h2
@@ -68,7 +68,7 @@ const cardData: CardData[] = [
 
     <!-- Ceníky -->
     <div
-      class="container mx-auto -mt-10 flex flex-col justify-center gap-6 p-6 md:-mt-24 lg:-mt-28 md:flex-row md:flex-nowrap lg:flex-nowrap xl:flex-nowrap"
+      class="mx-auto -mt-10 flex max-w-5xl flex-col justify-center gap-6 p-6 md:-mt-24 lg:-mt-28 md:flex-row md:flex-nowrap md:items-stretch lg:flex-nowrap xl:flex-nowrap"
     >
       {
         cardData.map((card, index) => (
@@ -77,11 +77,11 @@ const cardData: CardData[] = [
             duration={800}
             delay={600 + index * 200}
             direction="top"
-            className="backdrop-blur-sm"
+            className="backdrop-blur-sm flex-1 flex"
             client:only="react"
           >
             <div
-              class="price-card relative flex min-h-[504px] w-full flex-col justify-between rounded-lg p-6 text-white hover:cursor-pointer md:min-w-[400px] lg:min-w-[450px] xl:min-w-[504px]"
+              class="price-card relative flex h-full w-full flex-col justify-between rounded-lg p-6 text-white hover:cursor-pointer md:min-w-[320px] lg:min-w-[360px] xl:min-w-[400px]"
               data-card-index={index}
             >
               <h3 class="mb-4 text-center text-2xl font-bold" style="text-shadow: 0 1px 3px rgb(0 0 0);">{card.title}</h3>
@@ -112,7 +112,18 @@ const cardData: CardData[] = [
     </div>
 
     <!-- Bento efekty -->
-    <PriceListBentoEffects client:visible />
+    <PriceListBentoEffects 
+      enableStars={true}
+      enableSpotlight={true}
+      enableBorderGlow={true}
+      enableTilt={true}
+      enableMagnetism={true}
+      clickEffect={true}
+      spotlightRadius={300}
+      particleCount={12}
+      glowColor="250, 104, 0"
+      client:idle 
+    />
   </section>
 </div>
 
@@ -150,6 +161,15 @@ const cardData: CardData[] = [
     --g4-fade: 0%;
   }
 
+  .price-section {
+    position: relative;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-intensity: 0;
+    --glow-radius: 200px;
+    --glow-color: 250, 104, 0;
+  }
+
   .price-card {
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
@@ -162,5 +182,34 @@ const cardData: CardData[] = [
     box-shadow:
       0 4px 20px rgba(46, 24, 78, 0.4),
       0 0 30px rgba(250, 104, 0, 0.2);
+  }
+
+  .price-card--border-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 6px;
+    background: radial-gradient(
+      var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+      rgba(250, 104, 0, calc(var(--glow-intensity) * 0.8)) 0%,
+      rgba(250, 104, 0, calc(var(--glow-intensity) * 0.4)) 30%,
+      transparent 60%
+    );
+    border-radius: inherit;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: subtract;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .price-card--border-glow:hover::after {
+    opacity: 1;
   }
 </style>

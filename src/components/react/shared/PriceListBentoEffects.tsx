@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 
-export interface BentoEffectsProps {
+export interface PriceListBentoEffectsProps {
   enableStars?: boolean;
   enableSpotlight?: boolean;
   enableBorderGlow?: boolean;
@@ -16,7 +16,7 @@ export interface BentoEffectsProps {
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = '250, 104, 0';;
+const DEFAULT_GLOW_COLOR = '250, 104, 0';
 const MOBILE_BREAKPOINT = 768;
 
 const createParticleElement = (
@@ -78,7 +78,7 @@ const useMobileDetection = () => {
   return isMobile;
 };
 
-const PriceListBentoEffects: React.FC<BentoEffectsProps> = ({
+const PriceListBentoEffects: React.FC<PriceListBentoEffectsProps> = ({
   enableStars = true,
   enableSpotlight = true,
   enableBorderGlow = true,
@@ -319,7 +319,7 @@ const PriceListBentoEffects: React.FC<BentoEffectsProps> = ({
     // Globální spotlight efekt
     if (enableSpotlight) {
       const spotlight = document.createElement('div');
-      spotlight.className = 'price-list-global-spotlight';
+      spotlight.className = 'price-global-spotlight';
       spotlight.style.cssText = `
         position: fixed;
         width: 800px;
@@ -345,7 +345,7 @@ const PriceListBentoEffects: React.FC<BentoEffectsProps> = ({
       const handleMouseMove = (e: MouseEvent) => {
         if (!spotlightRef.current) return;
 
-        const section = document.querySelector('#cenik');
+        const section = document.querySelector('.price-section');
         const rect = section?.getBoundingClientRect();
         const mouseInside =
           rect &&
@@ -461,7 +461,7 @@ const PriceListBentoEffects: React.FC<BentoEffectsProps> = ({
     <>
       <style>
         {`
-          #cenik {
+          .price-section {
             --glow-x: 50%;
             --glow-y: 50%;
             --glow-intensity: 0;
