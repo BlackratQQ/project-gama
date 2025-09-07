@@ -17,7 +17,7 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  { label: 'Hlavní stránka', href: '/' },
+  { label: 'Hlavní stránka', href: '/#hlavni-stranka' },
   {
     label: 'Moje služby',
     href: '/#moje-sluzby',
@@ -35,6 +35,14 @@ const NavbarMenu: FC = () => {
   const handleServicesClick = () => {
     if (typeof window !== 'undefined' && window.openSplitModal) {
       window.openSplitModal();
+    }
+  };
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const contactElement = document.getElementById('kontaktni-formular');
+    if (contactElement) {
+      contactElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -102,6 +110,7 @@ const NavbarMenu: FC = () => {
           ) : (
             <a
               href={item.href}
+              onClick={item.label === 'Kontakt' ? handleContactClick : undefined}
               className="text-white hover:text-orange-500 font-medium transition-colors duration-200"
             >
               <BlurText

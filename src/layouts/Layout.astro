@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Navbar from '../components/navbar/Navbar.astro';
+import SmoothScrollHandler from '../components/react/shared/SmoothScrollHandler';
 
 export interface Props {
   title?: string;
@@ -206,6 +207,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
     <div id="main-content">
       <slot />
     </div>
+    
+    <!-- Smooth scroll handler -->
+    <SmoothScrollHandler client:load />
     
   </body>
 </html>
