@@ -41,7 +41,7 @@ const PRESETS: Record<PresetType, DotGridConfig> = {
     dotSize: 5,
     gap: 15,
     baseColor: '#000000',
-    activeColor: '#0062A4',
+    activeColor: '#fa6800',
     proximity: 120,
     speedTrigger: 200,
     shockRadius: 50,

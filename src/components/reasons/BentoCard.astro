@@ -48,8 +48,8 @@ const { title, description, index, icon } = Astro.props;
   .reason-card:hover {
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow:
-      0 4px 20px rgba(46, 24, 78, 0.4),
-      0 0 30px rgba(132, 0, 255, 0.2);
+      0 4px 20px rgba(78, 46, 24, 0.4),
+      0 0 30px rgba(250, 104, 0, 0.2);
   }
 
   .card__content {
@@ -83,6 +83,7 @@ const { title, description, index, icon } = Astro.props;
     line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-shadow: 0 1px 3px rgb(0 0 0);
   }
 
   .card__description {
@@ -95,6 +96,7 @@ const { title, description, index, icon } = Astro.props;
     line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-shadow: 0 1px 3px rgb(0 0 0);
   }
 
   @media (max-width: 768px) {

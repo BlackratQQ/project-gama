@@ -41,6 +41,7 @@ const services = [
       <!-- Nadpis -->
       <h2
         class="relative mb-12 select-none text-center text-6xl font-bold text-white sm:text-6xl md:text-8xl xl:text-9xl"
+        style="text-shadow: 0 1px 3px rgb(0 0 0);"
       >
         <!-- Statický fallback pro SEO/crawlery -->
         <noscript> O CO SE POSTARÁM? </noscript>
@@ -81,12 +82,12 @@ const services = [
                   <div class="relative mb-4 flex h-16 items-center justify-center text-white">
                     <Icon name={service.icon} size="48" />
                   </div>
-                  <h3 class="text-2xl font-bold leading-tight" lang="cs" itemprop="name">
+                  <h3 class="text-2xl font-bold leading-tight" lang="cs" itemprop="name" style="text-shadow: 0 1px 3px rgb(0 0 0);">
                     {service.title}
                   </h3>
                 </div>
                 <div class="relative z-10 mb-4 mt-4 flex-1 flex items-center">
-                  <p class="text-gray-300" lang="cs" itemprop="description">
+                  <p class="text-gray-300" lang="cs" itemprop="description" style="text-shadow: 0 1px 3px rgb(0 0 0);">
                     {service.description}
                   </p>
                 </div>
@@ -106,7 +107,7 @@ const services = [
         clickEffect={true}
         spotlightRadius={300}
         particleCount={12}
-        glowColor="132, 0, 255"
+        glowColor="250, 104, 0"
         client:idle
       />
     </div>
@@ -160,7 +161,7 @@ const services = [
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow:
       0 4px 20px rgba(46, 24, 78, 0.4),
-      0 0 30px rgba(132, 0, 255, 0.2);
+      0 0 30px rgba(250, 104, 0, 0.2);
     cursor: pointer;
   }
 
@@ -171,8 +172,8 @@ const services = [
     padding: 6px;
     background: radial-gradient(
       var(--glow-radius) circle at var(--glow-x) var(--glow-y),
-      rgba(132, 0, 255, calc(var(--glow-intensity) * 0.8)) 0%,
-      rgba(132, 0, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+      rgba(250, 104, 0, calc(var(--glow-intensity) * 0.8)) 0%,
+      rgba(250, 104, 0, calc(var(--glow-intensity) * 0.4)) 30%,
       transparent 60%
     );
     border-radius: inherit;
