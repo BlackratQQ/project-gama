@@ -1,6 +1,6 @@
-'use client';
-import React, { useRef, useEffect, useCallback, useMemo } from 'react';
-import { gsap } from 'gsap';
+"use client";
+import React, { useRef, useEffect, useCallback, useMemo } from "react";
+import { gsap } from "gsap";
 
 const throttle = (func: (e: MouseEvent) => void, limit: number) => {
   let lastCall = 0;
@@ -21,7 +21,7 @@ interface Dot {
   _inertiaApplied: boolean;
 }
 
-type PresetType = 'portfolio' | 'background' | 'interactive' | 'subtle';
+type PresetType = "portfolio" | "background" | "interactive" | "subtle";
 
 interface DotGridConfig {
   dotSize: number;
@@ -40,8 +40,8 @@ const PRESETS: Record<PresetType, DotGridConfig> = {
   portfolio: {
     dotSize: 5,
     gap: 15,
-    baseColor: '#000000',
-    activeColor: '#fa6800',
+    baseColor: "#00000000",
+    activeColor: "#fa6800",
     proximity: 120,
     speedTrigger: 200,
     shockRadius: 50,
@@ -52,8 +52,8 @@ const PRESETS: Record<PresetType, DotGridConfig> = {
   background: {
     dotSize: 3,
     gap: 20,
-    baseColor: '#171618',
-    activeColor: '#2e12a1',
+    baseColor: "#171618",
+    activeColor: "#2e12a1",
     proximity: 80,
     speedTrigger: 300,
     shockRadius: 30,
@@ -64,8 +64,8 @@ const PRESETS: Record<PresetType, DotGridConfig> = {
   interactive: {
     dotSize: 8,
     gap: 12,
-    baseColor: '#000000',
-    activeColor: '#ffffff',
+    baseColor: "#000000",
+    activeColor: "#ffffff",
     proximity: 150,
     speedTrigger: 100,
     shockRadius: 80,
@@ -76,8 +76,8 @@ const PRESETS: Record<PresetType, DotGridConfig> = {
   subtle: {
     dotSize: 2,
     gap: 25,
-    baseColor: '#333333',
-    activeColor: '#666666',
+    baseColor: "#333333",
+    activeColor: "#666666",
     proximity: 60,
     speedTrigger: 400,
     shockRadius: 25,
@@ -105,10 +105,10 @@ function hexToRgb(hex: string) {
 }
 
 const DotGrid: React.FC<DotGridProps> = ({
-  preset = 'portfolio',
-  className = '',
+  preset = "portfolio",
+  className = "",
   style,
-  height = '100%',
+  height = "100%",
   ...overrideProps
 }) => {
   // Sloučení preset konfigurace s override props
@@ -143,7 +143,7 @@ const DotGrid: React.FC<DotGridProps> = ({
   const activeRgb = useMemo(() => hexToRgb(activeColor), [activeColor]);
 
   const circlePath = useMemo(() => {
-    if (typeof window === 'undefined' || !window.Path2D) return null;
+    if (typeof window === "undefined" || !window.Path2D) return null;
 
     const p = new Path2D();
     p.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
@@ -162,7 +162,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     canvas.height = height * dpr;
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (ctx) ctx.scale(dpr, dpr);
 
     const cols = Math.floor((width + gap) / (dotSize + gap));
@@ -198,7 +198,7 @@ const DotGrid: React.FC<DotGridProps> = ({
     const draw = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext("2d");
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -238,17 +238,17 @@ const DotGrid: React.FC<DotGridProps> = ({
   useEffect(() => {
     buildGrid();
     let ro: ResizeObserver | null = null;
-    if ('ResizeObserver' in window) {
+    if ("ResizeObserver" in window) {
       ro = new ResizeObserver(buildGrid);
       if (wrapperRef.current) {
         ro.observe(wrapperRef.current);
       }
     } else {
-      (window as Window).addEventListener('resize', buildGrid);
+      (window as Window).addEventListener("resize", buildGrid);
     }
     return () => {
       if (ro) ro.disconnect();
-      else window.removeEventListener('resize', buildGrid);
+      else window.removeEventListener("resize", buildGrid);
     };
   }, [buildGrid]);
 
@@ -292,13 +292,13 @@ const DotGrid: React.FC<DotGridProps> = ({
             xOffset: pushX,
             yOffset: pushY,
             duration: 0.3,
-            ease: 'power1.out',
+            ease: "power1.out",
             onComplete: () => {
               gsap.to(dot, {
                 xOffset: 0,
                 yOffset: 0,
                 duration: returnDuration,
-                ease: 'elastic.out(1,0.75)',
+                ease: "elastic.out(1,0.75)",
               });
               dot._inertiaApplied = false;
             },
@@ -325,13 +325,13 @@ const DotGrid: React.FC<DotGridProps> = ({
             xOffset: pushX,
             yOffset: pushY,
             duration: 0.4,
-            ease: 'power1.out',
+            ease: "power1.out",
             onComplete: () => {
               gsap.to(dot, {
                 xOffset: 0,
                 yOffset: 0,
                 duration: returnDuration,
-                ease: 'elastic.out(1,0.75)',
+                ease: "elastic.out(1,0.75)",
               });
               dot._inertiaApplied = false;
             },
@@ -341,18 +341,32 @@ const DotGrid: React.FC<DotGridProps> = ({
     };
 
     const throttledMove = throttle(onMove, 50);
-    window.addEventListener('mousemove', throttledMove, { passive: true });
-    window.addEventListener('click', onClick);
+    window.addEventListener("mousemove", throttledMove, { passive: true });
+    window.addEventListener("click", onClick);
 
     return () => {
-      window.removeEventListener('mousemove', throttledMove);
-      window.removeEventListener('click', onClick);
+      window.removeEventListener("mousemove", throttledMove);
+      window.removeEventListener("click", onClick);
     };
-  }, [maxSpeed, speedTrigger, proximity, returnDuration, shockRadius, shockStrength]);
+  }, [
+    maxSpeed,
+    speedTrigger,
+    proximity,
+    returnDuration,
+    shockRadius,
+    shockStrength,
+  ]);
 
   return (
-    <div className={`relative w-full ${className}`} style={{ height, ...style }} ref={wrapperRef}>
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
+    <div
+      className={`relative w-full ${className}`}
+      style={{ height, ...style }}
+      ref={wrapperRef}
+    >
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+      />
     </div>
   );
 };

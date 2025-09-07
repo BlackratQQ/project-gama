@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import PortfolioGrid from './PortfolioGrid';
 import PortfolioLightbox from './PortfolioLightbox';
+import PortfolioPreloader from './PortfolioPreloader';
 
 interface PortfolioItem {
   image: string;
   imageAvif: string;
   glowImage: string;
   glowImageAvif: string;
+  fullImage: string;
+  fullImageAvif: string;
   alt: string;
 }
 
@@ -20,13 +23,11 @@ export default function PortfolioContainer({ items }: PortfolioContainerProps) {
   const [lightboxImageAvif, setLightboxImageAvif] = useState('');
   const [lightboxAlt, setLightboxAlt] = useState('');
 
-  const handleItemClick = (index: number, isHovered: boolean) => {
+  const handleItemClick = (index: number, _isHovered: boolean) => {
     const item = items[index];
-    const imageSrc = isHovered ? item.glowImage : item.image;
-    const imageAvifSrc = isHovered ? item.glowImageAvif : item.imageAvif;
-
-    setLightboxImage(imageSrc);
-    setLightboxImageAvif(imageAvifSrc);
+    
+    setLightboxImage(item.fullImage);
+    setLightboxImageAvif(item.fullImageAvif);
     setLightboxAlt(item.alt);
     setLightboxOpen(true);
   };
@@ -38,6 +39,7 @@ export default function PortfolioContainer({ items }: PortfolioContainerProps) {
   return (
     <>
       <PortfolioGrid items={items} onItemClick={handleItemClick} />
+      <PortfolioPreloader items={items} />
       <PortfolioLightbox
         isOpen={lightboxOpen}
         imageSrc={lightboxImage}
