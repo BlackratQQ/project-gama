@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 const CSSAnimatedLogo: FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Trigger animation after component mount
@@ -11,7 +12,18 @@ const CSSAnimatedLogo: FC = () => {
       setIsLoaded(true);
     }, 10);
 
-    return () => clearTimeout(timer);
+    // Check if mobile on mount
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   useEffect(() => {
@@ -30,9 +42,9 @@ const CSSAnimatedLogo: FC = () => {
     };
   }, []);
 
-  // Výpočet velikosti a pozice na základě scroll progress
-  const logoHeight = 80 - (scrollProgress * 40); // 80px -> 40px
-  const logoMarginTop = 24 - (scrollProgress * 24); // 24px -> 0px
+  // Výpočet velikosti a pozice na základě scroll progress a mobile/desktop
+  const logoHeight = isMobile ? 40 : (80 - (scrollProgress * 40)); // Mobile: 40px always, Desktop: 80px -> 40px
+  const logoMarginTop = isMobile ? 0 : (24 - (scrollProgress * 24)); // Mobile: 0px always, Desktop: 24px -> 0px
 
   return (
     <div className="logo-container">
