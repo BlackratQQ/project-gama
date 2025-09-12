@@ -941,3 +941,59 @@ body {
   bottom: 0; /* Umístění na spodní část */
   height: 19.7%; /* Výška vrstvy */
 }
+
+/* Burger menu animace pro SplitModal a MobileMenu */
+.burger-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  margin: -12px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.bar {
+  width: 35px;
+  height: 4px;
+  background-color: white;
+  border-radius: 2px;
+  transform-origin: center;
+  transition:
+    transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 0.3s ease,
+    background-color 0.3s ease;
+}
+
+/* Hover efekt na aktivní ikonu - vylepšení X */
+.burger-icon.active:hover .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-6px, 5px) scale(1.1);
+  background-color: #f97316;
+}
+
+.burger-icon.active:hover .bar:nth-child(2) {
+  opacity: 0;
+  transform: rotate(0) translate(0px, 30px) scale(0.5);
+}
+
+.burger-icon.active:hover .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-8px, -9px) scale(1.1);
+  background-color: #f97316;
+}
+
+.burger-icon.active .bar {
+  background-color: #f97316; /* Nastaví barvu oranžovou (#f97316) při aktivním stavu */
+}
+
+.burger-icon.active .bar:nth-child(1) {
+  transform: rotate(-60deg) translate(-10px, -9px); /* Úpravy dle potřeby */
+}
+
+.burger-icon.active .bar:nth-child(2) {
+  transform: rotate(0) translate(0px, 18px); /* Úpravy dle potřeby */
+}
+
+.burger-icon.active .bar:nth-child(3) {
+  transform: rotate(60deg) translate(-7px, -19px); /* Skryjeme prostřední pruh */
+}

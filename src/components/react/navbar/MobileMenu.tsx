@@ -43,13 +43,30 @@ export default function MobileMenu() {
       setIsOpen(true);
     };
 
-    // Listen for custom event from MobileMenuButton
+    const handleCloseMenu = () => {
+      setIsOpen(false);
+    };
+
+    // Listen for custom events from MobileMenuButton
     window.addEventListener('openMobileMenu', handleOpenMenu);
+    window.addEventListener('closeMobileMenu', handleCloseMenu);
 
     return () => {
       window.removeEventListener('openMobileMenu', handleOpenMenu);
+      window.removeEventListener('closeMobileMenu', handleCloseMenu);
     };
   }, []);
+
+  // Notify button about state changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (isOpen) {
+        window.dispatchEvent(new CustomEvent('mobileMenuOpened'));
+      } else {
+        window.dispatchEvent(new CustomEvent('mobileMenuClosed'));
+      }
+    }
+  }, [isOpen]);
 
   const closeMenu = () => setIsOpen(false);
 

@@ -1,29 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function MobileMenuButton() {
-  const handleOpenMenu = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleToggleMenu = () => {
     if (typeof window !== 'undefined') {
-      // Dispatch custom event to open mobile menu
-      window.dispatchEvent(new CustomEvent('openMobileMenu'));
+      if (isMenuOpen) {
+        // Close menu
+        window.dispatchEvent(new CustomEvent('closeMobileMenu'));
+      } else {
+        // Open menu
+        window.dispatchEvent(new CustomEvent('openMobileMenu'));
+      }
+      setIsMenuOpen(!isMenuOpen);
     }
   };
 
+  // Listen for menu state changes from MobileMenu component
+  useEffect(() => {
+    const handleMenuOpened = () => {
+      setIsMenuOpen(true);
+    };
+
+    const handleMenuClosed = () => {
+      setIsMenuOpen(false);
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('mobileMenuOpened', handleMenuOpened);
+      window.addEventListener('mobileMenuClosed', handleMenuClosed);
+
+      return () => {
+        window.removeEventListener('mobileMenuOpened', handleMenuOpened);
+        window.removeEventListener('mobileMenuClosed', handleMenuClosed);
+      };
+    }
+  }, []);
+
   return (
     <div className="mobile-menu-container lg:hidden">
-      {/* Hamburger button */}
+      {/* Animated burger button */}
       <button
-        className="mobile-menu-toggle p-2 text-white hover:text-orange-500"
+        className={`burger-icon border-0 bg-transparent p-0 ${isMenuOpen ? 'active' : ''}`}
         aria-label="Toggle menu"
-        onClick={handleOpenMenu}
+        onClick={handleToggleMenu}
       >
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
+        <span className="bar"></span>
+        <span className="bar"></span>
+        <span className="bar"></span>
       </button>
     </div>
   );
