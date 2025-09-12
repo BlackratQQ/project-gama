@@ -42,7 +42,7 @@ export default function SplitModal({ isOpen, onClose }: SplitModalProps) {
       aria-label="Zavřít split modal"
     >
       {/* Tlačítko na zavření */}
-      <div className="fixed right-8 top-8 z-30 transition-opacity duration-500 opacity-100">
+      <div className="fixed right-8 top-8 z-40 transition-opacity duration-500 opacity-100">
         <button
           type="button"
           className="burger-icon active border-0 bg-transparent p-0"
