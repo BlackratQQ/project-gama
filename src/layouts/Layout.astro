@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Navbar from '../components/navbar/Navbar.astro';
+import MobileMenu from '../components/react/navbar/MobileMenu';
 import SmoothScrollHandler from '../components/react/shared/SmoothScrollHandler';
 
 export interface Props {
@@ -204,6 +205,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://vojtechk
     <div id="navigation">
       <Navbar />
     </div>
+    
+    <!-- Mobile menu outside of navbar for lower z-index -->
+    <MobileMenu client:load />
+    
     <div id="main-content">
       <slot />
     </div>

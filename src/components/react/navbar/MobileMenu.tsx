@@ -38,7 +38,19 @@ export default function MobileMenu() {
     };
   }, [isOpen]);
 
-  const openMenu = () => setIsOpen(true);
+  useEffect(() => {
+    const handleOpenMenu = () => {
+      setIsOpen(true);
+    };
+
+    // Listen for custom event from MobileMenuButton
+    window.addEventListener('openMobileMenu', handleOpenMenu);
+
+    return () => {
+      window.removeEventListener('openMobileMenu', handleOpenMenu);
+    };
+  }, []);
+
   const closeMenu = () => setIsOpen(false);
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -52,26 +64,10 @@ export default function MobileMenu() {
   };
 
   return (
-    <div className="mobile-menu-container lg:hidden">
-      {/* Hamburger button */}
-      <button
-        className="mobile-menu-toggle p-2 text-white hover:text-orange-500"
-        aria-label="Toggle menu"
-        onClick={openMenu}
-      >
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
-
+    <>
       {/* Mobile menu overlay */}
       <div
-        className={`mobile-menu-overlay fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ${
+        className={`mobile-menu-overlay fixed inset-0 z-30 bg-black/50 transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={handleOverlayClick}
@@ -114,6 +110,6 @@ export default function MobileMenu() {
           </nav>
         </div>
       </div>
-    </div>
+    </>
   );
 }

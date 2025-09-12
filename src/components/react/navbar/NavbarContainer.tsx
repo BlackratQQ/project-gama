@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MobileMenu from './MobileMenu';
+import MobileMenuButton from './MobileMenuButton';
 import SplitModal from './SplitModal';
 import NavbarScrollEffects from './NavbarScrollEffects';
 
@@ -27,8 +27,8 @@ export default function NavbarContainer() {
 
   return (
     <>
-      {/* Mobile menu component */}
-      <MobileMenu />
+      {/* Mobile menu button */}
+      <MobileMenuButton />
 
       {/* Split modal */}
       <SplitModal isOpen={isSplitOpen} onClose={handleSplitClose} />
