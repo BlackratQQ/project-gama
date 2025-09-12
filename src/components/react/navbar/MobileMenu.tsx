@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+// Extend Window interface for openSplitModal
+declare global {
+  interface Window {
+    openSplitModal?: () => void;
+  }
+}
+
 interface MenuItem {
   label: string;
   href: string;
@@ -80,6 +87,16 @@ export default function MobileMenu() {
     closeMenu();
   };
 
+  const handleServicesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // Open SplitModal using global function
+    if (typeof window !== 'undefined' && window.openSplitModal) {
+      window.openSplitModal();
+    }
+    // Close mobile menu
+    closeMenu();
+  };
+
   return (
     <>
       {/* Mobile menu overlay */}
@@ -117,7 +134,7 @@ export default function MobileMenu() {
                   <a
                     href={item.href}
                     className="mobile-menu-link block text-xl font-medium text-white hover:text-orange-500 transition-colors duration-200"
-                    onClick={handleLinkClick}
+                    onClick={item.label === 'Moje služby' ? handleServicesClick : handleLinkClick}
                   >
                     {item.label}
                   </a>

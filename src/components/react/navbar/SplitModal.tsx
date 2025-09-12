@@ -64,7 +64,9 @@ export default function SplitModal({ isOpen, onClose }: SplitModalProps) {
         {/* Levá polovina: Vývoj funkčního webu */}
         <a
           href="/sluzby/vyvoj-funkcniho-webu"
-          className="group relative flex h-full w-full items-center justify-center border-r border-orange-500 bg-black/60 backdrop-blur-md backdrop-filter md:w-1/2"
+          className="group relative flex h-full w-full items-center justify-center border-b border-orange-500 md:border-b-0 md:border-r md:border-orange-500 bg-black md:w-1/2 transform
+          translate-y-[-100%] md:translate-y-0 md:translate-x-[-100%]
+          animate-[slideInTop_0.7s_ease-out_0.1s_forwards] md:animate-[slideInLeft_0.7s_ease-out_0.1s_forwards]"
         >
           <div className="p-12 text-center">
             {/* FontAwesome ikona FaLaptopCode */}
@@ -95,7 +97,9 @@ export default function SplitModal({ isOpen, onClose }: SplitModalProps) {
         {/* Pravá polovina: Automatizace procesů */}
         <a
           href="/sluzby/automatizace-procesu"
-          className="group relative flex h-full w-full items-center justify-center border-l border-orange-500 bg-black/60 backdrop-blur-md backdrop-filter md:w-1/2"
+          className="group relative flex h-full w-full items-center justify-center border-t border-orange-500 md:border-t-0 md:border-l md:border-orange-500 bg-black md:w-1/2 transform
+          translate-y-[100%] md:translate-y-0 md:translate-x-[100%]
+          animate-[slideInBottom_0.7s_ease-out_0.1s_forwards] md:animate-[slideInRight_0.7s_ease-out_0.1s_forwards]"
         >
           <div className="p-12 text-center">
             {/* FontAwesome ikona FaCogs */}
